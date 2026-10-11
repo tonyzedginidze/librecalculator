@@ -1,0 +1,13 @@
+{
+  "id": "percentage",
+  "slug": "percentage",
+  "category": "math",
+  "titleKey": "calculator.percentage.title",
+  "descriptionKey": "calculator.percentage.description",
+  "searchKeys": ["calculator.percentage.title", "calculator.percentage.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "of-value": ["value", "percentage"],
+    "ratio": ["part", "whole"]
+  }
+}

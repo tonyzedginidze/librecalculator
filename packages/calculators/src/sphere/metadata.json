@@ -1,0 +1,14 @@
+{
+  "id": "sphere",
+  "slug": "sphere",
+  "category": "geometry",
+  "titleKey": "calculator.sphere.title",
+  "descriptionKey": "calculator.sphere.description",
+  "searchKeys": ["calculator.sphere.title", "calculator.sphere.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "sphere-volume": ["radius"],
+    "sphere-surface": ["radius"],
+    "sphere-diameter": ["radius"]
+  }
+}

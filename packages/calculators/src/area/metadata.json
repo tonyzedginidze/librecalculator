@@ -1,0 +1,14 @@
+{
+  "id": "area",
+  "slug": "area",
+  "category": "geometry",
+  "titleKey": "calculator.area.title",
+  "descriptionKey": "calculator.area.description",
+  "searchKeys": ["calculator.area.title", "calculator.area.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "rectangle": ["width", "height"],
+    "triangle": ["base", "height"],
+    "circle": ["radius"]
+  }
+}

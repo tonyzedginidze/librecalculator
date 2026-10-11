@@ -1,0 +1,17 @@
+{
+  "id": "calories-per-serving",
+  "slug": "calories-per-serving",
+  "category": "cooking",
+  "titleKey": "calculator.calories-per-serving.title",
+  "descriptionKey": "calculator.calories-per-serving.description",
+  "searchKeys": [
+    "calculator.calories-per-serving.title",
+    "calculator.calories-per-serving.search"
+  ],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "portion-calories": ["totalCalories", "servings"],
+    "recipe-calories": ["portionCalories", "servings"],
+    "portion-weight": ["totalCalories", "totalGrams", "portionGrams"]
+  }
+}

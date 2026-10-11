@@ -1,0 +1,12 @@
+{
+  "id": "tdee",
+  "slug": "tdee",
+  "category": "health",
+  "titleKey": "calculator.tdee.title",
+  "descriptionKey": "calculator.tdee.description",
+  "searchKeys": ["calculator.tdee.title", "calculator.tdee.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "daily-energy": ["resting", "factor", "age"]
+  }
+}

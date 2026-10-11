@@ -1,0 +1,12 @@
+{
+  "id": "mass",
+  "slug": "mass",
+  "category": "units",
+  "titleKey": "calculator.mass.title",
+  "descriptionKey": "calculator.mass.description",
+  "searchKeys": ["calculator.mass.title", "calculator.mass.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "convert": ["value", "source", "target"]
+  }
+}

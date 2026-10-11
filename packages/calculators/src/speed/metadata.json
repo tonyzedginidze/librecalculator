@@ -1,0 +1,12 @@
+{
+  "id": "speed",
+  "slug": "speed",
+  "category": "physics",
+  "titleKey": "calculator.speed.title",
+  "descriptionKey": "calculator.speed.description",
+  "searchKeys": ["calculator.speed.title", "calculator.speed.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "speed-si": ["distance", "time"]
+  }
+}

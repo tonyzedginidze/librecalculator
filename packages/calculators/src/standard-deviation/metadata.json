@@ -1,0 +1,16 @@
+{
+  "id": "standard-deviation",
+  "slug": "standard-deviation",
+  "category": "math",
+  "titleKey": "calculator.standard-deviation.title",
+  "descriptionKey": "calculator.standard-deviation.description",
+  "searchKeys": [
+    "calculator.standard-deviation.title",
+    "calculator.standard-deviation.search"
+  ],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "population": ["values"],
+    "sample": ["values"]
+  }
+}

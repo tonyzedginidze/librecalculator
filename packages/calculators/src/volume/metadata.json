@@ -1,0 +1,14 @@
+{
+  "id": "volume",
+  "slug": "volume",
+  "category": "geometry",
+  "titleKey": "calculator.volume.title",
+  "descriptionKey": "calculator.volume.description",
+  "searchKeys": ["calculator.volume.title", "calculator.volume.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "prism": ["width", "height", "depth"],
+    "cylinder": ["radius", "height"],
+    "sphere": ["radius"]
+  }
+}

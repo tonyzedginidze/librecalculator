@@ -1,0 +1,998 @@
+---
+// Explainer video player. Reads what scripts/build-videos.ts wrote to
+// public/videos/<id>/ (<lang>.mp4, <lang>.9x16.mp4, <lang>.jpg, <lang>.json
+// with chapters) and renders nothing when there is no video. Without
+// JavaScript the native <video controls> still works; the script upgrades it.
+import { existsSync, readFileSync } from "node:fs";
+import { join } from "node:path";
+import { formatMessage } from "@open-calculators/i18n/locales";
+import { ui } from "@open-calculators/i18n/ui";
+
+interface Props {
+  id: string;
+  locale: string;
+}
+const { id, locale } = Astro.props;
+
+type Chapter = { id: string; title: string; start: number };
+type Track = { src: string; poster: string };
+type Entry = {
+  name: string;
+  duration: number;
+  chapters: Chapter[];
+  wide: Track;
+  tall?: Track;
+};
+
+const publicDir = join(process.cwd(), "public");
+const languages: Record<string, { name: string }> = JSON.parse(
+  readFileSync(join(process.cwd(), "../../videos/languages.json"), "utf8"),
+);
+
+const entries: Record<string, Entry> = {};
+for (const [lang, info] of Object.entries(languages)) {
+  const base = join(publicDir, "videos", id, lang);
+  if (!existsSync(`${base}.mp4`) || !existsSync(`${base}.json`)) continue;
+  const meta = JSON.parse(readFileSync(`${base}.json`, "utf8"));
+  const url = `/videos/${id}/${lang}`;
+  entries[lang] = {
+    name: info.name,
+    duration: meta.duration,
+    chapters: meta.chapters,
+    wide: { src: `${url}.mp4`, poster: `${url}.jpg` },
+    ...(existsSync(`${base}.9x16.mp4`)
+      ? { tall: { src: `${url}.9x16.mp4`, poster: `${url}.9x16.jpg` } }
+      : {}),
+  };
+}
+
+const wanted = locale.split("-")[0] ?? "en";
+const lang = entries[wanted] ? wanted : Object.keys(entries)[0];
+const entry = lang ? entries[lang] : undefined;
+const hasTall = Object.values(entries).some((e) => e.tall);
+const multiLang = Object.keys(entries).length > 1;
+
+const clock = (seconds: number) => {
+  const s = Math.max(0, Math.round(seconds));
+  return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+};
+
+// Strings the client script needs; templates keep their {placeholders}.
+const strings = {
+  sub: ui["ui.video.sub"],
+  cover: ui["ui.video.cover"],
+  position: ui["ui.video.position"],
+  play: ui["ui.video.play"],
+  pause: ui["ui.video.pause"],
+  replay: ui["ui.video.replay"],
+  mute: ui["ui.video.mute"],
+  unmute: ui["ui.video.unmute"],
+};
+const durationSeconds = entry ? Math.round(entry.duration) : 0;
+---
+{entry && lang && (
+  <section
+    class="ocv"
+    data-player
+    data-lang={lang}
+    data-entries={JSON.stringify(entries)}
+    data-strings={JSON.stringify(strings)}
+    aria-labelledby={`ocv-${id}`}
+  >
+    <header class="ocv-head">
+      <div class="ocv-titles">
+        <h2 id={`ocv-${id}`}>{ui["ui.video.heading"]}</h2>
+        <p class="ocv-sub" data-sub>{formatMessage(ui["ui.video.sub"], { seconds: String(durationSeconds), chapters: String(entry.chapters.length) })}</p>
+      </div>
+      <div class="ocv-tools">
+        {hasTall && (
+          <div class="ocv-seg" role="group" aria-label={ui["ui.video.shape"]}>
+            <button type="button" data-format="wide" aria-pressed="true">{ui["ui.video.shape.wide"]}</button>
+            <button type="button" data-format="tall" aria-pressed="false">{ui["ui.video.shape.tall"]}</button>
+          </div>
+        )}
+        {multiLang && (
+          <div class="ocv-menu" data-menu="lang">
+            <button type="button" class="ocv-pill" aria-haspopup="menu" aria-expanded="false" data-menu-button>
+              <span data-menu-label>{entry.name}</span>
+            </button>
+            <ul class="ocv-list" role="menu" hidden>
+              {Object.entries(entries).map(([code, e]) => (
+                <li role="none">
+                  <button type="button" role="menuitemradio" aria-checked={code === lang ? "true" : "false"} data-value={code}>{e.name}</button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+    </header>
+
+    <div class="ocv-stage" data-stage data-format="wide" tabindex="0" role="group" aria-label={ui["ui.video.player"]} style={`--ocv-poster: url(${entry.wide.poster})`}>
+      <video
+        preload="none"
+        playsinline
+        controls
+        poster={entry.wide.poster}
+        src={entry.wide.src}
+      ></video>
+
+      <button type="button" class="ocv-cover" data-cover aria-label={formatMessage(ui["ui.video.cover"], { time: clock(entry.duration) })}>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z" /></svg>
+        <span class="ocv-cover-text"><b data-cover-label>{ui["ui.video.play"]}</b><i data-cover-time>{clock(entry.duration)}</i></span>
+      </button>
+
+      <div class="ocv-bar" data-bar>
+        <div class="ocv-scrub" data-scrub role="slider" tabindex="0" aria-label={ui["ui.video.seek"]} aria-valuemin="0" aria-valuemax={Math.round(entry.duration)} aria-valuenow="0" aria-valuetext={formatMessage(ui["ui.video.position"], { current: "0:00", total: clock(entry.duration) })}>
+          <div class="ocv-track">
+            <div class="ocv-buffered" data-buffered></div>
+            <div class="ocv-fill" data-fill></div>
+            <div data-ticks>
+              {entry.chapters.slice(1).map((c) => (
+                <span class="ocv-tick" style={`left:${(c.start / entry.duration) * 100}%`}></span>
+              ))}
+            </div>
+          </div>
+          <div class="ocv-thumb" data-thumb></div>
+          <div class="ocv-tip" data-tip hidden></div>
+        </div>
+        <div class="ocv-row">
+          <button type="button" class="ocv-btn" data-act="play" aria-label={ui["ui.video.play"]}>
+            <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z" /></svg>
+            <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5a1 1 0 0 1 1 1v12a1 1 0 1 1-2 0V6a1 1 0 0 1 1-1Zm8 0a1 1 0 0 1 1 1v12a1 1 0 1 1-2 0V6a1 1 0 0 1 1-1Z" /></svg>
+            <svg class="i-replay" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5a7 7 0 1 1-6.7 9 1 1 0 1 1 1.92-.56A5 5 0 1 0 8 8.4l1.3 1.3A.5.5 0 0 1 9 10.5H5.5a.5.5 0 0 1-.5-.5V6.5a.5.5 0 0 1 .85-.35L7 7.3A7 7 0 0 1 12 5Z" /></svg>
+          </button>
+          <button type="button" class="ocv-btn" data-act="mute" aria-label={ui["ui.video.mute"]}>
+            <svg class="i-vol" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4h3.5l4.5 3.5v-11L7.5 10H4Zm12.2-2.2a1 1 0 0 1 1.4.1 6 6 0 0 1 0 8.2 1 1 0 1 1-1.5-1.3 4 4 0 0 0 0-5.6 1 1 0 0 1 .1-1.4Z" /></svg>
+            <svg class="i-mute" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4h3.5l4.5 3.5v-11L7.5 10H4Zm12.3 1.3 1.7-1.7a1 1 0 0 1 1.4 1.4L17.7 12.7l1.7 1.7a1 1 0 0 1-1.4 1.4l-1.7-1.7-1.7 1.7a1 1 0 0 1-1.4-1.4l1.7-1.7-1.7-1.7a1 1 0 0 1 1.4-1.4l1.7 1.7Z" /></svg>
+          </button>
+          <input type="range" class="ocv-vol" data-vol min="0" max="1" step="0.05" value="1" aria-label={ui["ui.video.volume"]} />
+          <span class="ocv-time" data-time>0:00 / {clock(entry.duration)}</span>
+          <span class="ocv-chapter" data-chapter>{entry.chapters[0]?.title}</span>
+          <div class="ocv-menu ocv-menu-up" data-menu="speed">
+            <button type="button" class="ocv-btn ocv-speed" aria-haspopup="menu" aria-expanded="false" aria-label={ui["ui.video.speed"]} data-menu-button>
+              <span data-menu-label>1×</span>
+            </button>
+            <ul class="ocv-list" role="menu" hidden>
+              {[0.75, 1, 1.25, 1.5, 2].map((rate) => (
+                <li role="none">
+                  <button type="button" role="menuitemradio" aria-checked={rate === 1 ? "true" : "false"} data-value={String(rate)}>{rate}×</button>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <button type="button" class="ocv-btn" data-act="fullscreen" aria-label={ui["ui.video.fullscreen"]}>
+            <svg class="i-fs" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9V6a1 1 0 0 1 1-1h3a1 1 0 0 1 0 2H7v2a1 1 0 0 1-2 0Zm14 0V6a1 1 0 0 0-1-1h-3a1 1 0 1 0 0 2h2v2a1 1 0 1 0 2 0ZM5 15v3a1 1 0 0 0 1 1h3a1 1 0 1 0 0-2H7v-2a1 1 0 1 0-2 0Zm14 0v3a1 1 0 0 1-1 1h-3a1 1 0 1 1 0-2h2v-2a1 1 0 1 1 2 0Z" /></svg>
+            <svg class="i-exit" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5a1 1 0 0 0-1 1v2H6a1 1 0 0 0 0 2h3a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1Zm6 0a1 1 0 0 1 1 1v2h2a1 1 0 1 1 0 2h-3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1ZM9 19a1 1 0 0 1-1-1v-2H6a1 1 0 1 1 0-2h3a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1Zm6 0a1 1 0 0 0 1-1v-2h2a1 1 0 1 0 0-2h-3a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1Z" /></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <ol class="ocv-chapters" data-chapters aria-label={ui["ui.video.chapters"]} style={`--n:${entry.chapters.length}`}>
+      {entry.chapters.map((c, i) => (
+        <li>
+          <button type="button" data-seek={c.start} aria-current={i === 0 ? "true" : "false"} style="--p:0">
+            <span class="ocv-rail"><span class="ocv-rail-fill"></span></span>
+            <span class="ocv-cs">{clock(c.start)}</span>
+            <span class="ocv-ct">{c.title}</span>
+          </button>
+        </li>
+      ))}
+    </ol>
+    <p class="ocv-hint" aria-hidden="true">
+      <span><kbd>{ui["ui.video.hint.space"]}</kbd> {ui["ui.video.hint.play"]}</span>
+      <span><kbd>←</kbd><kbd>→</kbd> {ui["ui.video.hint.seek"]}</span>
+      <span><kbd>F</kbd> {ui["ui.video.hint.fullscreen"]}</span>
+      <span><kbd>M</kbd> {ui["ui.video.hint.mute"]}</span>
+    </p>
+  </section>
+)}
+
+<style is:global>
+  /* Overlay colours sit on top of video frames, so they do not follow the page theme. */
+  .ocv {
+    --ocv-stage: #0f1a14;
+    --ocv-on: #f7f1e8;
+    --ocv-chalk: #f2d27a;
+    --ocv-scrim: rgb(10 14 12 / 0.86);
+    --ocv-hover: rgb(255 255 255 / 0.14);
+    margin: 0 0 2.5rem;
+  }
+  .ocv-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+    margin-bottom: 0.75rem;
+  }
+  .ocv-head h2 {
+    margin: 0;
+    font-family: var(--oc-font-serif);
+    font-size: 1.25rem;
+  }
+  .ocv-tools { display: flex; align-items: center; gap: 0.5rem; }
+
+  /* segmented format switch + language pill: same control language as the calculator */
+  .ocv-seg { display: inline-flex; }
+  .ocv-seg button,
+  .ocv-pill {
+    min-height: 2rem;
+    padding: 0 0.75rem;
+    font: inherit;
+    font-size: 0.85rem;
+    color: var(--oc-ink);
+    background: var(--oc-surface);
+    border: 1px solid var(--oc-control-line);
+    cursor: pointer;
+  }
+  .ocv-seg button:first-child { border-radius: 4px 0 0 4px; }
+  .ocv-seg button:last-child { border-radius: 0 4px 4px 0; margin-left: -1px; }
+  .ocv-pill { border-radius: 4px; }
+  .ocv-seg button:hover,
+  .ocv-pill:hover { border-color: var(--oc-ink); }
+  .ocv-seg button[aria-pressed="true"] {
+    position: relative;
+    border-color: var(--oc-accent);
+    background: var(--oc-accent-soft);
+    color: var(--oc-accent);
+  }
+  .ocv-seg button:focus-visible,
+  .ocv-pill:focus-visible { outline: 2px solid var(--oc-focus); outline-offset: 2px; }
+
+  /* stage: fixed 16:9 box so switching shape never shifts the page */
+  .ocv-stage {
+    position: relative;
+    isolation: isolate;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--ocv-stage);
+    border: 1px solid var(--oc-line);
+    border-radius: 6px;
+    color: var(--ocv-on);
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .ocv-stage:focus-visible { outline: 2px solid var(--oc-focus); outline-offset: 2px; }
+  .ocv-stage::before {
+    content: "";
+    position: absolute;
+    inset: -40px;
+    z-index: -1;
+    background: var(--ocv-poster) center / cover;
+    filter: blur(32px) brightness(0.45);
+    opacity: 0;
+  }
+  .ocv-stage[data-format="tall"]::before { opacity: 1; }
+  .ocv-stage video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: transparent;
+  }
+
+  /* play cover */
+  .ocv-cover {
+    position: absolute;
+    left: 1rem;
+    bottom: 1rem;
+    display: none;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.7rem 1.15rem 0.7rem 0.9rem;
+    font: inherit;
+    color: var(--ocv-on);
+    background: rgb(15 26 20 / 0.78);
+    border: 1px solid rgb(255 255 255 / 0.28);
+    border-radius: 8px;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    transition: background var(--oc-motion, 160ms) ease, border-color var(--oc-motion, 160ms) ease;
+  }
+  .ocv-cover:hover { background: rgb(15 26 20 / 0.92); border-color: var(--ocv-chalk); }
+  .ocv-cover:focus-visible { outline: 2px solid var(--ocv-chalk); outline-offset: 3px; }
+  .ocv-cover svg { width: 1.9rem; height: 1.9rem; fill: var(--ocv-chalk); }
+  .ocv-cover-text { display: grid; text-align: left; line-height: 1.15; }
+  .ocv-cover-text b { font-weight: 600; font-size: 1rem; }
+  .ocv-cover-text i {
+    font-style: normal;
+    font-family: var(--oc-font-mono);
+    font-size: 0.8rem;
+    opacity: 0.75;
+    font-variant-numeric: tabular-nums;
+  }
+  .ocv-stage[data-ready]:not([data-started]) .ocv-cover,
+  .ocv-stage[data-ready][data-ended] .ocv-cover { display: inline-flex; }
+
+  /* control bar, shown only once the script has taken over */
+  .ocv-bar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+    padding: 2.75rem 0.75rem 0.5rem;
+    background: linear-gradient(to bottom, transparent, var(--ocv-scrim));
+    transition: opacity 200ms ease;
+  }
+  .ocv-stage[data-ready] .ocv-bar { display: block; }
+  .ocv-stage[data-ready]:not([data-started]) .ocv-bar { opacity: 0; pointer-events: none; }
+  .ocv-stage[data-idle] { cursor: none; }
+  .ocv-stage[data-idle] .ocv-bar { opacity: 0; pointer-events: none; }
+
+  .ocv-scrub {
+    position: relative;
+    height: 1.25rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    touch-action: none;
+  }
+  .ocv-scrub:focus-visible { outline: 2px solid var(--ocv-chalk); outline-offset: 2px; border-radius: 3px; }
+  .ocv-track {
+    position: relative;
+    width: 100%;
+    height: 4px;
+    background: rgb(255 255 255 / 0.28);
+    border-radius: 2px;
+    transition: height 120ms ease;
+  }
+  .ocv-scrub:hover .ocv-track,
+  .ocv-scrub[data-drag] .ocv-track,
+  .ocv-scrub:focus-visible .ocv-track { height: 6px; }
+  .ocv-buffered,
+  .ocv-fill { position: absolute; inset: 0 auto 0 0; border-radius: 2px; width: 0; }
+  .ocv-buffered { background: rgb(255 255 255 / 0.32); }
+  .ocv-fill { background: var(--ocv-chalk); }
+  .ocv-tick {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    margin-left: -1.5px;
+    background: var(--ocv-stage);
+  }
+  .ocv-thumb {
+    position: absolute;
+    left: 0;
+    width: 12px;
+    height: 12px;
+    margin-left: -6px;
+    background: var(--ocv-chalk);
+    border-radius: 50%;
+    transform: scale(0);
+    transition: transform 120ms ease;
+    pointer-events: none;
+  }
+  .ocv-scrub:hover .ocv-thumb,
+  .ocv-scrub[data-drag] .ocv-thumb,
+  .ocv-scrub:focus-visible .ocv-thumb { transform: scale(1); }
+  .ocv-tip {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 0;
+    transform: translateX(-50%);
+    display: grid;
+    gap: 0.1rem;
+    padding: 0.3rem 0.55rem;
+    font-size: 0.75rem;
+    line-height: 1.2;
+    text-align: center;
+    white-space: nowrap;
+    color: var(--ocv-on);
+    background: rgb(15 26 20 / 0.95);
+    border: 1px solid rgb(255 255 255 / 0.22);
+    border-radius: 4px;
+    pointer-events: none;
+  }
+  .ocv-tip[hidden] { display: none; }
+  .ocv-tip b { font-weight: 600; }
+  .ocv-tip i { font-style: normal; font-family: var(--oc-font-mono); opacity: 0.8; }
+
+  .ocv-row { display: flex; align-items: center; gap: 0.15rem; margin-top: 0.1rem; }
+  .ocv-btn {
+    display: inline-grid;
+    place-items: center;
+    min-width: 2.25rem;
+    height: 2.25rem;
+    padding: 0 0.4rem;
+    font: inherit;
+    color: var(--ocv-on);
+    background: transparent;
+    border: 0;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .ocv-btn:hover { background: var(--ocv-hover); }
+  .ocv-btn:focus-visible { outline: 2px solid var(--ocv-chalk); outline-offset: -2px; }
+  .ocv-btn svg { width: 1.35rem; height: 1.35rem; fill: currentColor; }
+  .ocv-speed { font-family: var(--oc-font-mono); font-size: 0.85rem; font-variant-numeric: tabular-nums; }
+
+  /* icon state is driven by attributes on the stage */
+  .ocv-stage .i-pause,
+  .ocv-stage .i-replay,
+  .ocv-stage .i-mute,
+  .ocv-stage .i-exit { display: none; }
+  .ocv-stage[data-playing] .i-play,
+  .ocv-stage[data-ended] .i-play { display: none; }
+  .ocv-stage[data-playing] .i-pause { display: block; }
+  .ocv-stage[data-ended] .i-replay { display: block; }
+  .ocv-stage[data-muted] .i-vol { display: none; }
+  .ocv-stage[data-muted] .i-mute { display: block; }
+  .ocv-stage[data-fs] .i-fs { display: none; }
+  .ocv-stage[data-fs] .i-exit { display: block; }
+
+  .ocv-vol {
+    width: 0;
+    opacity: 0;
+    margin: 0;
+    accent-color: var(--ocv-chalk);
+    transition: width 160ms ease, opacity 160ms ease, margin 160ms ease;
+  }
+  .ocv-row:hover .ocv-vol,
+  .ocv-vol:focus-visible { width: 4.5rem; opacity: 1; margin: 0 0.4rem; }
+  .ocv-time {
+    margin-left: 0.4rem;
+    font-family: var(--oc-font-mono);
+    font-size: 0.8rem;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .ocv-chapter {
+    flex: 1;
+    min-width: 0;
+    margin: 0 0.75rem;
+    overflow: hidden;
+    font-size: 0.8rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: right;
+    opacity: 0.8;
+  }
+
+  /* menus (speed, language) */
+  .ocv-menu { position: relative; }
+  .ocv-list {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 0.35rem);
+    z-index: 3;
+    min-width: 6rem;
+    margin: 0;
+    padding: 0.25rem;
+    list-style: none;
+    background: var(--oc-surface);
+    border: 1px solid var(--oc-control-line);
+    border-radius: 6px;
+  }
+  .ocv-menu-up .ocv-list {
+    top: auto;
+    bottom: calc(100% + 0.5rem);
+    background: rgb(15 26 20 / 0.97);
+    border-color: rgb(255 255 255 / 0.22);
+  }
+  .ocv-list[hidden] { display: none; }
+  .ocv-list button {
+    display: block;
+    width: 100%;
+    padding: 0.4rem 0.65rem;
+    font: inherit;
+    font-size: 0.85rem;
+    text-align: left;
+    color: var(--oc-ink);
+    background: transparent;
+    border: 0;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .ocv-menu-up .ocv-list button { color: var(--ocv-on); font-family: var(--oc-font-mono); }
+  .ocv-list button:hover { background: var(--oc-canvas); }
+  .ocv-menu-up .ocv-list button:hover { background: var(--ocv-hover); }
+  .ocv-list button[aria-checked="true"] { color: var(--oc-accent); }
+  .ocv-menu-up .ocv-list button[aria-checked="true"] { color: var(--ocv-chalk); }
+  .ocv-list button:focus-visible { outline: 2px solid var(--oc-focus); outline-offset: -2px; }
+
+  /* chapter rail: a list when narrow, one even row of progress segments when wide */
+  .ocv { container-type: inline-size; }
+  .ocv-titles { display: grid; gap: 0.15rem; }
+  .ocv-sub { margin: 0; font-size: 0.8rem; color: var(--oc-muted); }
+  .ocv-chapters {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: 0.5rem 0 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--oc-line);
+  }
+  .ocv-chapters button {
+    display: grid;
+    grid-template-columns: 3.25rem 1fr;
+    grid-template-areas: "time title";
+    align-items: baseline;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.6rem 0.1rem;
+    font: inherit;
+    font-size: 0.9rem;
+    line-height: 1.3;
+    text-align: left;
+    color: var(--oc-ink);
+    background: none;
+    border: 0;
+    border-bottom: 1px solid var(--oc-line);
+    cursor: pointer;
+  }
+  .ocv-chapters button:focus-visible { outline: 2px solid var(--oc-focus); outline-offset: 2px; }
+  .ocv-chapters button[aria-current="true"] { color: var(--oc-accent); }
+  .ocv-rail { display: none; grid-area: rail; }
+  .ocv-cs {
+    grid-area: time;
+    font-family: var(--oc-font-mono);
+    font-size: 0.75rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--oc-muted);
+  }
+  .ocv-ct { grid-area: title; }
+
+  @container (min-width: 560px) {
+    .ocv-chapters {
+      grid-template-columns: repeat(var(--n, 5), minmax(0, 1fr));
+      gap: 0.6rem;
+      margin-top: 1rem;
+      border-top: 0;
+    }
+    .ocv-chapters button {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-areas: "rail" "time" "title";
+      align-content: start;
+      gap: 0.45rem;
+      padding: 0 0 0.25rem;
+      border-bottom: 0;
+    }
+    .ocv-rail {
+      display: block;
+      height: 4px;
+      overflow: hidden;
+      background: var(--oc-line);
+      border-radius: 2px;
+      transition: background var(--oc-motion, 160ms) ease;
+    }
+    .ocv-chapters button:hover .ocv-rail { background: var(--oc-control-line); }
+    .ocv-rail-fill {
+      display: block;
+      width: calc(var(--p, 0) * 100%);
+      height: 100%;
+      background: var(--oc-accent);
+    }
+    .ocv-chapters button[aria-current="true"] .ocv-cs { color: var(--oc-accent); }
+  }
+
+  .ocv-hint {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.1rem;
+    margin: 1rem 0 0;
+    font-size: 0.78rem;
+    color: var(--oc-muted);
+  }
+  .ocv-hint kbd {
+    margin-right: 0.15rem;
+    padding: 0.05rem 0.35rem;
+    font-family: var(--oc-font-mono);
+    font-size: 0.7rem;
+    color: var(--oc-ink);
+    background: var(--oc-surface);
+    border: 1px solid var(--oc-control-line);
+    border-radius: 3px;
+  }
+
+  @media (pointer: coarse) {
+    .ocv-btn { min-width: 2.75rem; height: 2.75rem; }
+    .ocv-vol,
+    [data-act="mute"],
+    .ocv-hint { display: none; }
+    .ocv-chapter { display: none; }
+  }
+  @media (max-width: 560px) {
+    .ocv-chapter { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ocv *,
+    .ocv *::before { transition: none !important; }
+  }
+</style>
+
+<script>
+  type Chapter = { id: string; title: string; start: number };
+  type Track = { src: string; poster: string };
+  type Entry = { name: string; duration: number; chapters: Chapter[]; wide: Track; tall?: Track };
+
+  const PREFS = "oc.video.prefs";
+  const fmt = (template: string, values: Record<string, string>) =>
+    template.replace(/\{(\w+)\}/g, (_, name: string) => values[name] ?? "");
+  const clock = (seconds: number) => {
+    const s = Math.max(0, Math.floor(seconds));
+    return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+  };
+  const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
+
+  function loadPrefs(): { rate?: number; volume?: number; muted?: boolean } {
+    try {
+      return JSON.parse(localStorage.getItem(PREFS) ?? "{}");
+    } catch {
+      return {};
+    }
+  }
+  function savePrefs(next: object) {
+    try {
+      localStorage.setItem(PREFS, JSON.stringify({ ...loadPrefs(), ...next }));
+    } catch {
+      /* storage can be unavailable; the player works without it */
+    }
+  }
+
+  function setupMenu(menu: HTMLElement, onPick: (value: string) => void) {
+    const button = menu.querySelector<HTMLButtonElement>("[data-menu-button]");
+    const list = menu.querySelector<HTMLElement>(".ocv-list");
+    if (!button || !list) return { select: (_: string) => {} };
+    const items = () => [...list.querySelectorAll<HTMLButtonElement>("[data-value]")];
+    const close = (refocus = false) => {
+      list.hidden = true;
+      button.setAttribute("aria-expanded", "false");
+      if (refocus) button.focus();
+    };
+    const open = () => {
+      list.hidden = false;
+      button.setAttribute("aria-expanded", "true");
+      (items().find((i) => i.getAttribute("aria-checked") === "true") ?? items()[0])?.focus();
+    };
+    button.addEventListener("click", () => (list.hidden ? open() : close()));
+    list.addEventListener("click", (event) => {
+      const item = (event.target as HTMLElement).closest<HTMLButtonElement>("[data-value]");
+      if (!item) return;
+      onPick(item.dataset.value ?? "");
+      close(true);
+    });
+    menu.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !list.hidden) {
+        event.stopPropagation();
+        close(true);
+      }
+      if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+        if (list.hidden) return;
+        event.preventDefault();
+        const all = items();
+        const at = all.indexOf(document.activeElement as HTMLButtonElement);
+        const step = event.key === "ArrowDown" ? 1 : -1;
+        all[(at + step + all.length) % all.length]?.focus();
+      }
+    });
+    document.addEventListener("pointerdown", (event) => {
+      if (!menu.contains(event.target as Node)) close();
+    });
+    return {
+      select(value: string) {
+        for (const item of items()) item.setAttribute("aria-checked", String(item.dataset.value === value));
+      },
+    };
+  }
+
+  function mount(root: HTMLElement) {
+    const foundStage = root.querySelector<HTMLElement>("[data-stage]");
+    const foundVideo = foundStage?.querySelector("video");
+    const scrub = root.querySelector<HTMLElement>("[data-scrub]");
+    if (!foundStage || !foundVideo || !scrub) return;
+    const stage = foundStage;
+    const video = foundVideo;
+
+    const entries: Record<string, Entry> = JSON.parse(root.dataset.entries ?? "{}");
+    const strings: Record<string, string> = JSON.parse(root.dataset.strings ?? "{}");
+    let lang = root.dataset.lang ?? Object.keys(entries)[0] ?? "en";
+    let format: "wide" | "tall" = "wide";
+    const entry = () => entries[lang] as Entry;
+
+    const q = <T extends HTMLElement>(selector: string) => root.querySelector<T>(selector);
+    const fill = q("[data-fill]");
+    const buffered = q("[data-buffered]");
+    const thumb = q("[data-thumb]");
+    const tip = q("[data-tip]");
+    const time = q("[data-time]");
+    const chapterLabel = q("[data-chapter]");
+    const volume = q<HTMLInputElement>("[data-vol]");
+    const cover = q<HTMLButtonElement>("[data-cover]");
+    const coverLabel = q("[data-cover-label]");
+    const chaptersEl = q("[data-chapters]");
+    const ticksEl = q("[data-ticks]");
+
+    const duration = () => (Number.isFinite(video.duration) && video.duration > 0 ? video.duration : entry().duration);
+    const chapterAt = (t: number) => {
+      const list = entry().chapters;
+      let index = 0;
+      for (let i = 0; i < list.length; i++) if ((list[i] as Chapter).start <= t + 0.05) index = i;
+      return index;
+    };
+
+    // take over from the native controls
+    video.controls = false;
+    video.removeAttribute("controls");
+    stage.dataset.ready = "";
+
+    const prefs = loadPrefs();
+    video.playbackRate = prefs.rate ?? 1;
+    video.volume = prefs.volume ?? 1;
+    video.muted = prefs.muted ?? false;
+    if (volume) volume.value = String(video.muted ? 0 : video.volume);
+
+    // ---- rendering
+    let shownChapter = -1;
+    function render() {
+      const d = duration();
+      const t = video.currentTime;
+      const pct = d ? (t / d) * 100 : 0;
+      if (fill) fill.style.width = `${pct}%`;
+      if (thumb) thumb.style.left = `${pct}%`;
+      if (time) time.textContent = `${clock(t)} / ${clock(d)}`;
+      scrub?.setAttribute("aria-valuenow", String(Math.round(t)));
+      scrub?.setAttribute("aria-valuetext", fmt(strings.position ?? "", { current: clock(t), total: clock(d) }));
+      if (buffered && video.buffered.length) {
+        const end = video.buffered.end(video.buffered.length - 1);
+        buffered.style.width = `${d ? (end / d) * 100 : 0}%`;
+      }
+      const list = entry().chapters;
+      chaptersEl?.querySelectorAll<HTMLElement>("button").forEach((b, i) => {
+        const from = list[i]?.start ?? 0;
+        const to = list[i + 1]?.start ?? d;
+        b.style.setProperty("--p", String(clamp((t - from) / Math.max(to - from, 0.01), 0, 1)));
+      });
+      const index = chapterAt(t);
+      if (index !== shownChapter) {
+        shownChapter = index;
+        if (chapterLabel) chapterLabel.textContent = entry().chapters[index]?.title ?? "";
+        chaptersEl?.querySelectorAll("button").forEach((b, i) => b.setAttribute("aria-current", String(i === index)));
+      }
+    }
+    function renderChapters() {
+      const e = entry();
+      chaptersEl?.style.setProperty("--n", String(e.chapters.length));
+      const sub = q("[data-sub]");
+      if (sub) sub.textContent = fmt(strings.sub ?? "", { seconds: String(Math.round(e.duration)), chapters: String(e.chapters.length) });
+      if (chaptersEl)
+        chaptersEl.innerHTML = e.chapters
+          .map(
+            (c, i) =>
+              `<li><button type="button" data-seek="${c.start}" aria-current="${i === 0}" style="--p:0"><span class="ocv-rail"><span class="ocv-rail-fill"></span></span><span class="ocv-cs">${clock(c.start)}</span><span class="ocv-ct"></span></button></li>`,
+          )
+          .join("");
+      chaptersEl?.querySelectorAll(".ocv-ct").forEach((el, i) => (el.textContent = e.chapters[i]?.title ?? ""));
+      if (ticksEl)
+        ticksEl.innerHTML = e.chapters
+          .slice(1)
+          .map((c) => `<span class="ocv-tick" style="left:${(c.start / e.duration) * 100}%"></span>`)
+          .join("");
+      shownChapter = -1;
+      render();
+    }
+
+    // ---- transport
+    const play = () => {
+      stage.dataset.started = "";
+      return video.play().catch(() => {});
+    };
+    const toggle = () => (video.paused || video.ended ? (video.ended && (video.currentTime = 0), play()) : video.pause());
+    const seek = (t: number) => {
+      video.currentTime = clamp(t, 0, duration());
+      render();
+    };
+    video.addEventListener("play", () => {
+      stage.dataset.playing = "";
+      delete stage.dataset.ended;
+      if (coverLabel) coverLabel.textContent = strings.play ?? "";
+      wake();
+    });
+    video.addEventListener("pause", () => {
+      delete stage.dataset.playing;
+      delete stage.dataset.idle;
+    });
+    video.addEventListener("ended", () => {
+      delete stage.dataset.playing;
+      delete stage.dataset.idle;
+      stage.dataset.ended = "";
+      if (coverLabel) coverLabel.textContent = strings.replay ?? "";
+    });
+    for (const name of ["timeupdate", "loadedmetadata", "progress", "seeking", "durationchange"])
+      video.addEventListener(name, render);
+
+    const playButton = q<HTMLButtonElement>('[data-act="play"]');
+    playButton?.addEventListener("click", toggle);
+    cover?.addEventListener("click", toggle);
+    video.addEventListener("click", toggle);
+    video.addEventListener("dblclick", () => fullscreen());
+    video.addEventListener("play", () => playButton?.setAttribute("aria-label", strings.pause ?? ""));
+    video.addEventListener("pause", () => playButton?.setAttribute("aria-label", strings.play ?? ""));
+
+    chaptersEl?.addEventListener("click", (event) => {
+      const button = (event.target as HTMLElement).closest<HTMLButtonElement>("[data-seek]");
+      if (!button) return;
+      seek(Number(button.dataset.seek));
+      play();
+    });
+
+    // ---- scrubbing
+    const timeAt = (clientX: number) => {
+      const box = scrub.getBoundingClientRect();
+      return clamp((clientX - box.left) / box.width, 0, 1) * duration();
+    };
+    const showTip = (clientX: number) => {
+      if (!tip) return;
+      const box = scrub.getBoundingClientRect();
+      const t = timeAt(clientX);
+      const left = clamp(clientX - box.left, 40, box.width - 40);
+      tip.hidden = false;
+      tip.style.left = `${left}px`;
+      tip.innerHTML = "<b></b><i></i>";
+      (tip.firstElementChild as HTMLElement).textContent = entry().chapters[chapterAt(t)]?.title ?? "";
+      (tip.lastElementChild as HTMLElement).textContent = clock(t);
+    };
+    scrub.addEventListener("pointerdown", (event) => {
+      scrub.setPointerCapture(event.pointerId);
+      scrub.dataset.drag = "";
+      stage.dataset.started = "";
+      seek(timeAt(event.clientX));
+    });
+    scrub.addEventListener("pointermove", (event) => {
+      showTip(event.clientX);
+      if ("drag" in scrub.dataset) seek(timeAt(event.clientX));
+    });
+    scrub.addEventListener("pointerup", () => delete scrub.dataset.drag);
+    scrub.addEventListener("pointercancel", () => delete scrub.dataset.drag);
+    scrub.addEventListener("pointerleave", () => tip && (tip.hidden = true));
+    scrub.addEventListener("keydown", (event) => {
+      const step = { ArrowLeft: -5, ArrowRight: 5, PageDown: -15, PageUp: 15 }[event.key];
+      if (step !== undefined) seek(video.currentTime + step);
+      else if (event.key === "Home") seek(0);
+      else if (event.key === "End") seek(duration());
+      else return;
+      event.preventDefault();
+      event.stopPropagation();
+    });
+
+    // ---- volume, speed, fullscreen
+    const syncVolume = () => {
+      if (video.muted || video.volume === 0) stage.dataset.muted = "";
+      else delete stage.dataset.muted;
+      q('[data-act="mute"]')?.setAttribute("aria-label", (video.muted ? strings.unmute : strings.mute) ?? "");
+    };
+    syncVolume();
+    q('[data-act="mute"]')?.addEventListener("click", () => {
+      video.muted = !video.muted;
+      if (!video.muted && video.volume === 0) video.volume = 0.6;
+      savePrefs({ muted: video.muted });
+    });
+    volume?.addEventListener("input", () => {
+      video.volume = Number(volume.value);
+      video.muted = video.volume === 0;
+      savePrefs({ volume: video.volume, muted: video.muted });
+    });
+    video.addEventListener("volumechange", () => {
+      syncVolume();
+      if (volume) volume.value = String(video.muted ? 0 : video.volume);
+    });
+
+    const speedMenuEl = q("[data-menu='speed']");
+    const speedLabel = speedMenuEl?.querySelector("[data-menu-label]");
+    const speedMenu = speedMenuEl
+      ? setupMenu(speedMenuEl, (value) => setRate(Number(value)))
+      : undefined;
+    function setRate(rate: number) {
+      video.defaultPlaybackRate = rate;
+      video.playbackRate = rate;
+      if (speedLabel) speedLabel.textContent = `${rate}×`;
+      speedMenu?.select(String(rate));
+      savePrefs({ rate });
+    }
+    setRate(video.playbackRate);
+
+    const fsButton = q<HTMLButtonElement>('[data-act="fullscreen"]');
+    const canFullscreen = !!(stage.requestFullscreen || (video as any).webkitEnterFullscreen);
+    if (!canFullscreen && fsButton) fsButton.hidden = true;
+    function fullscreen() {
+      if (document.fullscreenElement) document.exitFullscreen();
+      else if (stage?.requestFullscreen) stage.requestFullscreen().catch(() => {});
+      else (video as any).webkitEnterFullscreen?.();
+    }
+    fsButton?.addEventListener("click", fullscreen);
+    document.addEventListener("fullscreenchange", () => {
+      if (document.fullscreenElement === stage) stage.dataset.fs = "";
+      else delete stage.dataset.fs;
+    });
+
+    // ---- idle: hide the bar while playing
+    let idleTimer = 0;
+    function wake() {
+      delete stage.dataset.idle;
+      window.clearTimeout(idleTimer);
+      if (!video.paused) idleTimer = window.setTimeout(() => (stage.dataset.idle = ""), 2600);
+    }
+    stage.addEventListener("pointermove", wake);
+    stage.addEventListener("pointerdown", wake);
+    stage.addEventListener("focusin", wake);
+
+    // ---- keyboard (when focus is on the stage itself, not a button or menu)
+    stage.addEventListener("keydown", (event) => {
+      if (event.altKey || event.ctrlKey || event.metaKey) return;
+      const target = event.target as HTMLElement;
+      const onControl = target.closest("button, input, select, [role='slider']") && target !== stage;
+      const key = event.key.toLowerCase();
+      if (onControl && !["f", "m", "k"].includes(key)) return;
+      wake();
+      const handled = (() => {
+        if (key === " " || key === "k") return toggle(), true;
+        if (key === "arrowleft") return seek(video.currentTime - 5), true;
+        if (key === "arrowright") return seek(video.currentTime + 5), true;
+        if (key === "j") return seek(video.currentTime - 10), true;
+        if (key === "l") return seek(video.currentTime + 10), true;
+        if (key === "arrowup") return (video.muted = false), (video.volume = clamp(video.volume + 0.1, 0, 1)), true;
+        if (key === "arrowdown") return (video.volume = clamp(video.volume - 0.1, 0, 1)), true;
+        if (key === "m") return (video.muted = !video.muted), true;
+        if (key === "f") return fullscreen(), true;
+        if (key === "<" || key === ",") return setRate(Math.max(0.75, video.playbackRate - 0.25)), true;
+        if (key === ">" || key === ".") return setRate(Math.min(2, video.playbackRate + 0.25)), true;
+        if (/^[0-9]$/.test(key)) return seek((Number(key) / 10) * duration()), true;
+        return false;
+      })();
+      if (handled) event.preventDefault();
+    });
+
+    // ---- shape and language
+    function load(next: Track, resumeAt: number, wasPlaying: boolean) {
+      stage?.style.setProperty("--ocv-poster", `url(${next.poster})`);
+      video.poster = next.poster;
+      video.src = next.src;
+      video.addEventListener(
+        "loadedmetadata",
+        () => {
+          video.currentTime = resumeAt;
+          if (wasPlaying) play();
+        },
+        { once: true },
+      );
+      if (resumeAt > 0 || wasPlaying) video.load();
+    }
+    const formatButtons = [...root.querySelectorAll<HTMLButtonElement>("[data-format]")];
+    function setFormat(next: "wide" | "tall") {
+      const track = next === "tall" ? entry().tall : entry().wide;
+      if (!track || next === format) return;
+      const at = video.currentTime;
+      const wasPlaying = !video.paused;
+      format = next;
+      stage!.dataset.format = next;
+      for (const b of formatButtons) b.setAttribute("aria-pressed", String(b.dataset.format === next));
+      load(track, at, wasPlaying);
+    }
+    for (const b of formatButtons) b.addEventListener("click", () => setFormat(b.dataset.format as "wide" | "tall"));
+
+    const langMenuEl = q("[data-menu='lang']");
+    const langLabel = langMenuEl?.querySelector("[data-menu-label]");
+    const langMenu = langMenuEl
+      ? setupMenu(langMenuEl, (value) => {
+          if (!entries[value] || value === lang) return;
+          const at = video.currentTime;
+          const wasPlaying = !video.paused;
+          lang = value;
+          if (langLabel) langLabel.textContent = entry().name;
+          langMenu?.select(value);
+          const e = entry();
+          if (format === "tall" && !e.tall) setFormat("wide");
+          renderChapters();
+          load(format === "tall" && e.tall ? e.tall : e.wide, at, wasPlaying);
+        })
+      : undefined;
+
+    render();
+  }
+
+  for (const root of document.querySelectorAll<HTMLElement>("[data-player]")) mount(root);
+</script>

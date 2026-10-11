@@ -1,0 +1,15 @@
+{
+  "id": "percentage-change",
+  "slug": "percentage-change",
+  "category": "math",
+  "titleKey": "calculator.percentage-change.title",
+  "descriptionKey": "calculator.percentage-change.description",
+  "searchKeys": [
+    "calculator.percentage-change.title",
+    "calculator.percentage-change.search"
+  ],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "change": ["oldValue", "newValue"]
+  }
+}

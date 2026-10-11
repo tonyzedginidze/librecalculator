@@ -1,0 +1,16 @@
+{
+  "id": "margin-markup",
+  "slug": "margin-markup",
+  "category": "finance",
+  "titleKey": "calculator.margin-markup.title",
+  "descriptionKey": "calculator.margin-markup.description",
+  "searchKeys": [
+    "calculator.margin-markup.title",
+    "calculator.margin-markup.search"
+  ],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "margin": ["cost", "price"],
+    "markup": ["cost", "price"]
+  }
+}

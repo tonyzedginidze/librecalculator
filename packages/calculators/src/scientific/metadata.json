@@ -1,0 +1,15 @@
+{
+  "id": "scientific",
+  "slug": "scientific",
+  "category": "math",
+  "titleKey": "calculator.scientific.title",
+  "descriptionKey": "calculator.scientific.description",
+  "searchKeys": ["calculator.scientific.title", "calculator.scientific.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "square-root": ["value"],
+    "integer-power": ["value", "exponent"],
+    "natural-log": ["value"],
+    "sine-degrees": ["value"]
+  }
+}

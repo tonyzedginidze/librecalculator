@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.astro/
+apps/desktop/src-tauri/target/
+.slim/deepwork/.runtime/
+*.log
+.DS_Store
+
+.slim/
+.videos-build/
+apps/web/public/videos/
+
+# Kept locally, not pushed
+/videos/
+/lfs/

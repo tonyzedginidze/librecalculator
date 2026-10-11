@@ -1,0 +1,14 @@
+{
+  "id": "cylinder",
+  "slug": "cylinder",
+  "category": "geometry",
+  "titleKey": "calculator.cylinder.title",
+  "descriptionKey": "calculator.cylinder.description",
+  "searchKeys": ["calculator.cylinder.title", "calculator.cylinder.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "cylinder-volume": ["radius", "height"],
+    "cylinder-surface": ["radius", "height"],
+    "cylinder-lateral": ["radius", "height"]
+  }
+}

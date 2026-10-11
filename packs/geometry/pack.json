@@ -1,0 +1,9 @@
+{
+  "id": "geometry",
+  "version": 1,
+  "category": "geometry",
+  "titleKey": "ui.pack.geometry.title",
+  "descriptionKey": "ui.pack.geometry.description",
+  "calculatorIds": ["rectangle", "triangle", "circle", "sphere", "cylinder"],
+  "default": false
+}

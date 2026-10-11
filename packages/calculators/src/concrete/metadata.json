@@ -1,0 +1,12 @@
+{
+  "id": "concrete",
+  "slug": "concrete",
+  "category": "construction",
+  "titleKey": "calculator.concrete.title",
+  "descriptionKey": "calculator.concrete.description",
+  "searchKeys": ["calculator.concrete.title", "calculator.concrete.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "slab": ["length", "width", "depth", "waste"]
+  }
+}

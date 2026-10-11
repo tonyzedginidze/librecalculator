@@ -1,0 +1,16 @@
+{
+  "id": "construction",
+  "version": 1,
+  "category": "construction",
+  "titleKey": "ui.pack.construction.title",
+  "descriptionKey": "ui.pack.construction.description",
+  "calculatorIds": [
+    "concrete",
+    "paint",
+    "flooring",
+    "roofing",
+    "tile",
+    "lumber"
+  ],
+  "default": false
+}

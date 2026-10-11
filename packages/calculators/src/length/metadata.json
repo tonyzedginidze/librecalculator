@@ -1,0 +1,12 @@
+{
+  "id": "length",
+  "slug": "length",
+  "category": "units",
+  "titleKey": "calculator.length.title",
+  "descriptionKey": "calculator.length.description",
+  "searchKeys": ["calculator.length.title", "calculator.length.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "convert": ["value", "source", "target"]
+  }
+}

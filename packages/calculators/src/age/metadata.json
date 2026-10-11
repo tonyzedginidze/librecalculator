@@ -1,0 +1,12 @@
+{
+  "id": "age",
+  "slug": "age",
+  "category": "date-time",
+  "titleKey": "calculator.age.title",
+  "descriptionKey": "calculator.age.description",
+  "searchKeys": ["calculator.age.title", "calculator.age.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "completed-years": ["birth", "asof"]
+  }
+}

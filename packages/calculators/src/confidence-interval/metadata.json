@@ -1,0 +1,15 @@
+{
+  "id": "confidence-interval",
+  "slug": "confidence-interval",
+  "category": "statistics",
+  "titleKey": "calculator.confidence-interval.title",
+  "descriptionKey": "calculator.confidence-interval.description",
+  "searchKeys": [
+    "calculator.confidence-interval.title",
+    "calculator.confidence-interval.search"
+  ],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "normal-interval": ["mean", "sigma", "count", "critical"]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "baking-ratios",
+  "slug": "baking-ratios",
+  "category": "cooking",
+  "titleKey": "calculator.baking-ratios.title",
+  "descriptionKey": "calculator.baking-ratios.description",
+  "searchKeys": [
+    "calculator.baking-ratios.title",
+    "calculator.baking-ratios.search"
+  ],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "baker-percent": ["ingredient", "flour"],
+    "ingredient-mass": ["flour", "percentage"],
+    "flour-mass": ["ingredient", "percentage"]
+  }
+}

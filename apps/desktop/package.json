@@ -1,0 +1,31 @@
+{
+  "name": "@open-calculators/desktop",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 5173 --strictPort",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1 --port 5173 --strictPort",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@open-calculators/calculators": "workspace:*",
+    "@open-calculators/content": "workspace:*",
+    "@open-calculators/design": "workspace:*",
+    "@open-calculators/dom-ui": "workspace:*",
+    "@open-calculators/i18n": "workspace:*",
+    "@tauri-apps/api": "2.12.2",
+    "react": "19.2.3",
+    "react-dom": "19.2.3"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "2.12.1",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "6.1.2",
+    "oxc-transform-react": "0.153.0",
+    "typescript": "5.9.3",
+    "vite": "8.3.4"
+  }
+}

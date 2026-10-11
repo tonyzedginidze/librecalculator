@@ -1,0 +1,22 @@
+---
+import { calculatorCatalog, packCatalog } from "@open-calculators/calculators";
+import { Sidebar } from "@open-calculators/dom-ui/components";
+import { en } from "@open-calculators/i18n";
+import { ui } from "@open-calculators/i18n/ui";
+import Base from "../../layouts/Base.astro";
+export function getStaticPaths() {
+  return packCatalog.map(pack => ({ params: { pack: pack.id }, props: { pack } }));
+}
+const { pack } = Astro.props;
+const messages: Readonly<Record<string, string>> = { ...en, ...ui };
+const title = messages[pack.titleKey] ?? pack.id;
+const description = messages[pack.descriptionKey] ?? "";
+const ids = new Set<string>(pack.calculatorIds);
+const items = calculatorCatalog.filter(item => ids.has(item.id));
+---
+<Base title={title} description={description}>
+  <div class="oc-app"><Sidebar client:load /><main class="oc-main" id="calculator" data-category={pack.category}>
+    <h1 class="oc-title">{title}</h1><p>{description}</p>
+    <ul>{items.map(item => <li><a href={`/calculators/${item.slug}`}>{en[item.titleKey]}</a><p>{en[item.descriptionKey]}</p></li>)}</ul>
+  </main></div>
+</Base>

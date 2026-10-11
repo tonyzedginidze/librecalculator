@@ -1,0 +1,102 @@
+import type { Lesson } from "../schema";
+export const lesson: Lesson = {
+  calculatorId: "flooring",
+  blocks: [
+    {
+      id: "intro",
+      kind: "prose",
+      titleKey: "lesson.flooring.intro.title",
+      bodyKey: "lesson.flooring.intro.body",
+    },
+    {
+      id: "method",
+      kind: "prose",
+      titleKey: "lesson.flooring.method.title",
+      bodyKey: "lesson.flooring.method.body",
+    },
+    {
+      id: "formula",
+      kind: "formula",
+      bodyKey: "lesson.flooring.formula",
+      variables: [
+        { symbol: "N", nameKey: "lesson.flooring.variable.packs" },
+        { symbol: "L", nameKey: "flooring.field.length" },
+        { symbol: "W", nameKey: "flooring.field.width" },
+        { symbol: "p", nameKey: "flooring.field.packArea" },
+        { symbol: "a", nameKey: "flooring.field.waste" },
+      ],
+    },
+    {
+      id: "example-1",
+      kind: "example",
+      titleKey: "lesson.flooring.example.1",
+      operation: "packs",
+      inputs: {
+        length: "5",
+        width: "4",
+        packArea: "2",
+        waste: "10",
+      },
+      expected: "11",
+      workingKey: "flooring.working.summary",
+    },
+    {
+      id: "example-2",
+      kind: "example",
+      titleKey: "lesson.flooring.example.2",
+      operation: "packs",
+      inputs: {
+        length: "3",
+        width: "3",
+        packArea: "2",
+        waste: "0",
+      },
+      expected: "5",
+      workingKey: "flooring.working.summary",
+    },
+    {
+      id: "example-3",
+      kind: "example",
+      titleKey: "lesson.flooring.example.3",
+      operation: "packs",
+      inputs: {
+        length: "2",
+        width: "2",
+        packArea: "3",
+        waste: "5",
+      },
+      expected: "2",
+      workingKey: "flooring.working.summary",
+    },
+    {
+      id: "visual",
+      kind: "visual",
+      visualKey: "flooring.visual.description",
+      alternativeKey: "flooring.visual.alternative",
+    },
+    {
+      id: "mistakes",
+      kind: "prose",
+      titleKey: "lesson.flooring.mistakes.title",
+      bodyKey: "lesson.flooring.mistakes.body",
+    },
+    {
+      id: "limits",
+      kind: "prose",
+      titleKey: "lesson.flooring.limits.title",
+      bodyKey: "lesson.flooring.limits.body",
+    },
+    {
+      id: "faq",
+      kind: "faq",
+      questionKey: "lesson.flooring.faq.q",
+      answerKey: "lesson.flooring.faq.a",
+    },
+    {
+      id: "sources",
+      kind: "prose",
+      titleKey: "lesson.flooring.sources.title",
+      bodyKey: "lesson.flooring.sources.body",
+    },
+  ],
+};

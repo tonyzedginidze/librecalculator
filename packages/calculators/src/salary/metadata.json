@@ -1,0 +1,13 @@
+{
+  "id": "salary",
+  "slug": "salary",
+  "category": "finance",
+  "titleKey": "calculator.salary.title",
+  "descriptionKey": "calculator.salary.description",
+  "searchKeys": ["calculator.salary.title", "calculator.salary.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "annual-to-hourly": ["pay", "hours", "weeks"],
+    "hourly-to-annual": ["pay", "hours", "weeks"]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "@open-calculators/calculators",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./numeric/money": "./src/numeric/money.ts",
+    "./*": "./src/*/index.ts"
+  },
+  "dependencies": {
+    "decimal.js": "10.6.0"
+  }
+}

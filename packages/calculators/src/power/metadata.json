@@ -1,0 +1,12 @@
+{
+  "id": "power",
+  "slug": "power",
+  "category": "physics",
+  "titleKey": "calculator.power.title",
+  "descriptionKey": "calculator.power.description",
+  "searchKeys": ["calculator.power.title", "calculator.power.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "power-si": ["energy", "time"]
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "id": "tile",
+  "slug": "tile",
+  "category": "construction",
+  "titleKey": "calculator.tile.title",
+  "descriptionKey": "calculator.tile.description",
+  "searchKeys": ["calculator.tile.title", "calculator.tile.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "tiles": ["area", "tileWidth", "tileHeight", "waste"]
+  }
+}

@@ -1,0 +1,567 @@
+/* Desktop chrome. App-shaped: no page scroll, a source list, a toolbar. */
+
+html,
+body,
+#root {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: default;
+}
+
+input,
+textarea,
+.oc-answer-value,
+.oc-answer,
+[data-selectable] {
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+kbd {
+  font: 500 0.7rem / 1 var(--oc-font-sans);
+  padding: 0.18rem 0.35rem;
+  border-radius: 5px;
+  border: 1px solid var(--oc-line);
+  background: var(--oc-surface);
+  color: var(--oc-muted);
+}
+
+/* ---------- main window ---------- */
+
+.dk-shell {
+  display: grid;
+  grid-template-columns: 15rem minmax(0, 1fr);
+  height: 100%;
+}
+
+.dk-side {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background: color-mix(in srgb, var(--oc-canvas) 92%, var(--oc-ink));
+  border-right: 1px solid var(--oc-line);
+}
+
+.dk-drag {
+  flex: none;
+  height: 2.25rem;
+}
+:root[data-platform="mac"][data-native] .dk-drag {
+  height: 3.1rem;
+}
+:root:not([data-native]) .dk-drag,
+:root[data-native]:not([data-platform="mac"]) .dk-drag {
+  height: 0.5rem;
+}
+
+.dk-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.1rem 1rem 0.9rem;
+}
+.dk-brand .oc-brand-name {
+  font-size: 1.08rem;
+}
+
+.dk-search {
+  position: relative;
+  margin: 0 0.75rem 0.5rem;
+}
+.dk-search input {
+  width: 100%;
+  height: 1.9rem;
+  padding: 0 2.6rem 0 0.65rem;
+  border: 1px solid var(--oc-line);
+  border-radius: 8px;
+  background: var(--oc-surface);
+  color: var(--oc-ink);
+  font: inherit;
+  font-size: 0.88rem;
+}
+.dk-search input:focus {
+  outline: 2px solid color-mix(in srgb, var(--oc-accent) 55%, transparent);
+  outline-offset: -1px;
+}
+.dk-search kbd {
+  position: absolute;
+  top: 50%;
+  right: 0.4rem;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  pointer-events: none;
+}
+.dk-search input:focus + kbd,
+.dk-search input:not(:placeholder-shown) + kbd {
+  display: none;
+}
+
+.dk-list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0 0.5rem 0.5rem;
+}
+.dk-cat {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  margin-top: 0.35rem;
+  padding: 0.35rem 0.55rem;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--oc-muted);
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: left;
+  cursor: pointer;
+}
+.dk-cat[data-active="true"] {
+  color: var(--oc-accent);
+}
+.dk-all {
+  margin-top: 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+.dk-all small {
+  font-size: 0.72rem;
+  font-weight: 500;
+}
+.dk-cat:hover {
+  background: color-mix(in srgb, var(--oc-ink) 6%, transparent);
+  color: var(--oc-ink);
+}
+.dk-cat svg:first-child {
+  flex: none;
+  width: 0.95rem;
+  height: 0.95rem;
+  color: var(--oc-accent);
+}
+[data-category="geometry"] > .dk-cat svg:first-child {
+  color: var(--oc-geometry);
+}
+[data-category="units"] > .dk-cat svg:first-child {
+  color: var(--oc-units);
+}
+[data-category="finance"] > .dk-cat svg:first-child {
+  color: var(--oc-finance);
+}
+.dk-cat span {
+  flex: 1;
+}
+.dk-chevron {
+  flex: none;
+  transition: transform var(--oc-motion) ease;
+}
+.dk-cat[aria-expanded="true"] .dk-chevron {
+  transform: rotate(90deg);
+}
+.dk-fold {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--oc-motion) ease;
+}
+.dk-fold[data-open="true"] {
+  grid-template-rows: 1fr;
+}
+.dk-fold > div {
+  min-height: 0;
+  overflow: hidden;
+}
+.dk-empty {
+  margin: 1rem 0.6rem;
+  color: var(--oc-muted);
+  font-size: 0.85rem;
+}
+
+.dk-side footer {
+  flex: none;
+  padding: 0.5rem;
+  border-top: 1px solid var(--oc-line);
+}
+
+.dk-item {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  width: 100%;
+  min-height: 1.9rem;
+  padding: 0.2rem 0.55rem;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--oc-ink);
+  font: inherit;
+  font-size: 0.88rem;
+  text-align: left;
+  cursor: pointer;
+  transition: color var(--oc-motion) ease;
+}
+.dk-item kbd {
+  margin-left: auto;
+  border: 0;
+  background: transparent;
+}
+.dk-item:hover {
+  background: color-mix(in srgb, var(--oc-ink) 6%, transparent);
+}
+.dk-item[data-active="true"] {
+  color: var(--oc-accent);
+  font-weight: 650;
+}
+.dk-side footer .dk-item svg {
+  flex: none;
+}
+
+.dk-list .dk-item {
+  padding-left: 1.9rem;
+}
+
+.dk-main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  background: var(--oc-surface);
+}
+
+.dk-bar {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  height: 3.1rem;
+  padding: 0 1.25rem;
+  border-bottom: 1px solid var(--oc-line);
+}
+.dk-title {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  min-width: 0;
+}
+.dk-title strong {
+  font-size: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dk-title span {
+  font-size: 0.8rem;
+  color: var(--oc-muted);
+}
+
+.dk-segment {
+  display: inline-flex;
+  padding: 2px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--oc-ink) 8%, transparent);
+}
+.dk-segment button {
+  padding: 0.2rem 0.75rem;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--oc-muted);
+  font: inherit;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+.dk-segment button[aria-selected="true"],
+.dk-segment button[aria-pressed="true"] {
+  background: var(--oc-surface);
+  color: var(--oc-ink);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--oc-ink) 20%, transparent);
+}
+
+.dk-content {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+.dk-pad {
+  width: min(100% - 3rem, 46rem);
+  margin: 0 auto;
+  padding-block: 1.5rem 3rem;
+}
+.dk-tool .oc-calc-head .oc-title {
+  display: none;
+}
+.dk-lesson {
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+/* settings */
+.dk-settings {
+  width: min(100% - 3rem, 40rem);
+  margin: 0 auto;
+  padding-block: 1.5rem;
+}
+.dk-settings h2 {
+  margin: 1.25rem 0 0.5rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--oc-muted);
+}
+.dk-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--oc-line);
+  border-radius: 12px;
+  background: var(--oc-canvas);
+}
+.dk-row p {
+  margin: 0.15rem 0 0;
+  font-size: 0.82rem;
+  color: var(--oc-muted);
+}
+.dk-shortcut {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex: none;
+}
+.dk-keys {
+  display: inline-flex;
+  gap: 0.2rem;
+}
+.dk-record {
+  min-width: 7.5rem;
+  min-height: 1.9rem;
+  padding: 0 0.7rem;
+  border: 1px solid var(--oc-line);
+  border-radius: 8px;
+  background: var(--oc-surface);
+  color: var(--oc-ink);
+  font: inherit;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+.dk-record[data-recording="true"] {
+  border-color: var(--oc-accent);
+  color: var(--oc-accent);
+}
+.dk-link {
+  border: 0;
+  background: none;
+  color: var(--oc-accent);
+  font: inherit;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+.dk-error {
+  margin: 0.5rem 0 0;
+  color: var(--oc-danger);
+  font-size: 0.82rem;
+}
+
+/* ---------- quick search window ---------- */
+
+.dq {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--oc-surface);
+  border: 1px solid var(--oc-line);
+}
+.dq-head {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  height: 3.4rem;
+  padding: 0 1rem;
+  border-bottom: 1px solid var(--oc-line);
+}
+.dq-head input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  color: var(--oc-ink);
+  font: inherit;
+  font-size: 1.15rem;
+  outline: none;
+}
+.dq-head button {
+  border: 0;
+  background: none;
+  color: var(--oc-muted);
+  font: inherit;
+  cursor: pointer;
+}
+.dq-head strong {
+  flex: 1;
+}
+.dq-head .dq-open {
+  color: var(--oc-accent);
+  font-size: 0.82rem;
+}
+.dq-list {
+  flex: 1;
+  min-height: 0;
+  margin: 0;
+  padding: 0.4rem;
+  overflow-y: auto;
+  list-style: none;
+}
+.dq-list button {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  width: 100%;
+  min-height: 2.3rem;
+  padding: 0 0.7rem;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--oc-ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.dq-list button span {
+  flex: 1;
+}
+.dq-list button small {
+  color: var(--oc-muted);
+  font-size: 0.75rem;
+}
+.dq-list button[data-selected="true"] {
+  background: var(--oc-accent);
+  color: var(--oc-accent-ink);
+}
+.dq-list button[data-selected="true"] small {
+  color: inherit;
+  opacity: 0.8;
+}
+.dq-empty {
+  padding: 1rem;
+  color: var(--oc-muted);
+}
+.dq-foot {
+  flex: none;
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  border-top: 1px solid var(--oc-line);
+  color: var(--oc-muted);
+  font-size: 0.75rem;
+}
+.dq-foot kbd {
+  margin-right: 0.15rem;
+}
+.dq-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 1rem 1.25rem 1.25rem;
+}
+.dq-body .oc-calc-head .oc-title {
+  display: none;
+}
+.dq-head .dq-pin {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 7px;
+  color: var(--oc-muted);
+}
+.dq-head .dq-pin svg {
+  transform: rotate(45deg);
+  transition: transform var(--oc-motion) ease;
+}
+.dq-head .dq-pin:hover {
+  color: var(--oc-ink);
+  background: color-mix(in srgb, var(--oc-ink) 7%, transparent);
+}
+.dq-head .dq-pin[aria-pressed="true"] {
+  color: var(--oc-accent);
+}
+.dq-head .dq-pin[aria-pressed="true"] svg {
+  transform: none;
+  fill: color-mix(in srgb, currentColor 25%, transparent);
+}
+
+/* video */
+.dk-video video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  background: #000;
+}
+.dk-chapters {
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.dk-chapters button {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  padding: 0.5rem 0.7rem;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--oc-ink);
+  font: inherit;
+  font-size: 0.9rem;
+  text-align: left;
+  cursor: pointer;
+}
+.dk-chapters button:hover {
+  background: color-mix(in srgb, var(--oc-ink) 6%, transparent);
+}
+.dk-chapters button[data-active="true"] {
+  color: var(--oc-accent);
+  font-weight: 650;
+}
+.dk-chapters time {
+  color: var(--oc-muted);
+  font-variant-numeric: tabular-nums;
+}
+.dk-video-empty {
+  text-align: center;
+  padding-top: 4rem;
+}
+.dk-video-empty p {
+  color: var(--oc-muted);
+}
+.dk-video-empty button {
+  padding: 0.35rem 0.9rem;
+  border: 1px solid var(--oc-line);
+  border-radius: 8px;
+  background: var(--oc-surface);
+  color: var(--oc-ink);
+  font: inherit;
+  cursor: pointer;
+}
+
+/* card grid */
+.dk-grid {
+  padding: 1.25rem 1.5rem 2.5rem;
+}

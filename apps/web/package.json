@@ -1,0 +1,30 @@
+{
+  "name": "@open-calculators/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev --host 127.0.0.1",
+    "build": "bun ../../scripts/generate-web-topics.ts && astro build && bun ../../scripts/build-offline.ts",
+    "preview": "astro preview --host 127.0.0.1",
+    "typecheck": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/react": "7.0.1",
+    "@open-calculators/calculators": "workspace:*",
+    "@open-calculators/content": "workspace:*",
+    "@open-calculators/design": "workspace:*",
+    "@open-calculators/dom-ui": "workspace:*",
+    "@open-calculators/i18n": "workspace:*",
+    "astro": "7.3.8",
+    "react": "19.2.3",
+    "react-dom": "19.2.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.6",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.3",
+    "oxc-transform-react": "0.153.0",
+    "typescript": "5.9.3"
+  }
+}

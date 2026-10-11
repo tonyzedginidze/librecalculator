@@ -1,0 +1,37 @@
+{
+  "name": "open-calculators",
+  "private": true,
+  "packageManager": "bun@1.4.2",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "generate": "bun scripts/generate-catalog.ts",
+    "check:generated": "bun scripts/generate-catalog.ts --check",
+    "generate:web-topics": "bun scripts/generate-web-topics.ts",
+    "check:web-topics": "bun scripts/generate-web-topics.ts --check",
+    "dev": "bun run dev:web",
+    "dev:web": "cd apps/web && bun run dev",
+    "dev:desktop": "cd apps/desktop && bunx tauri dev",
+    "dev:desktop:ui": "cd apps/desktop && bun run dev",
+    "build:web": "cd apps/web && bun run build",
+    "build:desktop": "cd apps/desktop && bun run build",
+    "test": "bun test",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "content-check": "bun scripts/check-content.ts",
+    "new": "bun scripts/new-calculator.ts",
+    "export:art": "bun scripts/export-art.ts",
+    "readme:art": "bun scripts/readme-art.ts"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.3.8",
+    "@types/bun": "1.3.5",
+    "typescript": "5.9.3"
+  },
+  "dependencies": {
+    "gsap": "3.15.0"
+  }
+}

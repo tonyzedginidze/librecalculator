@@ -1,0 +1,12 @@
+{
+  "id": "savings",
+  "slug": "savings",
+  "category": "finance",
+  "titleKey": "calculator.savings.title",
+  "descriptionKey": "calculator.savings.description",
+  "searchKeys": ["calculator.savings.title", "calculator.savings.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "save": ["principal", "deposit", "annualRate", "months"]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "id": "units",
+  "version": 1,
+  "category": "units",
+  "titleKey": "ui.pack.units.title",
+  "descriptionKey": "ui.pack.units.description",
+  "calculatorIds": [
+    "length",
+    "mass",
+    "temperature",
+    "speed-conversion",
+    "duration",
+    "cooking-measures"
+  ],
+  "default": false
+}

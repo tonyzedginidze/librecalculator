@@ -1,0 +1,12 @@
+{
+  "id": "density",
+  "slug": "density",
+  "category": "physics",
+  "titleKey": "calculator.density.title",
+  "descriptionKey": "calculator.density.description",
+  "searchKeys": ["calculator.density.title", "calculator.density.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "density-si": ["mass", "volume"]
+  }
+}

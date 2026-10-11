@@ -1,0 +1,12 @@
+{
+  "id": "energy",
+  "slug": "energy",
+  "category": "physics",
+  "titleKey": "calculator.energy.title",
+  "descriptionKey": "calculator.energy.description",
+  "searchKeys": ["calculator.energy.title", "calculator.energy.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "energy-si": ["mass", "speed"]
+  }
+}

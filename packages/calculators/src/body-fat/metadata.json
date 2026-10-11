@@ -1,0 +1,13 @@
+{
+  "id": "body-fat",
+  "slug": "body-fat",
+  "category": "health",
+  "titleKey": "calculator.body-fat.title",
+  "descriptionKey": "calculator.body-fat.description",
+  "searchKeys": ["calculator.body-fat.title", "calculator.body-fat.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "male-regression": ["weight", "height", "age"],
+    "female-regression": ["weight", "height", "age"]
+  }
+}

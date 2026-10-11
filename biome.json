@@ -1,0 +1,41 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.3.8/schema.json",
+  "formatter": {
+    "indentStyle": "space",
+    "indentWidth": 2
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "double",
+      "semicolons": "always"
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "complexity": {
+        "noImportantStyles": "off"
+      },
+      "style": {
+        "noDescendingSpecificity": "off"
+      }
+    }
+  },
+  "files": {
+    "ignoreUnknown": true,
+    "includes": [
+      "**",
+      "!bun.lock",
+      "!**/*.generated.ts",
+      "!**/dist",
+      "!**/.astro",
+      "!apps/desktop/src-tauri",
+      "!**/*.astro",
+      "!apps/desktop/index.html",
+      "!.slim",
+      "!.videos-build",
+      "!apps/web/public/videos"
+    ]
+  }
+}

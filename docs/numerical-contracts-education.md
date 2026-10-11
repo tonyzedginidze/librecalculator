@@ -1,0 +1,13 @@
+# Education numerical contracts
+
+Every engine uses bounded canonical decimal strings (256 characters, 30 significant digits, adjusted exponent magnitude at most 100) and the shared 50-significant-digit Decimal context. Divisions are not presentation-rounded. Exact terminating examples assert strings; repeating results use absolute-plus-relative tolerance 1e-12. Invalid fields, domain errors and overflow are explicit failures. Academic policies remain supplied by the institution: no universal letter-grade mapping, GPA exclusion, repeat-course replacement or rounding rule is implied.
+
+GPA: nonnegative grade-point values and total quality points, strictly positive credits, with fractional credit units supported. GPA=qualityPoints/credits. Combining terms weights each GPA by its credit count; target quality points=targetGpa×credits. The same grading scale must be used in every term. Fixtures: 42/12=3.5; 12 credits at 3 and 12 at 3.5 combine to 3.25; target 4 on 12 credits needs 48 quality points.
+
+Grade: earned points and percentages are nonnegative. Possible points are strictly positive. Extra-credit scores above 100% are supported. Weight is 0–100%. Percent=earned/possible×100; contribution=percentage×weight/100; targetPoints=targetPercent×possible/100. Fixtures: 40/50=80%; 80×30/100=24 percentage points; 80% of 50=40 points.
+
+Final grade: current grade is the normalized average outside the final. Scores and targets are nonnegative, with explicit extra credit above 100% permitted. Weight is 0–100%; solving for final requires nonzero weight, solving for coursework requires weight less than 100%. Projected=current×(1−w/100)+final×w/100. Required-final=(target−current×(1−w/100))/(w/100). Required-coursework=(target−final×w/100)/(1−w/100). Required outputs can be negative or greater than 100; do not clamp them. Negative means a zero score already meets the target; greater than 100 needs extra credit or is unattainable under a capped scheme. Fixture: current 80%, final 90%, weight 30% yields 83% overall; both inverse operations recover 90% and 80%.
+
+Test score: equal-weight, all-or-nothing questions only. Total questions integer 1–1,000,000; correct integer 0 through total; target 0–100%. Percent=correct/total×100; missed=total−correct; minimum correct=ceil(target×total/100). Fixtures: 16/20=80%; 20−16=4; 80% threshold of 20 needs 16. Nontrivial threshold 75% of 7 needs 6, never rounded down to 5.
+
+Reference: OpenStax Prealgebra 2e arithmetic and percentage material, https://openstax.org/details/books/prealgebra-2e. Consult the actual institutional handbook for policies.

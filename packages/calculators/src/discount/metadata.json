@@ -1,0 +1,13 @@
+{
+  "id": "discount",
+  "slug": "discount",
+  "category": "math",
+  "titleKey": "calculator.discount.title",
+  "descriptionKey": "calculator.discount.description",
+  "searchKeys": ["calculator.discount.title", "calculator.discount.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "sale-price": ["original", "discount"],
+    "discount-percent": ["original", "sale"]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "probability",
+  "slug": "probability",
+  "category": "statistics",
+  "titleKey": "calculator.probability.title",
+  "descriptionKey": "calculator.probability.description",
+  "searchKeys": [
+    "calculator.probability.title",
+    "calculator.probability.search"
+  ],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "complement": ["first"],
+    "independent-both": ["first", "second"],
+    "event-union": ["first", "second", "intersection"]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "@open-calculators/content",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/lessons.generated.ts",
+    "./schema": "./src/schema.ts",
+    "./*": "./src/*/index.ts"
+  }
+}

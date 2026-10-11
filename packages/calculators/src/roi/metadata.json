@@ -1,0 +1,12 @@
+{
+  "id": "roi",
+  "slug": "roi",
+  "category": "finance",
+  "titleKey": "calculator.roi.title",
+  "descriptionKey": "calculator.roi.description",
+  "searchKeys": ["calculator.roi.title", "calculator.roi.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "return": ["investment", "proceeds", "fees"]
+  }
+}

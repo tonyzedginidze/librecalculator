@@ -1,0 +1,12 @@
+{
+  "id": "z-score",
+  "slug": "z-score",
+  "category": "statistics",
+  "titleKey": "calculator.z-score.title",
+  "descriptionKey": "calculator.z-score.description",
+  "searchKeys": ["calculator.z-score.title", "calculator.z-score.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "standard-score": ["value", "mean", "deviation"]
+  }
+}

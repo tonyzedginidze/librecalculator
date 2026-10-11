@@ -1,0 +1,13 @@
+{
+  "name": "@open-calculators/i18n",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/en.ts",
+    "./ui": "./src/ui.ts",
+    "./topics": "./src/topics/index.generated.ts",
+    "./topics/*": "./src/topics/*.ts",
+    "./locales": "./src/locales.ts"
+  }
+}

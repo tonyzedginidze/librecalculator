@@ -1,0 +1,12 @@
+{
+  "id": "mortgage",
+  "slug": "mortgage",
+  "category": "finance",
+  "titleKey": "calculator.mortgage.title",
+  "descriptionKey": "calculator.mortgage.description",
+  "searchKeys": ["calculator.mortgage.title", "calculator.mortgage.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "amortize": ["principal", "annualRate", "months"]
+  }
+}

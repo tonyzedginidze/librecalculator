@@ -1,0 +1,14 @@
+{
+  "id": "triangle",
+  "slug": "triangle",
+  "category": "geometry",
+  "titleKey": "calculator.triangle.title",
+  "descriptionKey": "calculator.triangle.description",
+  "searchKeys": ["calculator.triangle.title", "calculator.triangle.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "triangle-area": ["base", "height"],
+    "triangle-perimeter": ["sideA", "sideB", "sideC"],
+    "triangle-altitude": ["area", "base"]
+  }
+}

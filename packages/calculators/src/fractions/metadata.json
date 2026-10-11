@@ -1,0 +1,36 @@
+{
+  "id": "fractions",
+  "slug": "fractions",
+  "category": "math",
+  "titleKey": "calculator.fractions.title",
+  "descriptionKey": "calculator.fractions.description",
+  "searchKeys": ["calculator.fractions.title", "calculator.fractions.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "add": [
+      "leftNumerator",
+      "leftDenominator",
+      "rightNumerator",
+      "rightDenominator"
+    ],
+    "subtract": [
+      "leftNumerator",
+      "leftDenominator",
+      "rightNumerator",
+      "rightDenominator"
+    ],
+    "multiply": [
+      "leftNumerator",
+      "leftDenominator",
+      "rightNumerator",
+      "rightDenominator"
+    ],
+    "divide": [
+      "leftNumerator",
+      "leftDenominator",
+      "rightNumerator",
+      "rightDenominator"
+    ],
+    "reduce": ["numerator", "denominator"]
+  }
+}

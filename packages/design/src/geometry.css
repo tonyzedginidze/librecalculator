@@ -1,0 +1,145 @@
+/* Dimensioned shape drawings (components/shape-diagram.tsx).
+   Same language as the result-visual kit: accent contour and the solved mark,
+   accent-soft fill, thin muted dimension lines, mono figures with a paper halo. */
+
+.oc-shape {
+  display: block;
+  width: 100%;
+  max-width: 460px;
+  height: auto;
+  margin: 0 auto;
+  overflow: visible;
+  user-select: none;
+}
+
+.oc-shape-solid,
+.oc-shape-solid-light,
+.oc-shape-solid-deep,
+.oc-shape-quiet,
+.oc-shape-outline-strong {
+  stroke: var(--oc-accent);
+  stroke-width: 2.25;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.oc-shape-solid {
+  fill: color-mix(in srgb, var(--oc-accent) 16%, var(--oc-surface));
+}
+.oc-shape-solid-light {
+  fill: color-mix(in srgb, var(--oc-accent) 9%, var(--oc-surface));
+}
+.oc-shape-solid-deep {
+  fill: color-mix(in srgb, var(--oc-accent) 30%, var(--oc-surface));
+}
+.oc-shape-quiet {
+  fill: var(--oc-surface);
+  stroke: color-mix(in srgb, var(--oc-accent) 55%, var(--oc-surface));
+}
+.oc-shape-outline-strong {
+  fill: color-mix(in srgb, var(--oc-accent) 6%, var(--oc-surface));
+  stroke-width: 4;
+}
+.oc-shape-strong {
+  stroke-width: 4;
+}
+
+.oc-shape-edge,
+.oc-shape-edge-strong {
+  fill: none;
+  stroke: var(--oc-accent);
+  stroke-width: 1.75;
+  stroke-linecap: round;
+}
+.oc-shape-edge-strong {
+  stroke-width: 4;
+}
+
+.oc-shape-hidden {
+  fill: none;
+  stroke: var(--oc-accent);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 4;
+  opacity: 0.55;
+}
+
+.oc-shape-answer-line {
+  fill: none;
+  stroke: var(--oc-accent);
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+.oc-shape-radius {
+  fill: none;
+  stroke: var(--oc-ink);
+  stroke-width: 1.75;
+  stroke-linecap: round;
+}
+
+.oc-shape-guide {
+  fill: none;
+  stroke: var(--oc-ink);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 4;
+}
+
+.oc-shape-mark {
+  fill: none;
+  stroke: var(--oc-ink);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+}
+
+.oc-shape-dot {
+  fill: var(--oc-accent);
+}
+.oc-shape-centre {
+  fill: var(--oc-ink);
+}
+
+.oc-shape-dim,
+.oc-shape-ext {
+  fill: none;
+  stroke: var(--oc-muted);
+  stroke-width: 1.25;
+  stroke-linecap: round;
+}
+.oc-shape-ext {
+  stroke-width: 1;
+  opacity: 0.6;
+}
+.oc-shape-dim-answer {
+  stroke: var(--oc-accent);
+  stroke-width: 1.75;
+}
+
+.oc-shape-label {
+  font-family: var(--oc-font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  fill: var(--oc-ink);
+  dominant-baseline: central;
+  paint-order: stroke;
+  stroke: var(--oc-surface);
+  stroke-width: 5px;
+  stroke-linejoin: round;
+}
+.oc-shape-label[data-tone="answer"] {
+  fill: var(--oc-accent);
+  font-size: 15px;
+  font-weight: 700;
+}
+.oc-shape-label[data-on="fill"] {
+  stroke: color-mix(in srgb, var(--oc-accent) 16%, var(--oc-surface));
+}
+
+/* Phones draw the 360-unit canvas at about 300px; keep figures legible. */
+@media (max-width: 560px) {
+  .oc-shape-label {
+    font-size: 16px;
+  }
+  .oc-shape-label[data-tone="answer"] {
+    font-size: 17px;
+  }
+}

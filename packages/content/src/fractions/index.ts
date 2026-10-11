@@ -1,0 +1,163 @@
+import type { Lesson } from "../schema";
+
+export const lesson: Lesson = {
+  calculatorId: "fractions",
+  blocks: [
+    {
+      id: "intro",
+      kind: "prose",
+      titleKey: "lesson.fractions.intro.title",
+      bodyKey: "lesson.fractions.intro.body",
+    },
+    {
+      id: "fraction-formula",
+      kind: "formula",
+      bodyKey: "lesson.fractions.formula.fraction",
+      variables: [
+        {
+          symbol: "a",
+          nameKey: "lesson.fractions.variable.numerator",
+          unitKey: "lesson.fractions.unit.integer",
+        },
+        {
+          symbol: "b",
+          nameKey: "lesson.fractions.variable.denominator",
+          unitKey: "lesson.fractions.unit.integer",
+        },
+        {
+          symbol: "c",
+          nameKey: "lesson.fractions.variable.other-numerator",
+          unitKey: "lesson.fractions.unit.integer",
+        },
+        {
+          symbol: "d",
+          nameKey: "lesson.fractions.variable.other-denominator",
+          unitKey: "lesson.fractions.unit.integer",
+        },
+        {
+          symbol: "x/y",
+          nameKey: "lesson.fractions.variable.value",
+          unitKey: "lesson.fractions.unit.rational",
+        },
+      ],
+    },
+    {
+      id: "example-add",
+      kind: "example",
+      titleKey: "lesson.fractions.example.add",
+      operation: "add",
+      inputs: {
+        leftNumerator: "1",
+        leftDenominator: "2",
+        rightNumerator: "1",
+        rightDenominator: "3",
+      },
+      expected: "5/6",
+      workingKey: "fractions.working.add",
+    },
+    {
+      id: "example-subtract",
+      kind: "example",
+      titleKey: "lesson.fractions.example.subtract",
+      operation: "subtract",
+      inputs: {
+        leftNumerator: "1",
+        leftDenominator: "2",
+        rightNumerator: "3",
+        rightDenominator: "4",
+      },
+      expected: "-1/4",
+      workingKey: "fractions.working.subtract",
+    },
+    {
+      id: "example-multiply",
+      kind: "example",
+      titleKey: "lesson.fractions.example.multiply",
+      operation: "multiply",
+      inputs: {
+        leftNumerator: "2",
+        leftDenominator: "3",
+        rightNumerator: "9",
+        rightDenominator: "4",
+      },
+      expected: "3/2",
+      workingKey: "fractions.working.multiply",
+    },
+    {
+      id: "example-divide",
+      kind: "example",
+      titleKey: "lesson.fractions.example.divide",
+      operation: "divide",
+      inputs: {
+        leftNumerator: "2",
+        leftDenominator: "3",
+        rightNumerator: "4",
+        rightDenominator: "5",
+      },
+      expected: "5/6",
+      workingKey: "fractions.working.divide",
+    },
+    {
+      id: "example-reduce-negative",
+      kind: "example",
+      titleKey: "lesson.fractions.example.reduce",
+      operation: "reduce",
+      inputs: { numerator: "-42", denominator: "-56" },
+      expected: "3/4",
+      workingKey: "fractions.working.reduce",
+    },
+    {
+      id: "visual-model",
+      kind: "visual",
+      visualKey: "fractions.visual.description",
+      alternativeKey: "fractions.visual.alternative",
+    },
+    {
+      id: "mixed-numbers",
+      kind: "prose",
+      titleKey: "lesson.fractions.mixed.title",
+      bodyKey: "lesson.fractions.mixed.body",
+    },
+    {
+      id: "common-mistakes",
+      kind: "prose",
+      titleKey: "lesson.fractions.mistakes.title",
+      bodyKey: "lesson.fractions.mistakes.body",
+    },
+    {
+      id: "limits",
+      kind: "prose",
+      titleKey: "lesson.fractions.limits.title",
+      bodyKey: "lesson.fractions.limits.body",
+    },
+    {
+      id: "faq-denominators",
+      kind: "faq",
+      questionKey: "lesson.fractions.faq.denominators.q",
+      answerKey: "lesson.fractions.faq.denominators.a",
+    },
+    {
+      id: "faq-negative",
+      kind: "faq",
+      questionKey: "lesson.fractions.faq.negative.q",
+      answerKey: "lesson.fractions.faq.negative.a",
+    },
+    {
+      id: "faq-zero",
+      kind: "faq",
+      questionKey: "lesson.fractions.faq.zero.q",
+      answerKey: "lesson.fractions.faq.zero.a",
+    },
+    {
+      id: "sources",
+      kind: "prose",
+      titleKey: "lesson.fractions.sources.title",
+      bodyKey: "lesson.fractions.sources.body",
+    },
+    {
+      id: "related-percentage",
+      kind: "related",
+      calculatorId: "percentage",
+    },
+  ],
+};

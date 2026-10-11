@@ -1,0 +1,12 @@
+{
+  "id": "paint",
+  "slug": "paint",
+  "category": "construction",
+  "titleKey": "calculator.paint.title",
+  "descriptionKey": "calculator.paint.description",
+  "searchKeys": ["calculator.paint.title", "calculator.paint.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "litres": ["area", "coats", "coverage", "waste"]
+  }
+}

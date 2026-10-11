@@ -1,0 +1,12 @@
+{
+  "id": "time-zone",
+  "slug": "time-zone",
+  "category": "date-time",
+  "titleKey": "calculator.time-zone.title",
+  "descriptionKey": "calculator.time-zone.description",
+  "searchKeys": ["calculator.time-zone.title", "calculator.time-zone.search"],
+  "inputSchemaVersion": 2,
+  "operations": {
+    "fixed-offset": ["hour", "minute", "sourceOffset", "targetOffset"]
+  }
+}

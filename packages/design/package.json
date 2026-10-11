@@ -1,0 +1,12 @@
+{
+  "name": "@open-calculators/design",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/tokens.ts",
+    "./css": "./src/css.ts",
+    "./boot": "./src/boot.ts",
+    "./ui.css": "./src/ui.css"
+  }
+}

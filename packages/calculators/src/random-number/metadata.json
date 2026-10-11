@@ -1,0 +1,15 @@
+{
+  "id": "random-number",
+  "slug": "random-number",
+  "category": "math",
+  "titleKey": "calculator.random-number.title",
+  "descriptionKey": "calculator.random-number.description",
+  "searchKeys": [
+    "calculator.random-number.title",
+    "calculator.random-number.search"
+  ],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "seeded-integer": ["minimum", "maximum", "seed"]
+  }
+}

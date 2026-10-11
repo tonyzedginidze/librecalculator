@@ -1,0 +1,12 @@
+{
+  "id": "lumber",
+  "slug": "lumber",
+  "category": "construction",
+  "titleKey": "calculator.lumber.title",
+  "descriptionKey": "calculator.lumber.description",
+  "searchKeys": ["calculator.lumber.title", "calculator.lumber.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "board-feet": ["thickness", "width", "length", "quantity"]
+  }
+}

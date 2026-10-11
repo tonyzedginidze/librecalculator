@@ -1,0 +1,17 @@
+{
+  "id": "recipe-scaling",
+  "slug": "recipe-scaling",
+  "category": "cooking",
+  "titleKey": "calculator.recipe-scaling.title",
+  "descriptionKey": "calculator.recipe-scaling.description",
+  "searchKeys": [
+    "calculator.recipe-scaling.title",
+    "calculator.recipe-scaling.search"
+  ],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "recipe-scale": ["quantity", "originalServings", "targetServings"],
+    "recipe-factor": ["originalServings", "targetServings"],
+    "recipe-reverse": ["quantity", "originalServings", "targetServings"]
+  }
+}

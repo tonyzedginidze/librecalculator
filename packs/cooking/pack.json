@@ -1,0 +1,15 @@
+{
+  "id": "cooking",
+  "version": 1,
+  "category": "cooking",
+  "titleKey": "ui.pack.cooking.title",
+  "descriptionKey": "ui.pack.cooking.description",
+  "calculatorIds": [
+    "recipe-scaling",
+    "cup-gram-conversion",
+    "oven-temperature",
+    "baking-ratios",
+    "calories-per-serving"
+  ],
+  "default": false
+}

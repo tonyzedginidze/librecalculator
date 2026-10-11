@@ -1,0 +1,14 @@
+{
+  "id": "statistics",
+  "version": 1,
+  "category": "statistics",
+  "titleKey": "ui.pack.statistics.title",
+  "descriptionKey": "ui.pack.statistics.description",
+  "calculatorIds": [
+    "z-score",
+    "confidence-interval",
+    "probability",
+    "weighted-average"
+  ],
+  "default": false
+}

@@ -1,0 +1,15 @@
+{
+  "id": "water-intake",
+  "slug": "water-intake",
+  "category": "health",
+  "titleKey": "calculator.water-intake.title",
+  "descriptionKey": "calculator.water-intake.description",
+  "searchKeys": [
+    "calculator.water-intake.title",
+    "calculator.water-intake.search"
+  ],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "water-volume": ["weight", "rate", "age"]
+  }
+}

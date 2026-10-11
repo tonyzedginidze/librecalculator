@@ -1,0 +1,15 @@
+{
+  "id": "weighted-average",
+  "slug": "weighted-average",
+  "category": "statistics",
+  "titleKey": "calculator.weighted-average.title",
+  "descriptionKey": "calculator.weighted-average.description",
+  "searchKeys": [
+    "calculator.weighted-average.title",
+    "calculator.weighted-average.search"
+  ],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "weighted-mean": ["values", "weights"]
+  }
+}

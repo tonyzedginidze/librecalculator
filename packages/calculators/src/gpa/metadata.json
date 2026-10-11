@@ -1,0 +1,14 @@
+{
+  "id": "gpa",
+  "slug": "gpa",
+  "category": "education",
+  "titleKey": "calculator.gpa.title",
+  "descriptionKey": "calculator.gpa.description",
+  "searchKeys": ["calculator.gpa.title", "calculator.gpa.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "gpa-average": ["qualityPoints", "credits"],
+    "gpa-combined": ["previousGpa", "previousCredits", "newGpa", "newCredits"],
+    "gpa-target": ["targetGpa", "totalCredits"]
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "temperature",
+  "slug": "temperature",
+  "category": "units",
+  "titleKey": "calculator.temperature.title",
+  "descriptionKey": "calculator.temperature.description",
+  "searchKeys": [
+    "calculator.temperature.title",
+    "calculator.temperature.search"
+  ],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "convert": ["value", "source", "target"]
+  }
+}

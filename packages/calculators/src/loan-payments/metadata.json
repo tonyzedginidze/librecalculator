@@ -1,0 +1,15 @@
+{
+  "id": "loan-payments",
+  "slug": "loan-payments",
+  "category": "finance",
+  "titleKey": "calculator.loan-payments.title",
+  "descriptionKey": "calculator.loan-payments.description",
+  "searchKeys": [
+    "calculator.loan-payments.title",
+    "calculator.loan-payments.search"
+  ],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "amortize": ["principal", "annualRate", "months"]
+  }
+}

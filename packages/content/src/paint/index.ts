@@ -1,0 +1,102 @@
+import type { Lesson } from "../schema";
+export const lesson: Lesson = {
+  calculatorId: "paint",
+  blocks: [
+    {
+      id: "intro",
+      kind: "prose",
+      titleKey: "lesson.paint.intro.title",
+      bodyKey: "lesson.paint.intro.body",
+    },
+    {
+      id: "method",
+      kind: "prose",
+      titleKey: "lesson.paint.method.title",
+      bodyKey: "lesson.paint.method.body",
+    },
+    {
+      id: "formula",
+      kind: "formula",
+      bodyKey: "lesson.paint.formula",
+      variables: [
+        { symbol: "P", nameKey: "lesson.paint.variable.paint" },
+        { symbol: "A", nameKey: "paint.field.area" },
+        { symbol: "n", nameKey: "paint.field.coats" },
+        { symbol: "c", nameKey: "paint.field.coverage" },
+        { symbol: "a", nameKey: "paint.field.waste" },
+      ],
+    },
+    {
+      id: "example-1",
+      kind: "example",
+      titleKey: "lesson.paint.example.1",
+      operation: "litres",
+      inputs: {
+        area: "40",
+        coats: "2",
+        coverage: "10",
+        waste: "10",
+      },
+      expected: "8.8",
+      workingKey: "paint.working.summary",
+    },
+    {
+      id: "example-2",
+      kind: "example",
+      titleKey: "lesson.paint.example.2",
+      operation: "litres",
+      inputs: {
+        area: "12",
+        coats: "1",
+        coverage: "6",
+        waste: "0",
+      },
+      expected: "2",
+      workingKey: "paint.working.summary",
+    },
+    {
+      id: "example-3",
+      kind: "example",
+      titleKey: "lesson.paint.example.3",
+      operation: "litres",
+      inputs: {
+        area: "30",
+        coats: "3",
+        coverage: "9",
+        waste: "5",
+      },
+      expected: "10.5",
+      workingKey: "paint.working.summary",
+    },
+    {
+      id: "visual",
+      kind: "visual",
+      visualKey: "paint.visual.description",
+      alternativeKey: "paint.visual.alternative",
+    },
+    {
+      id: "mistakes",
+      kind: "prose",
+      titleKey: "lesson.paint.mistakes.title",
+      bodyKey: "lesson.paint.mistakes.body",
+    },
+    {
+      id: "limits",
+      kind: "prose",
+      titleKey: "lesson.paint.limits.title",
+      bodyKey: "lesson.paint.limits.body",
+    },
+    {
+      id: "faq",
+      kind: "faq",
+      questionKey: "lesson.paint.faq.q",
+      answerKey: "lesson.paint.faq.a",
+    },
+    {
+      id: "sources",
+      kind: "prose",
+      titleKey: "lesson.paint.sources.title",
+      bodyKey: "lesson.paint.sources.body",
+    },
+  ],
+};

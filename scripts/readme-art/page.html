@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>/*VARIABLES*/</style>
+<style>/*UI*/</style>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #ffffff; }
+  [data-theme='dark'] body { background: #0d1117; }
+  body { font-family: var(--oc-font-sans); color: var(--oc-ink); -webkit-font-smoothing: antialiased; }
+  .b { display: none; position: relative; overflow: hidden; background: var(--oc-canvas); border: 1px solid var(--oc-line); border-radius: 16px; }
+  .b.on { display: block; }
+  .serif { font-family: var(--oc-font-serif); }
+  .mono { font-family: var(--oc-font-mono); font-variant-numeric: tabular-nums; }
+  .card { background: var(--oc-surface); border: 1px solid var(--oc-line); border-radius: 10px; }
+  .wash { background: linear-gradient(160deg, var(--oc-accent-soft), var(--oc-canvas) 70%); }
+  .art svg { display: block; width: 100%; height: auto; }
+
+  /* Hero */
+  #hero { width: 960px; height: 440px; }
+  #hero .left { position: absolute; left: 56px; top: 64px; width: 360px; }
+  #hero .mark { width: 92px; height: 92px; color: var(--oc-accent); }
+  #hero h1 { font-family: var(--oc-font-serif); font-weight: 400; font-size: 54px; line-height: 1.02; letter-spacing: -0.01em; margin: 26px 0 14px; }
+  #hero .pitch { font-family: var(--oc-font-serif); font-size: 22px; line-height: 1.35; color: var(--oc-ink); margin: 0; }
+  #hero .facts { margin: 24px 0 0; font-size: 15px; line-height: 1.55; color: var(--oc-muted); max-width: 330px; }
+  #hero .facts b { font-family: var(--oc-font-mono); font-weight: 500; color: var(--oc-ink); }
+  #hero .calc { position: absolute; right: 40px; top: 40px; width: 476px; height: 360px; padding: 22px 24px; }
+  #hero .calc-title { font-family: var(--oc-font-serif); font-size: 21px; margin: 0 0 14px; }
+  #hero .grid { display: grid; grid-template-columns: 172px 1fr; gap: 20px; }
+  #hero .oc-fields { display: grid; gap: 8px; }
+  #hero .oc-input { height: 34px; }
+  #hero .oc-field-label { font-size: 12px; }
+  #hero .oc-field:nth-child(n+3) { display: none; }
+  #hero .oc-answer { padding: 10px 12px; }
+  #hero .oc-answer p:last-child { display: none; }
+  #hero .oc-answer-value { font-size: 26px; margin: 2px 0 0; }
+  #hero .working { font-size: 12px; line-height: 1.55; margin-top: 12px; color: var(--oc-ink); }
+  #hero .working .k, .k { font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--oc-muted); font-weight: 600; margin-bottom: 4px; display: block; }
+  #hero .gauge { position: absolute; left: 30px; top: 196px; width: 150px; }
+  #hero .gauge .oc-viz-gauge-reflabel, #hero .gauge .oc-viz-note { display: none; }
+  #hero .scale { position: absolute; left: 216px; right: 24px; bottom: 22px; font-size: 12px; line-height: 1.5; color: var(--oc-muted); border-top: 1px solid var(--oc-line); padding-top: 12px; }
+  #hero .scale b { display: block; font-family: var(--oc-font-serif); font-weight: 400; font-size: 15px; color: var(--oc-ink); margin-bottom: 3px; }
+  #hero .scale p { margin: 0; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  #hero .gauge .oc-viz-gauge { margin: 0; }
+
+  /* Star strip */
+  #star { width: 960px; height: 112px; }
+  #star .in { position: absolute; inset: 0; display: flex; align-items: center; gap: 22px; padding: 0 40px; }
+  #star svg.s { width: 44px; height: 44px; color: var(--oc-accent); flex: none; }
+  #star h2 { font-family: var(--oc-font-serif); font-weight: 400; font-size: 26px; margin: 0; }
+  #star p { margin: 4px 0 0; font-size: 14px; color: var(--oc-muted); }
+  #star .btn { margin-left: auto; display: flex; align-items: center; gap: 10px; background: var(--oc-accent); color: var(--oc-accent-ink); padding: 12px 20px; border-radius: 8px; font-weight: 600; font-size: 15px; }
+  #star .btn svg { width: 18px; height: 18px; }
+  #star .orbits { position: absolute; right: -24px; top: -40px; width: 190px; color: var(--oc-accent); opacity: .12; }
+
+  /* Feature cards */
+  .f { width: 480px; height: 270px; }
+  .f .stage { position: absolute; inset: 0; }
+  .f .card { position: absolute; }
+  .chip { display: inline-block; font-family: var(--oc-font-mono); font-size: 12px; padding: 3px 8px; border: 1px solid var(--oc-accent); color: var(--oc-accent); border-radius: 6px; background: var(--oc-surface); }
+
+  #f-working .calc { left: 28px; top: 24px; width: 250px; height: 222px; padding: 14px 16px; }
+  #f-working .oc-fields { display: grid; gap: 4px; }
+  #f-working .oc-field:nth-child(4) { display: none; }
+  #f-working .oc-field-label { font-size: 11px; }
+  #f-working .oc-input { height: 30px; font-size: 13px; }
+  #f-working .oc-field { gap: 3px; }
+  #f-working .side { position: absolute; left: 298px; top: 24px; width: 156px; }
+  #f-working .ans { font-family: var(--oc-font-mono); color: var(--oc-result); font-size: 22px; margin: 2px 0 10px; }
+  #f-working .art { width: 156px; border-radius: 8px; overflow: hidden; border: 1px solid var(--oc-line); }
+  #f-working .eq { position: absolute; left: 28px; right: 28px; bottom: 0; }
+  #f-working .work { position: absolute; left: 298px; top: 178px; width: 168px; font-size: 11px; line-height: 1.55; }
+
+  #f-packs .tile { position: absolute; width: 136px; height: 178px; border-radius: 8px; overflow: hidden; border: 1px solid var(--oc-line); background: var(--oc-surface); }
+  #f-packs .tile .lab { padding: 7px 9px 8px; font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--oc-accent); font-weight: 600; }
+  #f-packs .tile .ttl { font-family: var(--oc-font-serif); font-size: 13px; text-transform: none; letter-spacing: 0; color: var(--oc-ink); font-weight: 400; margin-top: 2px; }
+  #f-packs .tile.dim { opacity: .45; filter: grayscale(.6); }
+  #f-packs .switch { position: absolute; display: flex; align-items: center; gap: 8px; font-size: 12px; background: var(--oc-surface); border: 1px solid var(--oc-line); border-radius: 999px; padding: 5px 10px 5px 6px; }
+  #f-packs .switch i { width: 26px; height: 15px; border-radius: 999px; background: var(--oc-accent); position: relative; }
+  #f-packs .switch i::after { content: ""; position: absolute; right: 2px; top: 2px; width: 11px; height: 11px; border-radius: 50%; background: var(--oc-surface); }
+  #f-packs .switch.off i { background: var(--oc-line); }
+  #f-packs .switch.off i::after { right: auto; left: 2px; }
+
+  #f-platforms .win { position: absolute; left: 26px; top: 30px; width: 296px; height: 212px; overflow: hidden; }
+  #f-platforms .bar { height: 26px; border-bottom: 1px solid var(--oc-line); display: flex; align-items: center; gap: 6px; padding: 0 10px; }
+  #f-platforms .bar i { width: 8px; height: 8px; border-radius: 50%; background: var(--oc-line); }
+  #f-platforms .bar span { margin-left: 10px; flex: 1; height: 14px; border-radius: 4px; background: var(--oc-canvas); font-family: var(--oc-font-mono); font-size: 9px; color: var(--oc-muted); padding: 1px 8px; }
+  #f-platforms .body { display: grid; grid-template-columns: 70px 1fr; height: calc(100% - 26px); }
+  #f-platforms .nav { background: var(--oc-canvas); border-right: 1px solid var(--oc-line); padding: 10px 8px; display: grid; align-content: start; gap: 7px; }
+  #f-platforms .nav b { display: block; height: 6px; border-radius: 3px; background: var(--oc-line); }
+  #f-platforms .nav b:first-child { background: var(--oc-accent); width: 70%; }
+  #f-platforms .mini { padding: 10px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; align-content: start; }
+  #f-platforms .mini div { border: 1px solid var(--oc-line); border-radius: 4px; overflow: hidden; }
+  #f-platforms .quick { position: absolute; right: 26px; top: 86px; width: 172px; padding: 12px; }
+  #f-platforms .quick .q { font-family: var(--oc-font-serif); font-size: 13px; margin-bottom: 8px; }
+  #f-platforms .quick .in { height: 26px; border: 1px solid var(--oc-line); border-radius: 5px; font-family: var(--oc-font-mono); font-size: 11px; padding: 5px 8px; color: var(--oc-ink); }
+  #f-platforms .quick .res { font-size: 12px; padding: 5px 8px; border-radius: 5px; margin-top: 4px; color: var(--oc-muted); }
+  #f-platforms .quick .res.on { background: var(--oc-accent-soft); color: var(--oc-accent); }
+  #f-platforms .quick .in { margin-bottom: 6px; }
+  #f-platforms .keys { position: absolute; right: 34px; top: 30px; display: flex; gap: 6px; }
+  #f-platforms .keys span { min-width: 34px; height: 34px; padding: 0 8px; border: 1px solid var(--oc-line); border-bottom-width: 3px; border-radius: 7px; background: var(--oc-surface); font-family: var(--oc-font-mono); font-size: 14px; display: grid; place-items: center; }
+
+  #f-exact .sheet { left: 28px; top: 26px; width: 262px; height: 218px; padding: 16px 18px; }
+  #f-exact .sheet h4 { font-family: var(--oc-font-serif); font-weight: 400; font-size: 16px; margin: 0 0 4px; }
+  #f-exact .sheet .sub { font-size: 11px; color: var(--oc-muted); margin-bottom: 10px; }
+  #f-exact .row { display: flex; justify-content: space-between; align-items: center; font-family: var(--oc-font-mono); font-size: 13px; padding: 7px 0; border-top: 1px solid var(--oc-line); }
+  #f-exact .row svg { width: 16px; height: 16px; color: var(--oc-result); }
+  #f-exact .digits { position: absolute; left: 310px; top: 36px; width: 146px; }
+  #f-exact .digits .big { font-family: var(--oc-font-mono); font-size: 40px; color: var(--oc-accent); line-height: 1; }
+  #f-exact .digits p { font-size: 12px; color: var(--oc-muted); margin: 6px 0 16px; line-height: 1.4; }
+  #f-exact .digits .art { border-radius: 8px; overflow: hidden; border: 1px solid var(--oc-line); }
+
+  /* Packs gallery */
+  #packs { width: 960px; height: 444px; }
+  #packs .grid { position: absolute; inset: 24px; display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(3, 1fr); gap: 12px; }
+  #packs .p { background: var(--oc-surface); border: 1px solid var(--oc-line); border-radius: 10px; padding: 14px 16px; display: grid; grid-template-columns: 40px 1fr; column-gap: 14px; align-content: center; }
+  #packs .p .ic { grid-row: span 2; width: 40px; height: 40px; border-radius: 9px; display: grid; place-items: center; background: var(--oc-accent-soft); color: var(--oc-accent); }
+  #packs .p .ic svg { width: 22px; height: 22px; }
+  #packs .p .nm { font-family: var(--oc-font-serif); font-size: 16px; line-height: 1.2; }
+  #packs .p .ct { font-size: 12px; line-height: 1.4; color: var(--oc-muted); margin-top: 4px; }
+
+  /* Social preview */
+  #social { width: 1280px; height: 640px; border-radius: 0; border: 0; }
+  #social .left { position: absolute; left: 88px; top: 132px; width: 560px; }
+  #social .mark { width: 120px; height: 120px; color: var(--oc-accent); }
+  #social h1 { font-family: var(--oc-font-serif); font-weight: 400; font-size: 84px; line-height: 1; margin: 36px 0 18px; }
+  #social p { font-family: var(--oc-font-serif); font-size: 32px; margin: 0; }
+  #social .mosaic { position: absolute; right: 72px; top: 104px; width: 492px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  #social .mosaic div { border-radius: 10px; overflow: hidden; border: 1px solid var(--oc-line); background: var(--oc-surface); }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="mark" viewBox="0 0 48 48" fill="none">
+    <ellipse cx="24" cy="24" rx="8.5" ry="19.5" stroke="currentColor" stroke-width="3"/>
+    <ellipse cx="24" cy="24" rx="8.5" ry="19.5" transform="rotate(-60 24 24)" stroke="currentColor" stroke-width="3"/>
+    <ellipse cx="24" cy="24" rx="8.5" ry="19.5" transform="rotate(60 24 24)" stroke="currentColor" stroke-width="3"/>
+    <circle cx="24" cy="24" r="5.2" fill="currentColor"/>
+  </symbol>
+  <symbol id="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 2.8l2.85 5.78 6.38.93-4.62 4.5 1.09 6.35L12 17.35 6.3 20.36l1.09-6.35-4.62-4.5 6.38-.93z"/></symbol>
+</svg>
+
+<section class="b" id="hero">
+  <div class="left">
+    <svg class="mark"><use href="#mark"/></svg>
+    <h1>Libre Calculator</h1>
+    <p class="pitch">The universe in numbers.</p>
+    <p class="facts">Building the world's best calculators, free and open source.</p>
+  </div>
+  <div class="calc card" data-category="health">
+    <p class="calc-title">BMI calculator</p>
+    <div class="grid">
+      <div data-slot="bmi-fields"></div>
+      <div>
+        <div data-slot="bmi-answer"></div>
+        <div class="working"><span class="k">Working</span><span class="mono">70 kg × 10000 ÷ (175 cm × 175 cm) = 22.8571428571 kg/m²</span></div>
+      </div>
+    </div>
+    <div class="gauge" data-slot="bmi-gauge"></div>
+    <div class="scale" data-slot="bmi-lesson"></div>
+  </div>
+</section>
+
+<section class="b" id="star">
+  <svg class="orbits"><use href="#mark"/></svg>
+  <div class="in">
+    <svg class="s"><use href="#i-star"/></svg>
+    <div>
+      <h2>Star the project</h2>
+      <p>It helps more people find calculators that explain themselves.</p>
+    </div>
+    <div class="btn"><svg><use href="#i-star"/></svg>Star on GitHub</div>
+  </div>
+</section>
+
+<section class="b f" id="f-working" data-category="finance">
+  <div class="stage wash"></div>
+  <div class="card calc"><div data-slot="ci-fields"></div></div>
+  <div class="side">
+    <span class="k">Final balance</span>
+    <div class="ans">$16,470.09</div>
+    <div class="art" data-tiles="compound-interest"></div>
+  </div>
+  <div class="work"><span class="k">Working</span><span class="mono">A = P × (1 + r ÷ n)<sup>n×t</sup><br>= $16,470.09</span></div>
+</section>
+
+<section class="b f" id="f-packs">
+  <div class="stage wash"></div>
+  <div class="tile" style="left:26px;top:24px" data-pick="bmi"></div>
+  <div class="tile" style="left:172px;top:24px" data-pick="concrete"></div>
+  <div class="tile dim" style="left:318px;top:24px" data-pick="recipe-scaling"></div>
+  <div class="switch" style="left:34px;top:216px"><i></i>Health</div>
+  <div class="switch" style="left:180px;top:216px"><i></i>Construction</div>
+  <div class="switch off" style="left:326px;top:216px"><i></i>Cooking</div>
+</section>
+
+<section class="b f" id="f-platforms">
+  <div class="stage wash"></div>
+  <div class="card win">
+    <div class="bar"><i></i><i></i><i></i><span>librecalculator.com</span></div>
+    <div class="body">
+      <div class="nav"><b></b><b></b><b></b><b></b><b></b><b></b></div>
+      <div class="mini" data-tiles="percentage,area,unit-conversion,bmi,mortgage,temperature"></div>
+    </div>
+  </div>
+  <div class="keys"><span>⌘</span><span>⇧</span><span>C</span></div>
+  <div class="card quick">
+    <div class="q">Quick panel</div>
+    <div class="in">tip</div>
+    <div class="res on">Tip splitting</div>
+    <div class="res">Percentage</div>
+  </div>
+</section>
+
+<section class="b f" id="f-exact" data-category="statistics">
+  <div class="stage wash"></div>
+  <div class="card sheet">
+    <h4>Numeric contract</h4>
+    <div class="sub">Fixtures every engine must pass</div>
+    <div class="row"><span>mean(2, 4, 6) = 4</span><svg><use href="#check"/></svg></div>
+    <div class="row"><span>√9 = 3</span><svg><use href="#check"/></svg></div>
+    <div class="row"><span>2<sup>−3</sup> = 0.125</span><svg><use href="#check"/></svg></div>
+    <div class="row"><span>sin 90° = 1</span><svg><use href="#check"/></svg></div>
+  </div>
+  <div class="digits">
+    <div class="big">50</div>
+    <p>digit decimal maths. Rounded only for display.</p>
+    <div class="art" data-tiles="standard-deviation"></div>
+  </div>
+</section>
+
+<section class="b" id="packs"><div class="grid" data-slot="packs"></div></section>
+
+<section class="b" id="social">
+  <div class="left">
+    <svg class="mark"><use href="#mark"/></svg>
+    <h1>Libre Calculator</h1>
+    <p>The universe in numbers.</p>
+  </div>
+  <div class="mosaic" data-tiles="percentage,area,compound-interest,bmi,fractions,concrete,unit-conversion,recipe-scaling,standard-deviation"></div>
+</section>
+
+<script>
+  const data = /*DATA*/null;
+  const params = new URLSearchParams(location.search);
+  document.documentElement.dataset.theme = params.get("theme") || "light";
+  const tile = (id) => data.tiles.find((t) => t.id === id);
+  for (const el of document.querySelectorAll("[data-tiles]")) {
+    for (const id of el.dataset.tiles.split(",")) {
+      const t = tile(id);
+      const box = document.createElement("div");
+      box.className = "art wash";
+      box.dataset.category = t.category;
+      box.innerHTML = t.svg;
+      if (el.classList.contains("art")) { el.dataset.category = t.category; el.classList.add("wash"); el.innerHTML = t.svg; break; }
+      el.append(box);
+    }
+  }
+  for (const el of document.querySelectorAll("[data-pick]")) {
+    const t = tile(el.dataset.pick);
+    el.dataset.category = t.category;
+    el.innerHTML = `<div class="art wash">${t.svg}</div><div class="lab">${t.label}<div class="ttl">${t.title}</div></div>`;
+  }
+  for (const [slot, html] of Object.entries(data.slots)) {
+    const el = document.querySelector(`[data-slot="${slot}"]`);
+    if (el) el.innerHTML = html;
+  }
+  document.querySelector('[data-slot="packs"]').innerHTML = data.packs
+    .map((p) => `<div class="p" data-category="${p.category}"><span class="ic">${p.icon}</span><span class="nm">${p.name}</span><span class="ct">${p.description}</span></div>`)
+    .join("");
+  document.getElementById(params.get("banner"))?.classList.add("on");
+</script>
+</body>
+</html>

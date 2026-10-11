@@ -1,0 +1,17 @@
+{
+  "id": "health",
+  "version": 1,
+  "category": "health",
+  "titleKey": "ui.pack.health.title",
+  "descriptionKey": "ui.pack.health.description",
+  "calculatorIds": [
+    "bmi",
+    "bmr",
+    "tdee",
+    "macros",
+    "body-fat",
+    "water-intake",
+    "ideal-weight"
+  ],
+  "default": false
+}

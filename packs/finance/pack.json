@@ -1,0 +1,17 @@
+{
+  "id": "finance",
+  "version": 1,
+  "category": "finance",
+  "titleKey": "ui.pack.finance.title",
+  "descriptionKey": "ui.pack.finance.description",
+  "calculatorIds": [
+    "mortgage",
+    "savings",
+    "roi",
+    "salary",
+    "margin-markup",
+    "inflation",
+    "retirement"
+  ],
+  "default": false
+}

@@ -1,0 +1,102 @@
+import type { Lesson } from "../schema";
+export const lesson: Lesson = {
+  calculatorId: "lumber",
+  blocks: [
+    {
+      id: "intro",
+      kind: "prose",
+      titleKey: "lesson.lumber.intro.title",
+      bodyKey: "lesson.lumber.intro.body",
+    },
+    {
+      id: "method",
+      kind: "prose",
+      titleKey: "lesson.lumber.method.title",
+      bodyKey: "lesson.lumber.method.body",
+    },
+    {
+      id: "formula",
+      kind: "formula",
+      bodyKey: "lesson.lumber.formula",
+      variables: [
+        { symbol: "B", nameKey: "lesson.lumber.variable.board-feet" },
+        { symbol: "T", nameKey: "lumber.field.thickness" },
+        { symbol: "W", nameKey: "lumber.field.width" },
+        { symbol: "L", nameKey: "lumber.field.length" },
+        { symbol: "n", nameKey: "lumber.field.quantity" },
+      ],
+    },
+    {
+      id: "example-1",
+      kind: "example",
+      titleKey: "lesson.lumber.example.1",
+      operation: "board-feet",
+      inputs: {
+        thickness: "1",
+        width: "12",
+        length: "8",
+        quantity: "1",
+      },
+      expected: "8",
+      workingKey: "lumber.working.summary",
+    },
+    {
+      id: "example-2",
+      kind: "example",
+      titleKey: "lesson.lumber.example.2",
+      operation: "board-feet",
+      inputs: {
+        thickness: "1.5",
+        width: "3.5",
+        length: "8",
+        quantity: "4",
+      },
+      expected: "14",
+      workingKey: "lumber.working.summary",
+    },
+    {
+      id: "example-3",
+      kind: "example",
+      titleKey: "lesson.lumber.example.3",
+      operation: "board-feet",
+      inputs: {
+        thickness: "2",
+        width: "6",
+        length: "10",
+        quantity: "2",
+      },
+      expected: "20",
+      workingKey: "lumber.working.summary",
+    },
+    {
+      id: "visual",
+      kind: "visual",
+      visualKey: "lumber.visual.description",
+      alternativeKey: "lumber.visual.alternative",
+    },
+    {
+      id: "mistakes",
+      kind: "prose",
+      titleKey: "lesson.lumber.mistakes.title",
+      bodyKey: "lesson.lumber.mistakes.body",
+    },
+    {
+      id: "limits",
+      kind: "prose",
+      titleKey: "lesson.lumber.limits.title",
+      bodyKey: "lesson.lumber.limits.body",
+    },
+    {
+      id: "faq",
+      kind: "faq",
+      questionKey: "lesson.lumber.faq.q",
+      answerKey: "lesson.lumber.faq.a",
+    },
+    {
+      id: "sources",
+      kind: "prose",
+      titleKey: "lesson.lumber.sources.title",
+      bodyKey: "lesson.lumber.sources.body",
+    },
+  ],
+};

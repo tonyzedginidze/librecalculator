@@ -1,0 +1,68 @@
+# Financial calculator numerical contracts
+
+These contracts are defined before the compound-interest, loan-payment, and tip-splitting engines and their lessons. All amounts are USD. Locale formatting and input normalization belong at the platform boundary; engine inputs are canonical, ungrouped decimal strings without exponent notation.
+
+## Shared parsing and money settlement
+
+- Decimal rates use `parseCanonicalDecimal`: at most 256 input characters and 30 significant digits, no grouping/whitespace/exponent notation, adjusted input exponent magnitude at most 100, and 50 significant working digits through the existing Decimal helper. Outputs outside exponent magnitude 100 are rejected. Inputs must be finite.
+- Money fields are decimal dollar strings whose exact value is an integer number of cents. Sub-cent values are rejected, not rounded as inputs. Parse/convert with decimal arithmetic and integer cents, never JavaScript `Number`. Nonnegative principal/subtotal is bounded at `999999999999999999` cents (`$9,999,999,999,999,999.99`); every emitted USD-cents amount has the same maximum. Negative money is rejected. Loan principal must additionally be strictly positive; compound principal and tip subtotal may be zero.
+- The only money settlement rounding rule is decimal half-up to the nearest cent, including exact half-cent ties. Decimal calculations retain 50 significant digits before the specified settlement point. Integer cent strings are serialized base 10; no binary floating-point arithmetic is used.
+- Integer term/frequency/person fields contain ASCII digits only, no sign, decimal point, grouping, or exponent. Empty, malformed, and out-of-domain values have distinct field-specific failures. No invalid input, non-finite value, impossible schedule, or overflow is converted to a plausible-looking answer.
+
+## Compound interest
+
+- Inputs: principal from zero through the common USD bound in whole cents; nominal annual rate from 0% through 100% inclusive; integer years 1–1000; discrete compounding frequency exactly 1, 2, 4, 12, or 365 per year. No deposits, withdrawals, taxes, fees, or currency conversion.
+- For principal `P`, rate `r` expressed as a decimal fraction, frequency `n`, and years `t`, the unrounded balance is `P × (1 + r/n)^(n×t)`. There are exactly `n×t` periods. Work at the existing 50-digit Decimal precision; do not settle intermediate periods.
+- Settle the final balance once to cents, half-up. Final interest cents equal settled balance cents minus principal cents. A final balance or interest outside the shared money output bound is an explicit overflow failure.
+- The annual chart has one point for each completed year, derived from the same calculation's growth factor and rounded to cents only for display. Its last point must equal the settled final balance. The answer/working/chart must not independently recalculate competing results. Label the result a mathematical estimate, not an account settlement schedule.
+- Approximate-value fixtures compare the unrounded projection with independent references using relative error ≤ `1e-12` away from zero and absolute error ≤ `1e-12` near zero. The settled money outputs are checked exactly in cents.
+
+## Fixed-rate loan payments
+
+- Inputs: strictly positive principal in whole cents, bounded by the common USD limit; nominal annual rate 0%–100% inclusive; integer term 1–1200 months. Payments are monthly. This rate is nominal annual interest, not a regulated fee-inclusive APR. Fees, variable rates, and extra payments are excluded.
+- For annual percentage rate `R`, reduce the exact monthly growth factor `q = 1 + R/1200` to integers `a/b`. For nonzero `R`, the exact regular-payment estimate in cents is `P × (a−b) × a^N / (b × (a^N−b^N))`; for zero rate it is `P/N`. Compute the powers and quotient with `bigint`, then settle the exact rational once to cents with half-up quotient/remainder comparison. This avoids both near-equal Decimal subtraction and Decimal rounding at an exact half-cent. The exponent `N` is bounded to 1–1200.
+- The existing decimal parser accepts rates with up to 30 significant digits, adjusted exponent from −100 through 100, and at most 256 characters; the smallest positive accepted percentage rate is `10^−100`. Under those parser and rate bounds, the reduced monthly factor is at most 133 decimal digits and its 1200th power at most 159,600 decimal digits. Exponentiation uses a fixed, bounded BigInt exponent and does not create a term array or perform a GCD loop over the power-sized result. Tiny positive rates are not rejected or replaced by a zero-rate branch.
+- Build the actual schedule from integer cent balances. Each month's interest cents are the exact rational `balanceCents × (a−b)/b`, equivalent to `balanceCents × R / 1200` for the exact entered finite decimal percentage. Settle that rational to integer cents with half-up tie handling using integer quotient and remainder; do not first approximate the monthly rate. The regular payment reduces balance by payment minus that month's settled interest. In the final month, pay the remaining balance plus that month's interest; this adjusted payment clears the loan. Derive total paid and total interest by summing the resulting schedule, not from a separate annuity shortcut. Publish schedule amounts as integer cents.
+- Reject a regular payment that does not exceed settled monthly interest, any nonpositive principal reduction before the final month, an early payoff before the requested final month, or a final payment that cannot clear the cent balance. These are `non-amortizing`/`unrepresentable-schedule` failures, not silent schedule changes. Reject any payment, balance, or total outside the common money output bound.
+- Schedule arithmetic is cent-settled and therefore checked against independently authored exact-cent fixtures, not a floating tolerance. The one-month `$100.00`, 12% nominal annual fixture has `$1.00` interest and a `$101.00` final payment. The zero-rate `$10.00`, three-month fixture has payments `$3.33`, `$3.33`, `$3.34`.
+
+## Tip splitting
+
+- Inputs: subtotal from zero through the common USD bound in whole cents; tip rate 0%–1000% inclusive; positive integer people count 1–10000. No separate tax is inferred; tip is applied only to the entered subtotal.
+- Calculate the tip from subtotal cents and the entered percentage, then round the total tip exactly once to cents, half-up. Add subtotal and settled tip to obtain the exact total cents. Reject total overflow.
+- Divide total cents by people using integer quotient and remainder. Exactly `people − remainder` people receive the base share; exactly `remainder` people receive one cent more. Return only these two share classes/counts, never a per-person array. Their count-weighted total must equal the total cents exactly. A zero remainder is represented by a zero-count upper share class.
+
+## Independent reference fixtures and examples
+
+These expected values are manually derived before running the engines and are not generated by the code under test:
+
+| Calculator | Inputs | Independent expected result |
+|---|---|---|
+| Compound | `$1,000.00`, 10%, 2 years, annual | `$1,210.00` balance; `$210.00` interest |
+| Compound | `$100.00`, 0%, 2 years, monthly | `$100.00` balance; `$0.00` interest |
+| Compound | `$250.00`, 4%, 1 year, quarterly | `$260.15` balance; `$10.15` interest. `(1.01)^4 = 1.04060401`, giving `$260.1510025` before cent settlement. |
+| Loan | `$10.00`, 0%, 3 months | `$3.33`, `$3.33`, `$3.34`; `$0.00` interest |
+| Loan | `$100.00`, 12%, 1 month | `$1.00` interest; `$101.00` final payment |
+| Loan | `$16.50`, 4%, 1 month | Exact monthly interest is `1650 × 4 / 1200 = 5.5` cents, settled half-up to 6 cents; final payment `$16.56`. |
+| Loan | `$6.00`, 13%, 1 month | Exact monthly interest is `600 × 13 / 1200 = 6.5` cents, settled half-up to 7 cents; final payment `$6.07`. |
+| Loan | `$901.50`, 4%, 2 months | Exact monthly factor is `301/300`; exact payment is `90150 × 1 × 301² / (300 × (301² − 300²)) = 90601/2 = 45300.5` cents, settled to `45301`. Exact monthly interest settles to `301` then `151` cents; final payment is `45301`, total paid `90602`, and total interest `452` cents. |
+| Loan | `$1,000.00`, 12%, 12 months | Exact monthly factor is `101/100`; the independent rational annuity value is `1126825030131969720661201000 / 126825030131969720661201` cents (`8884.878…` cents), settled to `8885`. An independently iterated half-up-cent schedule totals `$1,066.19` paid, `$66.19` interest, and an `$88.84` adjusted final payment. |
+| Loan | `$100.00`, rate `10^−100`%, 12 months | Rate is within parser bounds; regular payment is 833 cents, monthly interest settles to zero cents, and the final 837-cent payment clears the `$100.00` principal. |
+| Tip | `$10.00`, 15%, 3 people | `$1.50` tip; `$11.50` total; one `$3.84` share and two `$3.83` shares |
+| Tip | `$0.00`, 1000%, 1 person | `$0.00` tip, total, and share |
+
+Boundary tests additionally cover zero principal/subtotal where allowed, zero and maximum rates, minimum/maximum terms and people counts, non-cent inputs, negative/out-of-range values, malformed/grouped/exponent input, oversized output, non-amortizing schedules, and exact allocation count/total invariants.
+
+## Finance launch pack
+
+All seven topics use the canonical Decimal parser above (50 working significant digits). Nonnegative whole-cent USD inputs and money outputs retain the shared bound. Final projected amounts settle once half-up to cents. Ratios emit signed decimal percentages without money settlement; division is at 50-digit precision. Invalid operations, malformed inputs and excessive values fail explicitly. Each UI and comparison visual consumes one engine result.
+
+- **Mortgage**: the fixed nominal-rate monthly loan contract above applies unchanged to mortgage principal. The exact-cent amortization schedule, regular payment, final payment and summed total are all returned. No property taxes, insurance, escrow, closing costs, extra payments or regulated APR calculation. The schedule is independent of other pack modules.
+- **Savings**: starting balance and end-of-month deposit may be zero. Rate 0–100% nominal annual, 1–1200 integer months. Repeat `B ← B(1+R/1200)+D` without intermediate cent settlement; round final balance once. Compare the settled balance with starting balance plus all deposits. Independent examples: `(1000,100,0%,12) → 2200`; `(100,10,12%,1) → 111`; `(100,10,12%,2) → 122.11`.
+- **ROI**: initial investment strictly positive; gross proceeds and selling fees nonnegative. `(proceeds−fees−investment)/investment ×100`; fees can exceed proceeds and the percentage can be below −100. Unannualized, excluding dividends, taxes and cash-flow timing. Independent examples: `(1000,1250,50) →20%`; `(200,150,10) →−30%`; `(500,510,10) →0%`.
+- **Salary**: gross annual-to-hourly and hourly-to-annual operations share nonnegative whole-cent pay input; positive hours/week 0.01–168 and integer paid weeks/year 1–53. Divide or multiply by `hours × weeks`, settle result to cents once. No deductions or overtime. Independent examples: `(52000,40,52) →25/hour`; `(20,40,52) →41600/year`; `(12000,20,50) →12/hour`.
+- **Margin and markup**: cost and price strictly positive whole-cent amounts. Margin denominator is selling price; markup denominator is cost. Selling below cost yields a signed negative result. Independent examples: cost 80 and price 100 →20% margin and 25% markup; cost 100 and price 80 →−25% margin.
+- **Inflation**: nonnegative amount, entered constant annual inflation 0–100%, integer years 0–100. Future cost multiplies by `(1+R/100)^years`; purchasing power divides by that same factor. No CPI data or forecast. Independent examples: `(100,10%,2) →121` future cost; `(121,10%,2) →100` purchasing power; `(250,0%,20) →250`.
+- **Retirement**: nonnegative starting balance and annual contribution, constant annual growth 0–100%, integer years 1–100. Repeat `B ← B(1+R/100)+C`; contributions occur at year-end. No income adequacy, withdrawals, inflation, volatility, fees, taxes or contribution-limit inference. Independent examples: `(10000,5000,0%,10) →60000`; `(1000,100,10%,1) →1200`; `(1000,100,10%,2) →1420`.
+
+These projections are educational estimates, not financial, tax or investment advice. The projection engines do not silently cap an overflowing result. Percentage calculations are checked by exact fixtures for terminating examples; general division tolerances are relative/absolute `1e-12` against independent references.

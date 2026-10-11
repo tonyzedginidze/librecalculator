@@ -1,0 +1,102 @@
+import type { Lesson } from "../schema";
+export const lesson: Lesson = {
+  calculatorId: "concrete",
+  blocks: [
+    {
+      id: "intro",
+      kind: "prose",
+      titleKey: "lesson.concrete.intro.title",
+      bodyKey: "lesson.concrete.intro.body",
+    },
+    {
+      id: "method",
+      kind: "prose",
+      titleKey: "lesson.concrete.method.title",
+      bodyKey: "lesson.concrete.method.body",
+    },
+    {
+      id: "formula",
+      kind: "formula",
+      bodyKey: "lesson.concrete.formula",
+      variables: [
+        { symbol: "V", nameKey: "lesson.concrete.variable.volume" },
+        { symbol: "L", nameKey: "concrete.field.length" },
+        { symbol: "W", nameKey: "concrete.field.width" },
+        { symbol: "D", nameKey: "concrete.field.depth" },
+        { symbol: "a", nameKey: "concrete.field.waste" },
+      ],
+    },
+    {
+      id: "example-1",
+      kind: "example",
+      titleKey: "lesson.concrete.example.1",
+      operation: "slab",
+      inputs: {
+        length: "5",
+        width: "4",
+        depth: "0.1",
+        waste: "10",
+      },
+      expected: "2.2",
+      workingKey: "concrete.working.summary",
+    },
+    {
+      id: "example-2",
+      kind: "example",
+      titleKey: "lesson.concrete.example.2",
+      operation: "slab",
+      inputs: {
+        length: "1",
+        width: "1",
+        depth: "1",
+        waste: "0",
+      },
+      expected: "1",
+      workingKey: "concrete.working.summary",
+    },
+    {
+      id: "example-3",
+      kind: "example",
+      titleKey: "lesson.concrete.example.3",
+      operation: "slab",
+      inputs: {
+        length: "2",
+        width: "3",
+        depth: "0.2",
+        waste: "5",
+      },
+      expected: "1.26",
+      workingKey: "concrete.working.summary",
+    },
+    {
+      id: "visual",
+      kind: "visual",
+      visualKey: "concrete.visual.description",
+      alternativeKey: "concrete.visual.alternative",
+    },
+    {
+      id: "mistakes",
+      kind: "prose",
+      titleKey: "lesson.concrete.mistakes.title",
+      bodyKey: "lesson.concrete.mistakes.body",
+    },
+    {
+      id: "limits",
+      kind: "prose",
+      titleKey: "lesson.concrete.limits.title",
+      bodyKey: "lesson.concrete.limits.body",
+    },
+    {
+      id: "faq",
+      kind: "faq",
+      questionKey: "lesson.concrete.faq.q",
+      answerKey: "lesson.concrete.faq.a",
+    },
+    {
+      id: "sources",
+      kind: "prose",
+      titleKey: "lesson.concrete.sources.title",
+      bodyKey: "lesson.concrete.sources.body",
+    },
+  ],
+};

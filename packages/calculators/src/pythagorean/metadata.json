@@ -1,0 +1,16 @@
+{
+  "id": "pythagorean",
+  "slug": "pythagorean-theorem",
+  "category": "geometry",
+  "titleKey": "calculator.pythagorean.title",
+  "descriptionKey": "calculator.pythagorean.description",
+  "searchKeys": [
+    "calculator.pythagorean.title",
+    "calculator.pythagorean.search"
+  ],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "missing-hypotenuse": ["a", "b"],
+    "missing-leg": ["hypotenuse", "leg"]
+  }
+}

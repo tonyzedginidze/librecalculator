@@ -1,0 +1,14 @@
+{
+  "id": "rectangle",
+  "slug": "rectangle",
+  "category": "geometry",
+  "titleKey": "calculator.rectangle.title",
+  "descriptionKey": "calculator.rectangle.description",
+  "searchKeys": ["calculator.rectangle.title", "calculator.rectangle.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "rectangle-area": ["width", "height"],
+    "rectangle-perimeter": ["width", "height"],
+    "rectangle-diagonal": ["width", "height"]
+  }
+}

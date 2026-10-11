@@ -1,0 +1,17 @@
+{
+  "id": "math-everyday",
+  "version": 1,
+  "category": "math",
+  "titleKey": "pack.math-everyday.title",
+  "descriptionKey": "pack.math-everyday.description",
+  "calculatorIds": [
+    "discount",
+    "average",
+    "standard-deviation",
+    "ratio",
+    "scientific",
+    "random-number",
+    "fuel-economy"
+  ],
+  "default": false
+}

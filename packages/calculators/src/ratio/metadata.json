@@ -1,0 +1,13 @@
+{
+  "id": "ratio",
+  "slug": "ratio",
+  "category": "math",
+  "titleKey": "calculator.ratio.title",
+  "descriptionKey": "calculator.ratio.description",
+  "searchKeys": ["calculator.ratio.title", "calculator.ratio.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "quotient": ["first", "second"],
+    "scale-ratio": ["first", "second", "target"]
+  }
+}

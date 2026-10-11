@@ -1,0 +1,12 @@
+{
+  "id": "flooring",
+  "slug": "flooring",
+  "category": "construction",
+  "titleKey": "calculator.flooring.title",
+  "descriptionKey": "calculator.flooring.description",
+  "searchKeys": ["calculator.flooring.title", "calculator.flooring.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "packs": ["length", "width", "packArea", "waste"]
+  }
+}

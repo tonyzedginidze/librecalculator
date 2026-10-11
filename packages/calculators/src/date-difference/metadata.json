@@ -1,0 +1,16 @@
+{
+  "id": "date-difference",
+  "slug": "date-difference",
+  "category": "date-time",
+  "titleKey": "calculator.date-difference.title",
+  "descriptionKey": "calculator.date-difference.description",
+  "searchKeys": [
+    "calculator.date-difference.title",
+    "calculator.date-difference.search"
+  ],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "elapsed-days": ["start", "end"],
+    "inclusive-days": ["start", "end"]
+  }
+}

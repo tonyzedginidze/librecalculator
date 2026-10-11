@@ -1,0 +1,8 @@
+---
+import { CatalogBrowser } from "@open-calculators/dom-ui/components";
+import { ui } from "@open-calculators/i18n/ui";
+import Base from "../layouts/Base.astro";
+---
+<Base title={ui["ui.app.name"]} description={ui["ui.hero.subtitle"]}>
+  <CatalogBrowser client:load />
+</Base>

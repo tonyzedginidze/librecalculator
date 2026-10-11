@@ -1,0 +1,17 @@
+{
+  "id": "cup-gram-conversion",
+  "slug": "cup-gram-conversion",
+  "category": "cooking",
+  "titleKey": "calculator.cup-gram-conversion.title",
+  "descriptionKey": "calculator.cup-gram-conversion.description",
+  "searchKeys": [
+    "calculator.cup-gram-conversion.title",
+    "calculator.cup-gram-conversion.search"
+  ],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "cups-to-grams": ["cups", "gramsPerCup"],
+    "grams-to-cups": ["grams", "gramsPerCup"],
+    "half-cup-grams": ["gramsPerCup"]
+  }
+}

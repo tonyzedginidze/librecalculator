@@ -1,0 +1,9 @@
+{
+  "id": "education",
+  "version": 1,
+  "category": "education",
+  "titleKey": "ui.pack.education.title",
+  "descriptionKey": "ui.pack.education.description",
+  "calculatorIds": ["gpa", "grade", "final-grade", "test-score"],
+  "default": false
+}

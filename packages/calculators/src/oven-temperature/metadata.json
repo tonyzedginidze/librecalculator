@@ -1,0 +1,17 @@
+{
+  "id": "oven-temperature",
+  "slug": "oven-temperature",
+  "category": "cooking",
+  "titleKey": "calculator.oven-temperature.title",
+  "descriptionKey": "calculator.oven-temperature.description",
+  "searchKeys": [
+    "calculator.oven-temperature.title",
+    "calculator.oven-temperature.search"
+  ],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "celsius-to-fahrenheit": ["temperature"],
+    "fahrenheit-to-celsius": ["temperature"],
+    "fan-adjustment": ["temperature", "reduction"]
+  }
+}

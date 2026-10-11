@@ -1,0 +1,20 @@
+{
+  "id": "core",
+  "version": 1,
+  "category": "math",
+  "titleKey": "ui.pack.core.title",
+  "descriptionKey": "ui.pack.core.description",
+  "calculatorIds": [
+    "percentage",
+    "percentage-change",
+    "fractions",
+    "unit-conversion",
+    "area",
+    "volume",
+    "pythagorean",
+    "compound-interest",
+    "loan-payments",
+    "tip-splitting"
+  ],
+  "default": true
+}

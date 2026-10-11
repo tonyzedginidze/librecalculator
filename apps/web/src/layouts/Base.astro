@@ -1,0 +1,57 @@
+---
+import { bootScript } from "@open-calculators/design/boot";
+import { variableCss } from "@open-calculators/design/css";
+import "@open-calculators/design/ui.css";
+import { defaultLocale, localeDirections } from "@open-calculators/i18n/locales";
+import { ui } from "@open-calculators/i18n/ui";
+
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+---
+<!doctype html>
+<html lang={defaultLocale} dir={localeDirections[defaultLocale]}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:site_name" content={ui["ui.app.name"]} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="theme-color" content="#f6f1e8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#14110f" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <style is:inline set:html={variableCss}></style>
+    <script is:inline set:html={bootScript()}></script>
+  </head>
+  <body>
+    <a class="oc-skip" href="#calculator">{ui["ui.skip"]}</a>
+    <slot />
+    <script>
+      if ("serviceWorker" in navigator && import.meta.env.PROD) {
+        void navigator.serviceWorker.register("/sw.js").then(() => navigator.serviceWorker.ready).then(registration => {
+          const send = () => {
+            let ids: string[] = ["core"];
+            try { const value = JSON.parse(localStorage.getItem("oc.active-packs.v1") ?? '["core"]'); if (Array.isArray(value)) ids = value.filter(id => typeof id === "string"); } catch {}
+            (navigator.serviceWorker.controller ?? registration.active)?.postMessage({type: "activate-packs", ids});
+          };
+          send();
+          window.addEventListener("oc.packs.changed", send);
+          window.addEventListener("storage", send);
+          navigator.serviceWorker.addEventListener("controllerchange", send);
+        }).catch(() => {});
+      }
+    </script>
+    <noscript>
+      <p class="oc-page">{ui["ui.noscript"]}</p>
+    </noscript>
+  </body>
+</html>

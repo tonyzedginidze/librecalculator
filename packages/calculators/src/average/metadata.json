@@ -1,0 +1,14 @@
+{
+  "id": "average",
+  "slug": "average",
+  "category": "math",
+  "titleKey": "calculator.average.title",
+  "descriptionKey": "calculator.average.description",
+  "searchKeys": ["calculator.average.title", "calculator.average.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "mean": ["values"],
+    "median": ["values"],
+    "mode": ["values"]
+  }
+}

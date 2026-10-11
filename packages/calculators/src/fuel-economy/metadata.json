@@ -1,0 +1,16 @@
+{
+  "id": "fuel-economy",
+  "slug": "fuel-economy",
+  "category": "math",
+  "titleKey": "calculator.fuel-economy.title",
+  "descriptionKey": "calculator.fuel-economy.description",
+  "searchKeys": [
+    "calculator.fuel-economy.title",
+    "calculator.fuel-economy.search"
+  ],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "litres-per-100km": ["distance", "fuel"],
+    "kilometres-per-litre": ["distance", "fuel"]
+  }
+}

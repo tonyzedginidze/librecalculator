@@ -1,0 +1,9 @@
+{
+  "id": "physics",
+  "version": 1,
+  "category": "physics",
+  "titleKey": "ui.pack.physics.title",
+  "descriptionKey": "ui.pack.physics.description",
+  "calculatorIds": ["speed", "force", "energy", "power", "density", "pressure"],
+  "default": false
+}

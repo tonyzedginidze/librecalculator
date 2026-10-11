@@ -1,0 +1,12 @@
+{
+  "id": "pressure",
+  "slug": "pressure",
+  "category": "physics",
+  "titleKey": "calculator.pressure.title",
+  "descriptionKey": "calculator.pressure.description",
+  "searchKeys": ["calculator.pressure.title", "calculator.pressure.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "pressure-si": ["force", "area"]
+  }
+}

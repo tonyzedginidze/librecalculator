@@ -1,0 +1,12 @@
+{
+  "id": "force",
+  "slug": "force",
+  "category": "physics",
+  "titleKey": "calculator.force.title",
+  "descriptionKey": "calculator.force.description",
+  "searchKeys": ["calculator.force.title", "calculator.force.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "force-si": ["mass", "acceleration"]
+  }
+}

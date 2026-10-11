@@ -1,0 +1,15 @@
+{
+  "id": "speed-conversion",
+  "slug": "speed-conversion",
+  "category": "units",
+  "titleKey": "calculator.speed-conversion.title",
+  "descriptionKey": "calculator.speed-conversion.description",
+  "searchKeys": [
+    "calculator.speed-conversion.title",
+    "calculator.speed-conversion.search"
+  ],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "convert": ["value", "source", "target"]
+  }
+}

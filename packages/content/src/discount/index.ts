@@ -1,0 +1,125 @@
+import type { Lesson } from "../schema";
+
+export const lesson: Lesson = {
+  calculatorId: "discount",
+  blocks: [
+    {
+      id: "intro",
+      kind: "prose",
+      titleKey: "lesson.discount.intro.title",
+      bodyKey: "lesson.discount.intro.body",
+    },
+    {
+      id: "meaning",
+      kind: "prose",
+      titleKey: "lesson.discount.meaning.title",
+      bodyKey: "lesson.discount.meaning.body",
+    },
+    {
+      id: "sale-price-formula",
+      kind: "formula",
+      bodyKey: "lesson.discount.formula.salePrice",
+      variables: [
+        { symbol: "P", nameKey: "lesson.discount.variable.original" },
+        {
+          symbol: "d",
+          nameKey: "lesson.discount.variable.rate",
+          unitKey: "unit.percent",
+        },
+        { symbol: "S", nameKey: "lesson.discount.variable.sale" },
+      ],
+    },
+    {
+      id: "discount-percent-formula",
+      kind: "formula",
+      bodyKey: "lesson.discount.formula.discountPercent",
+      variables: [
+        { symbol: "P", nameKey: "lesson.discount.variable.original" },
+        { symbol: "S", nameKey: "lesson.discount.variable.sale" },
+        {
+          symbol: "d",
+          nameKey: "lesson.discount.variable.rate",
+          unitKey: "unit.percent",
+        },
+      ],
+    },
+    {
+      id: "example-fifteen",
+      kind: "example",
+      titleKey: "lesson.discount.example.fifteen",
+      operation: "sale-price",
+      inputs: { original: "80", discount: "15" },
+      expected: "68",
+      workingKey: "discount.working.sale",
+    },
+    {
+      id: "example-cents",
+      kind: "example",
+      titleKey: "lesson.discount.example.cents",
+      operation: "sale-price",
+      inputs: { original: "19.99", discount: "30" },
+      expected: "13.993",
+      workingKey: "discount.working.sale",
+    },
+    {
+      id: "example-markup",
+      kind: "example",
+      titleKey: "lesson.discount.example.markup",
+      operation: "sale-price",
+      inputs: { original: "50", discount: "-10" },
+      expected: "55",
+      workingKey: "discount.working.sale",
+    },
+    {
+      id: "example-percent",
+      kind: "example",
+      titleKey: "lesson.discount.example.percent",
+      operation: "discount-percent",
+      inputs: { original: "200", sale: "150" },
+      expected: "25",
+      workingKey: "discount.working.percent",
+    },
+    {
+      id: "visual-reference",
+      kind: "visual",
+      visualKey: "discount.visual.description",
+      alternativeKey: "discount.visual.alternative",
+    },
+    {
+      id: "mistakes",
+      kind: "prose",
+      titleKey: "lesson.discount.mistakes.title",
+      bodyKey: "lesson.discount.mistakes.body",
+    },
+    {
+      id: "limits",
+      kind: "prose",
+      titleKey: "lesson.discount.limits.title",
+      bodyKey: "lesson.discount.limits.body",
+    },
+    {
+      id: "faq-stack",
+      kind: "faq",
+      questionKey: "lesson.discount.faq.stack.q",
+      answerKey: "lesson.discount.faq.stack.a",
+    },
+    {
+      id: "faq-zero",
+      kind: "faq",
+      questionKey: "lesson.discount.faq.zero.q",
+      answerKey: "lesson.discount.faq.zero.a",
+    },
+    {
+      id: "faq-negative",
+      kind: "faq",
+      questionKey: "lesson.discount.faq.negative.q",
+      answerKey: "lesson.discount.faq.negative.a",
+    },
+    {
+      id: "sources",
+      kind: "prose",
+      titleKey: "lesson.discount.sources.title",
+      bodyKey: "lesson.discount.sources.body",
+    },
+  ],
+};

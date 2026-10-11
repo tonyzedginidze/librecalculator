@@ -1,0 +1,14 @@
+{
+  "id": "test-score",
+  "slug": "test-score",
+  "category": "education",
+  "titleKey": "calculator.test-score.title",
+  "descriptionKey": "calculator.test-score.description",
+  "searchKeys": ["calculator.test-score.title", "calculator.test-score.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "test-percentage": ["correct", "questions"],
+    "test-missed": ["questions", "correct"],
+    "test-needed": ["target", "questions"]
+  }
+}

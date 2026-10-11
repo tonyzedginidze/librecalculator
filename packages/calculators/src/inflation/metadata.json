@@ -1,0 +1,13 @@
+{
+  "id": "inflation",
+  "slug": "inflation",
+  "category": "finance",
+  "titleKey": "calculator.inflation.title",
+  "descriptionKey": "calculator.inflation.description",
+  "searchKeys": ["calculator.inflation.title", "calculator.inflation.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "future-cost": ["amount", "annualRate", "years"],
+    "purchasing-power": ["amount", "annualRate", "years"]
+  }
+}

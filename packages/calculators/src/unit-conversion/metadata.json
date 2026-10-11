@@ -1,0 +1,15 @@
+{
+  "id": "unit-conversion",
+  "slug": "unit-conversion",
+  "category": "units",
+  "titleKey": "calculator.unit-conversion.title",
+  "descriptionKey": "calculator.unit-conversion.description",
+  "searchKeys": [
+    "calculator.unit-conversion.title",
+    "calculator.unit-conversion.search"
+  ],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "convert": ["value", "source", "target"]
+  }
+}

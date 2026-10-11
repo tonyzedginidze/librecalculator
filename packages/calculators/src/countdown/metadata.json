@@ -1,0 +1,12 @@
+{
+  "id": "countdown",
+  "slug": "countdown",
+  "category": "date-time",
+  "titleKey": "calculator.countdown.title",
+  "descriptionKey": "calculator.countdown.description",
+  "searchKeys": ["calculator.countdown.title", "calculator.countdown.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "days-until": ["reference", "target"]
+  }
+}

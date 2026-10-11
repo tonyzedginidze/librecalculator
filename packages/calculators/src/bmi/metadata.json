@@ -1,0 +1,12 @@
+{
+  "id": "bmi",
+  "slug": "bmi",
+  "category": "health",
+  "titleKey": "calculator.bmi.title",
+  "descriptionKey": "calculator.bmi.description",
+  "searchKeys": ["calculator.bmi.title", "calculator.bmi.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "bmi": ["weight", "height", "age"]
+  }
+}

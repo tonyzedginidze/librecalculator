@@ -1,0 +1,14 @@
+{
+  "id": "grade",
+  "slug": "grade",
+  "category": "education",
+  "titleKey": "calculator.grade.title",
+  "descriptionKey": "calculator.grade.description",
+  "searchKeys": ["calculator.grade.title", "calculator.grade.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "grade-percent": ["earned", "possible"],
+    "grade-contribution": ["percentage", "weight"],
+    "grade-required-points": ["target", "possible"]
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "id": "bmr",
+  "slug": "bmr",
+  "category": "health",
+  "titleKey": "calculator.bmr.title",
+  "descriptionKey": "calculator.bmr.description",
+  "searchKeys": ["calculator.bmr.title", "calculator.bmr.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "male-equation": ["weight", "height", "age"],
+    "female-equation": ["weight", "height", "age"]
+  }
+}

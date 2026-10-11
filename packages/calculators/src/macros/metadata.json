@@ -1,0 +1,14 @@
+{
+  "id": "macros",
+  "slug": "macros",
+  "category": "health",
+  "titleKey": "calculator.macros.title",
+  "descriptionKey": "calculator.macros.description",
+  "searchKeys": ["calculator.macros.title", "calculator.macros.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "protein-grams": ["calories", "protein", "carbohydrate", "fat", "age"],
+    "carbohydrate-grams": ["calories", "protein", "carbohydrate", "fat", "age"],
+    "fat-grams": ["calories", "protein", "carbohydrate", "fat", "age"]
+  }
+}

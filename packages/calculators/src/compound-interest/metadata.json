@@ -1,0 +1,15 @@
+{
+  "id": "compound-interest",
+  "slug": "compound-interest",
+  "category": "finance",
+  "titleKey": "calculator.compound-interest.title",
+  "descriptionKey": "calculator.compound-interest.description",
+  "searchKeys": [
+    "calculator.compound-interest.title",
+    "calculator.compound-interest.search"
+  ],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "compound": ["principal", "annualRate", "years", "frequency"]
+  }
+}

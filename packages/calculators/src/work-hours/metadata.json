@@ -1,0 +1,12 @@
+{
+  "id": "work-hours",
+  "slug": "work-hours",
+  "category": "date-time",
+  "titleKey": "calculator.work-hours.title",
+  "descriptionKey": "calculator.work-hours.description",
+  "searchKeys": ["calculator.work-hours.title", "calculator.work-hours.search"],
+  "inputSchemaVersion": 2,
+  "operations": {
+    "paid-hours": ["start", "end", "break", "overnight"]
+  }
+}

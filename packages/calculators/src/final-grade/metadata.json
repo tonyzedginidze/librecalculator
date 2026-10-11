@@ -1,0 +1,17 @@
+{
+  "id": "final-grade",
+  "slug": "final-grade",
+  "category": "education",
+  "titleKey": "calculator.final-grade.title",
+  "descriptionKey": "calculator.final-grade.description",
+  "searchKeys": [
+    "calculator.final-grade.title",
+    "calculator.final-grade.search"
+  ],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "final-required": ["current", "target", "finalWeight"],
+    "final-projected": ["current", "finalScore", "finalWeight"],
+    "final-current-needed": ["target", "finalScore", "finalWeight"]
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "id": "roofing",
+  "slug": "roofing",
+  "category": "construction",
+  "titleKey": "calculator.roofing.title",
+  "descriptionKey": "calculator.roofing.description",
+  "searchKeys": ["calculator.roofing.title", "calculator.roofing.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "roof-area": ["length", "width", "rise", "run", "waste"]
+  }
+}

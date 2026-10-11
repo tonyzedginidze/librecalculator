@@ -1,0 +1,12 @@
+{
+  "id": "retirement",
+  "slug": "retirement",
+  "category": "finance",
+  "titleKey": "calculator.retirement.title",
+  "descriptionKey": "calculator.retirement.description",
+  "searchKeys": ["calculator.retirement.title", "calculator.retirement.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "project": ["balance", "contribution", "annualRate", "years"]
+  }
+}

@@ -1,0 +1,102 @@
+import type { Lesson } from "../schema";
+export const lesson: Lesson = {
+  calculatorId: "tile",
+  blocks: [
+    {
+      id: "intro",
+      kind: "prose",
+      titleKey: "lesson.tile.intro.title",
+      bodyKey: "lesson.tile.intro.body",
+    },
+    {
+      id: "method",
+      kind: "prose",
+      titleKey: "lesson.tile.method.title",
+      bodyKey: "lesson.tile.method.body",
+    },
+    {
+      id: "formula",
+      kind: "formula",
+      bodyKey: "lesson.tile.formula",
+      variables: [
+        { symbol: "N", nameKey: "lesson.tile.variable.tiles" },
+        { symbol: "A", nameKey: "tile.field.area" },
+        { symbol: "w", nameKey: "tile.field.tileWidth" },
+        { symbol: "h", nameKey: "tile.field.tileHeight" },
+        { symbol: "a", nameKey: "tile.field.waste" },
+      ],
+    },
+    {
+      id: "example-1",
+      kind: "example",
+      titleKey: "lesson.tile.example.1",
+      operation: "tiles",
+      inputs: {
+        area: "10",
+        tileWidth: "50",
+        tileHeight: "50",
+        waste: "10",
+      },
+      expected: "44",
+      workingKey: "tile.working.summary",
+    },
+    {
+      id: "example-2",
+      kind: "example",
+      titleKey: "lesson.tile.example.2",
+      operation: "tiles",
+      inputs: {
+        area: "1",
+        tileWidth: "25",
+        tileHeight: "25",
+        waste: "0",
+      },
+      expected: "16",
+      workingKey: "tile.working.summary",
+    },
+    {
+      id: "example-3",
+      kind: "example",
+      titleKey: "lesson.tile.example.3",
+      operation: "tiles",
+      inputs: {
+        area: "1",
+        tileWidth: "30",
+        tileHeight: "30",
+        waste: "0",
+      },
+      expected: "12",
+      workingKey: "tile.working.summary",
+    },
+    {
+      id: "visual",
+      kind: "visual",
+      visualKey: "tile.visual.description",
+      alternativeKey: "tile.visual.alternative",
+    },
+    {
+      id: "mistakes",
+      kind: "prose",
+      titleKey: "lesson.tile.mistakes.title",
+      bodyKey: "lesson.tile.mistakes.body",
+    },
+    {
+      id: "limits",
+      kind: "prose",
+      titleKey: "lesson.tile.limits.title",
+      bodyKey: "lesson.tile.limits.body",
+    },
+    {
+      id: "faq",
+      kind: "faq",
+      questionKey: "lesson.tile.faq.q",
+      answerKey: "lesson.tile.faq.a",
+    },
+    {
+      id: "sources",
+      kind: "prose",
+      titleKey: "lesson.tile.sources.title",
+      bodyKey: "lesson.tile.sources.body",
+    },
+  ],
+};

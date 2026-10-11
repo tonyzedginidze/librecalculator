@@ -1,0 +1,15 @@
+{
+  "id": "tip-splitting",
+  "slug": "tip-splitting",
+  "category": "finance",
+  "titleKey": "calculator.tip-splitting.title",
+  "descriptionKey": "calculator.tip-splitting.description",
+  "searchKeys": [
+    "calculator.tip-splitting.title",
+    "calculator.tip-splitting.search"
+  ],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "split": ["subtotal", "tipRate", "people"]
+  }
+}

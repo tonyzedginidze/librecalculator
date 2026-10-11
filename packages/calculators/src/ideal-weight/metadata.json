@@ -1,0 +1,15 @@
+{
+  "id": "ideal-weight",
+  "slug": "ideal-weight",
+  "category": "health",
+  "titleKey": "calculator.ideal-weight.title",
+  "descriptionKey": "calculator.ideal-weight.description",
+  "searchKeys": [
+    "calculator.ideal-weight.title",
+    "calculator.ideal-weight.search"
+  ],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "bmi-weight": ["height", "targetBmi", "age"]
+  }
+}

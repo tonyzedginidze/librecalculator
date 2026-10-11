@@ -1,0 +1,15 @@
+{
+  "id": "date-time",
+  "version": 1,
+  "category": "date-time",
+  "titleKey": "ui.pack.date-time.title",
+  "descriptionKey": "ui.pack.date-time.description",
+  "calculatorIds": [
+    "age",
+    "date-difference",
+    "countdown",
+    "work-hours",
+    "time-zone"
+  ],
+  "default": false
+}

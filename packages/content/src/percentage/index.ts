@@ -1,0 +1,125 @@
+import type { Lesson } from "../schema";
+
+export const lesson: Lesson = {
+  calculatorId: "percentage",
+  blocks: [
+    {
+      id: "intro",
+      kind: "prose",
+      titleKey: "lesson.percentage.intro.title",
+      bodyKey: "lesson.percentage.intro.body",
+    },
+    {
+      id: "meaning",
+      kind: "prose",
+      titleKey: "lesson.percentage.meaning.title",
+      bodyKey: "lesson.percentage.meaning.body",
+    },
+    {
+      id: "of-value-formula",
+      kind: "formula",
+      bodyKey: "lesson.percentage.formula.ofValue",
+      variables: [
+        { symbol: "V", nameKey: "lesson.percentage.variable.value" },
+        {
+          symbol: "p",
+          nameKey: "lesson.percentage.variable.rate",
+          unitKey: "unit.percent",
+        },
+        { symbol: "R", nameKey: "lesson.percentage.variable.result" },
+      ],
+    },
+    {
+      id: "ratio-formula",
+      kind: "formula",
+      bodyKey: "lesson.percentage.formula.ratio",
+      variables: [
+        { symbol: "A", nameKey: "lesson.percentage.variable.part" },
+        { symbol: "B", nameKey: "lesson.percentage.variable.whole" },
+        {
+          symbol: "p",
+          nameKey: "lesson.percentage.variable.rate",
+          unitKey: "unit.percent",
+        },
+      ],
+    },
+    {
+      id: "example-discount",
+      kind: "example",
+      titleKey: "lesson.percentage.example.discount",
+      operation: "of-value",
+      inputs: { value: "80", percentage: "15" },
+      expected: "12",
+      workingKey: "percentage.working.ofValue",
+    },
+    {
+      id: "example-negative",
+      kind: "example",
+      titleKey: "lesson.percentage.example.negative",
+      operation: "of-value",
+      inputs: { value: "-240", percentage: "125" },
+      expected: "-300",
+      workingKey: "percentage.working.ofValue",
+    },
+    {
+      id: "example-ratio",
+      kind: "example",
+      titleKey: "lesson.percentage.example.ratio",
+      operation: "ratio",
+      inputs: { part: "18", whole: "24" },
+      expected: "75",
+      workingKey: "percentage.working.ratio",
+    },
+    {
+      id: "example-small",
+      kind: "example",
+      titleKey: "lesson.percentage.example.small",
+      operation: "of-value",
+      inputs: { value: "0.8", percentage: "2.5" },
+      expected: "0.02",
+      workingKey: "percentage.working.ofValue",
+    },
+    {
+      id: "visual-reference",
+      kind: "visual",
+      visualKey: "percentage.visual.description",
+      alternativeKey: "percentage.visual.alternative",
+    },
+    {
+      id: "mistakes",
+      kind: "prose",
+      titleKey: "lesson.percentage.mistakes.title",
+      bodyKey: "lesson.percentage.mistakes.body",
+    },
+    {
+      id: "limits",
+      kind: "prose",
+      titleKey: "lesson.percentage.limits.title",
+      bodyKey: "lesson.percentage.limits.body",
+    },
+    {
+      id: "faq-of",
+      kind: "faq",
+      questionKey: "lesson.percentage.faq.over100.q",
+      answerKey: "lesson.percentage.faq.over100.a",
+    },
+    {
+      id: "faq-zero",
+      kind: "faq",
+      questionKey: "lesson.percentage.faq.zero.q",
+      answerKey: "lesson.percentage.faq.zero.a",
+    },
+    {
+      id: "faq-negative",
+      kind: "faq",
+      questionKey: "lesson.percentage.faq.negative.q",
+      answerKey: "lesson.percentage.faq.negative.a",
+    },
+    {
+      id: "sources",
+      kind: "prose",
+      titleKey: "lesson.percentage.sources.title",
+      bodyKey: "lesson.percentage.sources.body",
+    },
+  ],
+};

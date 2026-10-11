@@ -1,0 +1,12 @@
+{
+  "id": "duration",
+  "slug": "duration",
+  "category": "units",
+  "titleKey": "calculator.duration.title",
+  "descriptionKey": "calculator.duration.description",
+  "searchKeys": ["calculator.duration.title", "calculator.duration.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "convert": ["value", "source", "target"]
+  }
+}

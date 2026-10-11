@@ -1,0 +1,14 @@
+{
+  "id": "circle",
+  "slug": "circle",
+  "category": "geometry",
+  "titleKey": "calculator.circle.title",
+  "descriptionKey": "calculator.circle.description",
+  "searchKeys": ["calculator.circle.title", "calculator.circle.search"],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "circle-area": ["radius"],
+    "circle-circumference": ["radius"],
+    "circle-diameter": ["radius"]
+  }
+}

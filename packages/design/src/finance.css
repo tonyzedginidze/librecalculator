@@ -1,0 +1,275 @@
+/* Financial Topic Scoped Styles */
+
+.oc-finance-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--oc-space-3, 0.75rem);
+  margin-bottom: var(--oc-space-4, 1rem);
+}
+
+.oc-finance-card {
+  background: var(--oc-bg-surface, rgba(255, 255, 255, 0.8));
+  border: 1px solid var(--oc-border-color, rgba(0, 0, 0, 0.1));
+  border-radius: 4px;
+  padding: var(--oc-space-3, 0.75rem) var(--oc-space-4, 1rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.oc-finance-card--primary {
+  background: var(--oc-bg-primary-tint, rgba(16, 185, 129, 0.08));
+  border-color: var(--oc-result);
+}
+
+.oc-finance-card-label {
+  font-size: var(--oc-font-xs, 0.75rem);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--oc-text-muted, #64748b);
+  font-weight: 600;
+}
+
+.oc-finance-card-value {
+  font-size: var(--oc-font-xl, 1.05rem);
+  font-weight: 700;
+  color: var(--oc-text-main, #0f172a);
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
+}
+
+.oc-finance-card--primary .oc-finance-card-value {
+  font-size: var(--oc-font-2xl, 1.25rem);
+  color: var(--oc-result);
+}
+
+.oc-finance-disclosure {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-top: 1.1rem;
+  padding: 0.15rem 0 0.15rem 0.8rem;
+  border-inline-start: 2px solid var(--oc-line);
+  color: var(--oc-muted);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.oc-finance-disclosure > [aria-hidden="true"] {
+  display: none;
+}
+
+/* Quick Select Presets / Chips */
+.oc-finance-presets legend {
+  float: left;
+  width: 100%;
+  margin-bottom: 0.4rem;
+  padding: 0;
+}
+
+.oc-finance-presets {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--oc-space-2, 0.5rem);
+  margin-top: 0.25rem;
+}
+
+.oc-finance-chip {
+  min-height: 2rem;
+  padding: 0 0.7rem;
+  font-size: 0.85rem;
+}
+
+.oc-finance-chip[data-active="true"] {
+  border-color: var(--oc-accent);
+  background: var(--oc-accent-soft);
+  color: var(--oc-accent);
+}
+
+/* Chart Container & Graphics */
+.oc-finance-chart-container {
+  margin-top: var(--oc-space-4, 1rem);
+  padding: var(--oc-space-3, 0.75rem);
+  background: var(--oc-bg-surface, rgba(255, 255, 255, 0.6));
+  border: 1px solid var(--oc-border-color, rgba(0, 0, 0, 0.08));
+  border-radius: 4px;
+}
+
+.oc-finance-chart-svg {
+  width: 100%;
+  height: auto;
+  max-height: 260px;
+  overflow: visible;
+}
+
+/* Interactive Chart Elements & Tooltips */
+.oc-finance-chart-interactive {
+  cursor: crosshair;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.oc-finance-chart-readout {
+  margin-block: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--oc-bg-element, rgba(241, 245, 249, 0.9));
+  border: 1px solid var(--oc-border-color, rgba(0, 0, 0, 0.1));
+  border-radius: 4px;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--oc-text-main, #1e293b);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.oc-finance-chart-readout-title {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--oc-accent-color, #0284c7);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.oc-finance-chart-readout-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  margin-top: 0.15rem;
+}
+
+.oc-finance-chart-readout-item {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.oc-finance-chart-readout-label {
+  color: var(--oc-text-muted, #64748b);
+}
+
+.oc-finance-chart-readout-val {
+  font-weight: 600;
+}
+
+.oc-finance-bar-group {
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.oc-finance-bar-group:hover rect,
+.oc-finance-bar-group[data-active="true"] rect {
+  filter: brightness(1.15);
+  stroke: var(--oc-accent-color, #0284c7);
+  stroke-width: 1.5px;
+}
+
+.oc-finance-chart-crosshair {
+  stroke: var(--oc-accent-color, #3b82f6);
+  stroke-dasharray: 4 4;
+  stroke-opacity: 0.6;
+}
+
+.oc-finance-chart-active-dot {
+  fill: var(--oc-accent);
+  stroke: var(--oc-surface);
+  stroke-width: 2px;
+}
+
+/* Amortization & Growth Tables */
+.oc-finance-table-wrapper {
+  max-height: 320px;
+  overflow-y: auto;
+  overflow-x: auto;
+  border: 1px solid var(--oc-border-color, rgba(0, 0, 0, 0.1));
+  border-radius: 4px;
+  margin-top: var(--oc-space-3, 0.75rem);
+}
+
+.oc-finance-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--oc-font-xs, 0.8125rem);
+  text-align: left;
+}
+
+.oc-finance-table th,
+.oc-finance-table td {
+  padding: 0.375rem 0.625rem;
+  border-bottom: 1px solid var(--oc-border-color, rgba(0, 0, 0, 0.06));
+  font-variant-numeric: tabular-nums;
+}
+
+.oc-finance-table th {
+  position: sticky;
+  top: 0;
+  background: var(--oc-bg-table-header, #f1f5f9);
+  font-weight: 600;
+  z-index: 1;
+}
+
+/* Allocation Shares Breakdown */
+.oc-finance-shares {
+  display: flex;
+  flex-direction: column;
+  gap: var(--oc-space-2, 0.5rem);
+  margin-top: var(--oc-space-3, 0.75rem);
+}
+
+.oc-finance-share-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  background: var(--oc-bg-element, #f8fafc);
+  border: 1px solid var(--oc-border-color, rgba(0, 0, 0, 0.08));
+}
+
+.oc-finance-share-item[data-extra="true"] {
+  border-color: var(--oc-accent);
+}
+
+.oc-finance-share-count {
+  font-weight: 600;
+  color: var(--oc-text-main, #1e293b);
+}
+
+.oc-finance-share-amount {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--oc-accent-dark, #0369a1);
+}
+
+/* Summary cards inside the answer: compact, no repeat of the main value. */
+.oc-answer .oc-finance-summary {
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  gap: 0.5rem;
+  margin: 0.5rem 0 0;
+}
+
+.oc-answer .oc-finance-card {
+  padding: 0.4rem 0.65rem;
+}
+
+.oc-answer .oc-finance-card--primary {
+  display: none;
+}
+
+.oc-finance-card-value,
+.oc-finance-chart-readout-val,
+.oc-finance-table td,
+.oc-numberline-ticks,
+.oc-numberline-marker-label {
+  font-family: var(--oc-font-mono);
+  font-variant-numeric: tabular-nums slashed-zero;
+}

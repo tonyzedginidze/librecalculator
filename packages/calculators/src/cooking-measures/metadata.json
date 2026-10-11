@@ -1,0 +1,15 @@
+{
+  "id": "cooking-measures",
+  "slug": "cooking-measures",
+  "category": "units",
+  "titleKey": "calculator.cooking-measures.title",
+  "descriptionKey": "calculator.cooking-measures.description",
+  "searchKeys": [
+    "calculator.cooking-measures.title",
+    "calculator.cooking-measures.search"
+  ],
+  "inputSchemaVersion": 1,
+  "operations": {
+    "convert": ["value", "source", "target"]
+  }
+}

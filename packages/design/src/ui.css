@@ -3023,3 +3023,52 @@ body:has(.oc-settings-dialog[open]) {
 .oc-breadcrumbs [aria-current="page"] {
   color: var(--oc-ink);
 }
+
+.oc-side-creator {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+  margin: 0.15rem 0 0.6rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--oc-line);
+}
+.oc-side-creator-link {
+  flex: none;
+  border-radius: 50%;
+}
+.oc-side-creator-photo {
+  flex: none;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow:
+    0 0 0 2px var(--oc-canvas),
+    0 0 0 3px var(--oc-line);
+}
+.oc-side-creator-bubble {
+  position: relative;
+  display: grid;
+  gap: 0.25rem;
+  min-width: 0;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--oc-line);
+  border-radius: 12px 12px 12px 3px;
+  background: var(--oc-surface);
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+.oc-side-creator-bubble p {
+  margin: 0;
+}
+.oc-side-creator-ask {
+  color: var(--oc-muted);
+}
+.oc-side-creator-bubble a {
+  color: var(--oc-accent);
+  font-weight: 620;
+  text-decoration: none;
+}
+.oc-side-creator-bubble a:hover {
+  text-decoration: underline;
+}

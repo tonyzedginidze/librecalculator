@@ -132,6 +132,13 @@ export const ui = {
   "ui.footer.about": "About",
   "ui.footer.source": "Source code on GitHub",
   "ui.footer.issue": "Report a problem",
+  "ui.creator.photoAlt": "Portrait of Tony, creator of Libre Calculator",
+  "ui.creator.name": "Tony",
+  "ui.creator.message":
+    "Hi, I'm Tony. I'm building a universe of free calculators that explain every answer.",
+  "ui.creator.ask": "Want to help? There are a few ways.",
+  "ui.creator.linkedin": "Tony on LinkedIn",
+  "ui.creator.cta": "See how you can help",
   "ui.sidebar.github.title": "Open source on GitHub",
   "ui.sidebar.github.text": "Star it or read the code",
   "ui.about.title": "About Libre Calculator",

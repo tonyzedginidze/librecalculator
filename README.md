@@ -178,6 +178,7 @@ You don't need to write code to make Libre Calculator better.
 
 | | How |
 |---|---|
+| **Star the repo** | A star takes one second and is the clearest sign the project is worth building. It helps people find Libre Calculator in GitHub search and trending lists, brings in more reviewers and contributors, and tells us which direction to keep growing. |
 | **Review a calculator** | Pick one you know well and check its answer, steps and lesson. If a number, unit or explanation is off, [open an issue](https://github.com/tonyzedginidze/librecalculator/issues/new) with the inputs you used. |
 | **Suggest a calculator** | Tell us what you wanted to calculate and couldn't. Real questions make the best calculators. |
 | **Improve a lesson** | Clearer wording, a better example or a common mistake worth mentioning. Lessons live in `packages/content`. |
@@ -185,8 +186,8 @@ You don't need to write code to make Libre Calculator better.
 | **Draw a tile** | Each calculator has a small flat illustration. [docs/tile-illustrations.md](docs/tile-illustrations.md) has the house style. |
 | **Report a bug** | Wrong results, broken layouts and accessibility problems all count. |
 | **Try the desktop app** | Run it on your system and tell us what breaks or feels slow. |
+| **Share it** | Send a calculator to a friend, a teacher or a colleague who would use it. |
 | **Build a calculator** | Follow [Add a calculator](#add-a-calculator). Open an issue first so we can agree on scope. |
-| **Star and share** | It's the easiest way to help more people find the project. |
 
 ### Contributors
 

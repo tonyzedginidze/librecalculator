@@ -7,6 +7,9 @@ import { en } from "../../i18n/src/en";
 export const repositoryUrl =
   "https://github.com/tonyzedginidze/librecalculator";
 
+/** The creator's LinkedIn profile, linked from the sidebar card. */
+export const creatorUrl = "https://www.linkedin.com/in/tokozedg";
+
 export function calculatorRoute(id: CalculatorId): string {
   const item = calculatorCatalog.find((candidate) => candidate.id === id);
   if (!item) throw new Error(`Unknown calculator ID: ${id}`);

@@ -14,6 +14,7 @@ import {
   calculatorRoute,
   catalogItems,
   categoryOrder,
+  creatorUrl,
   filterItems,
   repositoryUrl,
 } from "../catalog";
@@ -548,6 +549,34 @@ export function Sidebar(props: {
           )}
         </PillGroup>
         <div className="oc-side-settings">
+          <aside className="oc-side-creator">
+            <a
+              className="oc-side-creator-link"
+              href={creatorUrl}
+              target="_blank"
+              rel="noopener"
+              aria-label={ui["ui.creator.linkedin"]}
+            >
+              <img
+                className="oc-side-creator-photo"
+                src="/tony.jpg"
+                width="32"
+                height="32"
+                alt={ui["ui.creator.photoAlt"]}
+              />
+            </a>
+            <div className="oc-side-creator-bubble">
+              <p>{ui["ui.creator.message"]}</p>
+              <p className="oc-side-creator-ask">{ui["ui.creator.ask"]}</p>
+              <a
+                href={`${repositoryUrl}#ways-to-help`}
+                target="_blank"
+                rel="noopener"
+              >
+                {ui["ui.creator.cta"]} →
+              </a>
+            </div>
+          </aside>
           <a
             className="oc-side-github"
             href={repositoryUrl}

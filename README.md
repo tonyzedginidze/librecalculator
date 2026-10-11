@@ -12,16 +12,16 @@ Building the world's best calculators, free and open source.
 
 [Website](https://librecalculator.com) · [Calculator packs](#calculator-packs) · [Get started](#get-started) · [Ways to help](#ways-to-help) · [Docs](docs/README.md)
 
-[![Stars](https://img.shields.io/github/stars/alvinunreal/opencalculators?style=flat-square&labelColor=1c1712&color=7a3e22)](https://github.com/alvinunreal/opencalculators/stargazers)
-[![Last commit](https://img.shields.io/github/last-commit/alvinunreal/opencalculators?style=flat-square&labelColor=1c1712&color=2b7a4b)](https://github.com/alvinunreal/opencalculators/commits/main)
-[![Issues](https://img.shields.io/github/issues/alvinunreal/opencalculators?style=flat-square&labelColor=1c1712&color=2f5d8a)](https://github.com/alvinunreal/opencalculators/issues)
+[![Stars](https://img.shields.io/github/stars/tonyzedginidze/librecalculator?style=flat-square&labelColor=1c1712&color=7a3e22)](https://github.com/tonyzedginidze/librecalculator/stargazers)
+[![Last commit](https://img.shields.io/github/last-commit/tonyzedginidze/librecalculator?style=flat-square&labelColor=1c1712&color=2b7a4b)](https://github.com/tonyzedginidze/librecalculator/commits/main)
+[![Issues](https://img.shields.io/github/issues/tonyzedginidze/librecalculator?style=flat-square&labelColor=1c1712&color=2f5d8a)](https://github.com/tonyzedginidze/librecalculator/issues)
 [![Built with Bun](https://img.shields.io/badge/built_with-Bun-6a4c93?style=flat-square&labelColor=1c1712)](https://bun.sh)
 
 </div>
 
 <br>
 
-<a href="https://github.com/alvinunreal/opencalculators/stargazers">
+<a href="https://github.com/tonyzedginidze/librecalculator/stargazers">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset=".github/readme/star-dark.png">
     <img src=".github/readme/star-light.png" width="100%" alt="Star the project on GitHub">
@@ -132,8 +132,8 @@ The quickest way is the website: [librecalculator.com](https://librecalculator.c
 To run it locally you need Bun **1.4.2** and Node **24.21.0**.
 
 ```sh
-git clone https://github.com/alvinunreal/opencalculators.git
-cd opencalculators
+git clone https://github.com/tonyzedginidze/librecalculator.git
+cd librecalculator
 bun install --frozen-lockfile
 bun run dev            # website at http://localhost:4321
 bun run dev:desktop    # desktop app (needs the Tauri prerequisites)
@@ -178,7 +178,7 @@ You don't need to write code to make Libre Calculator better.
 
 | | How |
 |---|---|
-| **Review a calculator** | Pick one you know well and check its answer, steps and lesson. If a number, unit or explanation is off, [open an issue](https://github.com/alvinunreal/opencalculators/issues/new) with the inputs you used. |
+| **Review a calculator** | Pick one you know well and check its answer, steps and lesson. If a number, unit or explanation is off, [open an issue](https://github.com/tonyzedginidze/librecalculator/issues/new) with the inputs you used. |
 | **Suggest a calculator** | Tell us what you wanted to calculate and couldn't. Real questions make the best calculators. |
 | **Improve a lesson** | Clearer wording, a better example or a common mistake worth mentioning. Lessons live in `packages/content`. |
 | **Translate** | All text already lives in `packages/i18n`, ready for other languages. Translation isn't open yet; tell us which language you'd help with so we can start there. |
@@ -190,8 +190,8 @@ You don't need to write code to make Libre Calculator better.
 
 ### Contributors
 
-<a href="https://github.com/alvinunreal/opencalculators/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=alvinunreal/opencalculators" alt="Contributors">
+<a href="https://github.com/tonyzedginidze/librecalculator/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=tonyzedginidze/librecalculator" alt="Contributors">
 </a>
 
 <sub>README art is rendered from the live site with `bun run build:web && bun run readme:art`.</sub>

@@ -3,6 +3,10 @@ import { calculatorCatalog } from "../../calculators/src/catalog.generated";
 import { calculatorPacks } from "../../calculators/src/packs.generated";
 import { en } from "../../i18n/src/en";
 
+/** The project's source repository, linked from the sidebar, footer and schema. */
+export const repositoryUrl =
+  "https://github.com/tonyzedginidze/librecalculator";
+
 export function calculatorRoute(id: CalculatorId): string {
   const item = calculatorCatalog.find((candidate) => candidate.id === id);
   if (!item) throw new Error(`Unknown calculator ID: ${id}`);

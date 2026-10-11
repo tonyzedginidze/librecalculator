@@ -3,7 +3,11 @@ import { en } from "@open-calculators/i18n";
 import { ui } from "@open-calculators/i18n/ui";
 
 const messages: Readonly<Record<string, string>> = { ...en, ...ui };
-export const repository = "https://github.com/alvinunreal/opencalculators";
+
+export { repositoryUrl as repository } from "@open-calculators/dom-ui/catalog";
+
+import { repositoryUrl as repository } from "@open-calculators/dom-ui/catalog";
+
 /** Google's application categories, closest match per catalog category. */
 const applicationCategory: Record<string, string> = {
   finance: "FinanceApplication",

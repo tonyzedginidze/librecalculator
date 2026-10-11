@@ -1,4 +1,5 @@
 ---
+import { packCatalog } from "@open-calculators/calculators";
 import { bootScript } from "@open-calculators/design/boot";
 import { variableCss } from "@open-calculators/design/css";
 import "@open-calculators/design/ui.css";
@@ -64,7 +65,7 @@ const jsonLd = noindex ? undefined : structuredData(pathname, site);
     <style is:inline set:html={variableCss}></style>
     <script is:inline set:html={bootScript()}></script>
   </head>
-  <body>
+  <body data-packs={packCatalog.map(pack => pack.id).join(" ")}>
     <a class="oc-skip" href="#calculator">{ui["ui.skip"]}</a>
     <slot />
     {bare ? null : <SiteFooter />}
@@ -72,8 +73,9 @@ const jsonLd = noindex ? undefined : structuredData(pathname, site);
       if ("serviceWorker" in navigator && import.meta.env.PROD) {
         void navigator.serviceWorker.register("/sw.js").then(() => navigator.serviceWorker.ready).then(registration => {
           const send = () => {
-            let ids: string[] = ["core"];
-            try { const value = JSON.parse(localStorage.getItem("oc.active-packs.v1") ?? '["core"]'); if (Array.isArray(value)) ids = value.filter(id => typeof id === "string"); } catch {}
+            // Nothing saved means every pack is active on the web.
+            let ids: string[] = (document.body.dataset.packs ?? "core").split(" ");
+            try { const value = JSON.parse(localStorage.getItem("oc.active-packs.v1") ?? "null"); if (Array.isArray(value)) ids = value.filter(id => typeof id === "string"); } catch {}
             (navigator.serviceWorker.controller ?? registration.active)?.postMessage({type: "activate-packs", ids});
           };
           send();

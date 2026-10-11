@@ -358,6 +358,15 @@ button:disabled {
   gap: 1rem;
 }
 
+/* Animated grid cells wrap each tile; let the tile fill the row height. */
+.oc-grid-cell {
+  display: flex;
+}
+
+.oc-grid-cell > .oc-tile {
+  flex: 1;
+}
+
 .oc-tile {
   display: flex;
   flex-direction: column;
@@ -1621,6 +1630,78 @@ button:active:not(:disabled) {
   margin-top: auto;
   border-top: 1px solid var(--oc-line);
   padding: 0.5rem 0.75rem;
+}
+.oc-side-github {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin: 0.15rem 0 0.4rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--oc-line);
+  border-radius: 6px;
+  background: var(--oc-surface);
+  color: var(--oc-ink);
+  text-decoration: none;
+  transition:
+    border-color 160ms var(--oc-ease),
+    box-shadow 200ms var(--oc-ease),
+    transform 200ms var(--oc-ease);
+}
+.oc-side-github:hover {
+  border-color: var(--oc-ink);
+  box-shadow: 0 6px 16px -10px
+    color-mix(in srgb, var(--oc-ink) 40%, transparent);
+  transform: translateY(-1px);
+}
+.oc-side-github:focus-visible {
+  outline: 2px solid var(--oc-focus);
+  outline-offset: 2px;
+}
+.oc-side-github-mark {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--oc-ink);
+  color: var(--oc-canvas);
+}
+.oc-side-github-mark svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  fill: currentColor;
+}
+.oc-side-github-copy {
+  display: grid;
+  min-width: 0;
+  line-height: 1.25;
+}
+.oc-side-github-copy strong {
+  font-size: 0.9rem;
+  font-weight: 620;
+}
+.oc-side-github-copy span {
+  color: var(--oc-muted);
+  font-size: 0.78rem;
+}
+.oc-side-github-arrow {
+  flex: none;
+  width: 0.9rem;
+  height: 0.9rem;
+  margin-left: auto;
+  fill: none;
+  stroke: var(--oc-muted);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition:
+    transform 200ms var(--oc-ease),
+    stroke 160ms var(--oc-ease);
+}
+.oc-side-github:hover .oc-side-github-arrow {
+  stroke: var(--oc-ink);
+  transform: translate(2px, -2px);
 }
 .oc-side-settings > button {
   width: 100%;

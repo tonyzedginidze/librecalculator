@@ -1,6 +1,7 @@
 import { type ReactNode, useEffect, useRef, useState } from "react";
 import { packCatalog } from "../../calculators/src/packs.generated";
 import {
+  allPackIds,
   decodeActivePacks,
   defaultPackIds,
   normalizeActivePacks,
@@ -11,20 +12,22 @@ import { ui } from "../../i18n/src/ui";
 import { PackIcon } from "./components/pack-icon";
 
 const messages: Readonly<Record<string, string>> = { ...en, ...ui };
+export { allPackIds };
 export const packLabel = (key: string) => messages[key] ?? key;
 
 const CHANGE = "oc.packs.changed";
-const read = () => {
+const read = (defaults: () => string[]) => {
   try {
-    return decodeActivePacks(localStorage.getItem(PACK_STORAGE_KEY));
+    return decodeActivePacks(localStorage.getItem(PACK_STORAGE_KEY), defaults);
   } catch {
-    return defaultPackIds();
+    return defaults();
   }
 };
-export function useActivePacks() {
-  const [active, setActive] = useState<string[]>(defaultPackIds);
+/** `defaults` applies until the user changes a pack; the web passes every pack. */
+export function useActivePacks(defaults: () => string[] = defaultPackIds) {
+  const [active, setActive] = useState<string[]>(defaults);
   useEffect(() => {
-    const update = () => setActive(read());
+    const update = () => setActive(read(defaults));
     update();
     window.addEventListener(CHANGE, update);
     window.addEventListener("storage", update);
@@ -32,13 +35,14 @@ export function useActivePacks() {
       window.removeEventListener(CHANGE, update);
       window.removeEventListener("storage", update);
     };
-  }, []);
+  }, [defaults]);
   const toggle = (id: string) => {
     if (id === "core") return;
     const next = normalizeActivePacks(
       active.includes(id)
         ? active.filter((value) => value !== id)
         : [...active, id],
+      defaults,
     );
     setActive(next);
     try {

@@ -118,6 +118,7 @@ export function FlowList(props: { className?: string; children: ReactNode }) {
 export function FlowItem(props: { children: ReactNode }) {
   return (
     <motion.div
+      className="oc-grid-cell"
       layout
       initial={{ opacity: 0, scale: 0.96 }}
       animate={{ opacity: 1, scale: 1 }}

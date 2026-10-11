@@ -2909,10 +2909,19 @@ body:has(.oc-settings-dialog[open]) {
   font-size: 0.9rem;
 }
 
+/* Same width as .oc-main, so the footer lines up with the page content. */
 .oc-site-footer-inner {
-  width: min(100% - 2rem, 76rem);
+  width: min(100% - 3rem, 72rem);
   margin-inline: auto;
   padding-block: 2.5rem 2rem;
+  container-type: inline-size;
+}
+
+/* Beside a sidebar, centre the footer in the content column, not the window. */
+@media (min-width: 52.0625rem) {
+  body:has(.oc-sidebar) .oc-site-footer {
+    padding-left: var(--oc-sidebar-w);
+  }
 }
 
 .oc-site-footer-heading {
@@ -2923,10 +2932,23 @@ body:has(.oc-settings-dialog[open]) {
   font-weight: 560;
 }
 
+/* Column counts divide the 12 packs evenly, so no row is left half full. */
 .oc-site-footer-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
-  gap: 1.5rem 2rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.75rem 2rem;
+}
+
+@container (min-width: 36rem) {
+  .oc-site-footer-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@container (min-width: 54rem) {
+  .oc-site-footer-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 
 .oc-site-footer h3 {

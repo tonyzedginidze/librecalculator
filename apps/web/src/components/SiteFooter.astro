@@ -8,7 +8,10 @@ import { ui } from "@open-calculators/i18n/ui";
 import { repository } from "../seo";
 
 const messages: Readonly<Record<string, string>> = { ...en, ...ui };
-const packs = packCatalog.map((pack) => ({
+// Core first, then the packs alphabetically, as the catalog orders them.
+const packs = [...packCatalog]
+  .sort((a, b) => Number(b.id === "core") - Number(a.id === "core"))
+  .map((pack) => ({
   id: pack.id,
   category: pack.category,
   title: messages[pack.titleKey] ?? pack.id,

@@ -4,7 +4,7 @@ These are educational arithmetic estimates, not medical advice, diagnosis, treat
 
 ## BMI
 
-`weight kg ×10000 / height cm²`, adult age 20–120. Exact ratio retained without clinical classification. A numeric visual reference of 25 is for scale and expressly is not a target or health label. Independent fixtures: 70kg/200cm →17.5; 64kg/160cm →25; 81kg/180cm →25. The [CDC metric formula](https://www.cdc.gov/growth-chart-training/hcp/using-bmi/calculating-bmi.html) confirms the units. [CDC’s overview](https://www.cdc.gov/bmi/about/index.html) explains screening limitations. BMI does not measure body fat directly.
+`weight kg ×10000 / height cm²`, adult age 20–120. Exact ratio retained. The same calculation names the WHO adult category, compared on the unrounded decimal (lower bound inclusive): underweight <18.5; healthy weight 18.5–<25 (WHO “normal weight”); overweight 25–<30; obesity class I 30–<35, II 35–<40, III ≥40. The category is a screening band, not a diagnosis; the visual shades the same cut-offs. Independent fixtures: 70kg/200cm →17.5 underweight; 74kg/200cm →18.5 healthy weight; 64kg/160cm and 81kg/180cm →25 overweight; 120kg/200cm →30 obesity class I; 59.93kg/180cm →18.4969… underweight although it displays as 18.5. [WHO BMI categories](https://www.who.int/data/gho/data/themes/topics/topic-details/GHO/body-mass-index). The [CDC metric formula](https://www.cdc.gov/growth-chart-training/hcp/using-bmi/calculating-bmi.html) confirms the units. [CDC’s overview](https://www.cdc.gov/bmi/about/index.html) explains screening limitations. BMI does not measure body fat directly.
 
 ## Resting energy (BMR search topic)
 

@@ -26,7 +26,7 @@ export const messages = {
   "fuel-economy.visual.description":
     "The trip expressed as fuel per distance and as distance per fuel; one is 100 divided by the other.",
   "fuel-economy.visual.alternative":
-    "Two figures describe the same trip: litres per 100 kilometres and kilometres per litre. The exact numbers are stated in the answer and working.",
+    "Two figures describe the same trip: litres per 100 kilometres and kilometres per litre. The exact numbers are stated in the answer and the steps.",
   "lesson.fuel-economy.formula.litres-per-100km": "C = 100 × F ÷ D",
   "lesson.fuel-economy.formula.kilometres-per-litre": "E = D ÷ F",
   "lesson.fuel-economy.variable.consumption":
@@ -40,7 +40,7 @@ export const messages = {
   "lesson.fuel-economy.meaning.title": "Measure a trip",
   "lesson.fuel-economy.meaning.body":
     "Fill the tank, drive, then fill it again: the litres added are the fuel used over the distance on the trip meter. Enter both and choose litres per 100 km (lower is better) or kilometres per litre (higher is better).",
-  "lesson.fuel-economy.example.0": "Five hundred kilometres on forty litres",
+  "lesson.fuel-economy.example.0": "500 km on 40 litres",
   "lesson.fuel-economy.example.1": "Distance travelled per litre",
   "lesson.fuel-economy.example.2": "A lower consumption trip",
   "lesson.fuel-economy.mistakes.title": "Common mistakes",
@@ -48,7 +48,7 @@ export const messages = {
     "Do not enter the tank capacity unless that entire volume was consumed. Compare the same route and conditions where possible. Higher L/100 km means more fuel used, while higher km/L means less fuel per distance. This calculator does not accept miles or gallons.",
   "lesson.fuel-economy.limits.title": "Assumptions and limits",
   "lesson.fuel-economy.limits.body":
-    "This is the average for one measured trip, not a forecast or a manufacturer rating. Distance and fuel must both be above zero. Electric energy use, fuel price and emissions are not included, and the answer is only as precise as the measurements. Values use 50 working digits and are rounded to two decimals only for display.",
+    "This is the average for one measured trip, not a forecast or a manufacturer rating. Distance and fuel must both be above zero. Electric energy use, fuel price and emissions are not included, and the answer is only as precise as the measurements. Values use 50 internal digits and are rounded to two decimals only for display.",
   "lesson.fuel-economy.sources.title": "Sources",
   "lesson.fuel-economy.sources.body":
     "Natural Resources Canada, understanding fuel consumption ratings: https://natural-resources.canada.ca/energy-efficiency/transportation-alternative-fuels/personal-vehicles/buying-energy-efficient-vehicle/understanding-fuel-consumption-ratings",

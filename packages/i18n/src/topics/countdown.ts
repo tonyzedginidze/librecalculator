@@ -58,5 +58,5 @@ export const messages = {
     "Gregorian calendar arithmetic. December 20 to January 1 crosses twelve day boundaries.",
   "lesson.countdown.faq.q": "Can I count down to a past event?",
   "lesson.countdown.faq.a":
-    "Yes. The answer then reads as days ago, and the number in the working is negative.",
+    "Yes. The answer then reads as days ago, and the number in the steps is negative.",
 } as const;

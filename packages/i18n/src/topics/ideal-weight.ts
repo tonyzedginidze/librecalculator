@@ -44,9 +44,7 @@ export const messages = {
   "lesson.ideal-weight.sources.title": "Method and references",
   "lesson.ideal-weight.sources.body":
     "This is an algebraic rearrangement of CDC\u2019s metric BMI formula: https://www.cdc.gov/growth-chart-training/hcp/using-bmi/calculating-bmi.html . CDC\u2019s overview explains why BMI needs context: https://www.cdc.gov/bmi/about/index.html . Neither source endorses the calculator\u2019s example BMI as an individual goal.",
-  "lesson.ideal-weight.example.1": "Two metres and a BMI scenario of twenty",
-  "lesson.ideal-weight.example.2":
-    "One hundred sixty centimetres and twenty-five",
-  "lesson.ideal-weight.example.3":
-    "One hundred eighty centimetres and twenty-five",
+  "lesson.ideal-weight.example.1": "200 cm at a chosen BMI of 20",
+  "lesson.ideal-weight.example.2": "160 cm at a chosen BMI of 25",
+  "lesson.ideal-weight.example.3": "180 cm at a chosen BMI of 25",
 } as const;

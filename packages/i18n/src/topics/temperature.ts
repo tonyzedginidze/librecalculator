@@ -18,7 +18,7 @@ export const messages = {
   "temperature.visual.description":
     "Both scales are drawn over the same range of temperatures. Ticks line up at −40, where Celsius and Fahrenheit agree, at water's freezing point, at body temperature and at water's boiling point; the marker shows the entered reading.",
   "temperature.visual.alternative":
-    "The visible answer and working state both readings with their unit symbols.",
+    "The answer and the steps state both readings with their unit symbols.",
   "temperature.error.invalid-field":
     "Enter a number such as 12 or 0.5 and choose both units.",
   "temperature.error.incompatible-units": "Choose two temperature units.",
@@ -35,7 +35,7 @@ export const messages = {
   "temperature.variable.k": "reading in kelvin",
   "temperature.limits.title": "Definitions and limits",
   "temperature.limits.body":
-    "Absolute zero is exactly 0 K, −273.15 °C and −459.67 °F; readings below it are rejected. Water freezes at 0 °C (32 °F) and boils at 100 °C (212 °F) at sea level. Answers are shown to six significant figures; the working keeps every digit.",
+    "Absolute zero is exactly 0 K, −273.15 °C and −459.67 °F; readings below it are rejected. Water freezes at 0 °C (32 °F) and boils at 100 °C (212 °F) at sea level. Answers are shown to six significant figures; the calculation keeps every digit.",
   "temperature.mistakes.title": "Common mistakes",
   "temperature.mistakes.body":
     "A temperature difference converts without the offset: a rise of 10 °C is a rise of 18 °F, not 50 °F. This calculator converts readings. Kelvin is written without a degree sign.",

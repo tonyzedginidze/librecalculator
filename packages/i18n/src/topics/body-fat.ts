@@ -47,7 +47,7 @@ export const messages = {
   "lesson.body-fat.sources.title": "Method and references",
   "lesson.body-fat.sources.body":
     "Deurenberg P, Weststrate JA, Seidell JC, 1991, Body mass index as a measure of body fatness: age- and sex-specific prediction formulas: https://pubmed.ncbi.nlm.nih.gov/2043597/ . The adult equation uses BMI, age and the published male/female coefficient; reported standard error of estimate is 4.1 body-fat percentage points.",
-  "lesson.body-fat.example.1": "Male regression with BMI twenty",
+  "lesson.body-fat.example.1": "Male regression at BMI 20",
   "lesson.body-fat.example.2": "Female regression for the same measurements",
-  "lesson.body-fat.example.3": "Male regression with BMI twenty-five",
+  "lesson.body-fat.example.3": "Male regression at BMI 25",
 } as const;

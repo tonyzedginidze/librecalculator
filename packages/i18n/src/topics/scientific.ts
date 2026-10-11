@@ -33,7 +33,7 @@ export const messages = {
   "scientific.visual.result": "Result",
   "scientific.visual.description": "The expression written out with its value.",
   "scientific.visual.alternative":
-    "The function, its input and the result are written as one expression. The exact numbers are stated in the answer and working.",
+    "The function, its input and the result are written as one expression. The exact numbers are stated in the answer and the steps.",
   "lesson.scientific.formula.square-root": "y = √x",
   "lesson.scientific.formula.integer-power": "y = xᵏ",
   "lesson.scientific.formula.natural-log": "y = ln x",
@@ -48,16 +48,16 @@ export const messages = {
   "lesson.scientific.meaning.title": "Choose a function",
   "lesson.scientific.meaning.body":
     "Choose one operation at a time. Integer powers accept exponents between −100 and 100. Square roots require a nonnegative value and natural logarithms require a positive value. Sine uses degrees; enter 90 for a right angle.",
-  "lesson.scientific.example.0": "Root of nine",
+  "lesson.scientific.example.0": "Square root of 9",
   "lesson.scientific.example.1": "A negative integer power",
-  "lesson.scientific.example.2": "Logarithm of one",
+  "lesson.scientific.example.2": "Natural log of 1",
   "lesson.scientific.example.3": "A right angle",
   "lesson.scientific.mistakes.title": "Common mistakes",
   "lesson.scientific.mistakes.body":
     "A negative exponent means a reciprocal, not a negative result: 2⁻³ = 1/8. The logarithm of zero has no finite value. Sine here takes degrees; convert radians first (multiply by 180 ÷ π). This calculator evaluates one function at a time; it does not parse whole expressions.",
   "lesson.scientific.limits.title": "Assumptions and limits",
   "lesson.scientific.limits.body":
-    "The engine uses 50 significant digits. Roots, logarithms and trigonometry are approximate with absolute and relative fixture tolerance 1e−12. Sine angles are bounded to ±1,000,000 degrees and reduced modulo 360; exact quadrant angles return their exact signed values. Zero raised to zero or a negative exponent is rejected. Numeric observations use up to 30 significant input digits and 50 working digits; no presentation rounding enters the calculation.",
+    "The engine uses 50 significant digits. Roots, logarithms and trigonometry are approximate with absolute and relative fixture tolerance 1e−12. Sine angles are bounded to ±1,000,000 degrees and reduced modulo 360; exact quadrant angles return their exact signed values. Zero raised to zero or a negative exponent is rejected. Numeric observations use up to 30 significant input digits and 50 internal digits; no presentation rounding enters the calculation.",
   "lesson.scientific.sources.title": "Sources",
   "lesson.scientific.sources.body":
     "OpenStax Algebra and Trigonometry 2e: https://openstax.org/details/books/algebra-and-trigonometry-2e",

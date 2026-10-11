@@ -608,6 +608,9 @@ export function CalculatorCard(props: {
 export function CatalogBrowser(props: {
   nav?: Nav;
   initialCategory?: Category | "all";
+  /** Page heading and intro, rendered above the grid (web home). */
+  heading?: string;
+  intro?: string;
 }) {
   const { nav = webNav } = props;
   const [category, setCategory] = useState<Category | "all">(
@@ -650,6 +653,14 @@ export function CatalogBrowser(props: {
         onQuery={setQuery}
       />
       <main className="oc-main" id="calculator">
+        {props.heading ? (
+          <header className="oc-home-head">
+            <h1 className="oc-home-title">{props.heading}</h1>
+            {props.intro ? (
+              <p className="oc-home-intro">{props.intro}</p>
+            ) : null}
+          </header>
+        ) : null}
         <p className="oc-quiet oc-result-count" aria-live="polite">
           {category === "all" ? "" : `${categoryLabel(category)} · `}
           {countText(results.length)}

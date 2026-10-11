@@ -60,12 +60,10 @@ export const messages = {
   "lesson.loan-payments.variable.months": "number of monthly payments",
   "lesson.loan-payments.variable.regular-payment":
     "unrounded level-payment estimate before cent settlement",
-  "lesson.loan-payments.example.zero-rate":
-    "A $10.00 zero-interest loan over three months has two $3.33 payments and a $3.34 final payment.",
-  "lesson.loan-payments.example.one-month":
-    "A $100.00 balance at 12% nominal annual interest for one month accrues $1.00 interest and is paid with $101.00.",
+  "lesson.loan-payments.example.zero-rate": "$10.00 at 0% over 3 months",
+  "lesson.loan-payments.example.one-month": "$100.00 at 12% for 1 month",
   "lesson.loan-payments.example.amortization":
-    "A $1,000.00 loan at 12% nominal annual interest over 12 months has $88.85 regular payments and an adjusted $88.84 final payment.",
+    "$1,000.00 at 12% over 12 months",
   "lesson.loan-payments.schedule.title": "Read the actual schedule",
   "lesson.loan-payments.schedule.body":
     "The annuity formula supplies a high-precision estimate for the regular payment. The schedule then settles each month's interest to cents, subtracts that month's principal payment from the prior cent balance, and clears the remaining amount with the final payment. Total paid and total interest are sums of these schedule rows. They are not calculated from a second rounded formula.",

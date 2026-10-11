@@ -53,6 +53,6 @@ export const messages = {
   "lesson.savings.sources.body":
     "The balance follows from monthly compounding and the finite geometric series. Investor.gov explains compound interest and saving assumptions at https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator . The examples above are independent fixtures for this method.",
   "lesson.savings.example.1": "A year of deposits without interest",
-  "lesson.savings.example.2": "One deposit after interest",
-  "lesson.savings.example.3": "Two months of growth and deposits",
+  "lesson.savings.example.2": "1 month: $100 at 12% plus a $10 deposit",
+  "lesson.savings.example.3": "2 months: $100 at 12% plus $10 deposits",
 } as const;

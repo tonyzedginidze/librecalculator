@@ -4,37 +4,70 @@ import { variableCss } from "@open-calculators/design/css";
 import "@open-calculators/design/ui.css";
 import { defaultLocale, localeDirections } from "@open-calculators/i18n/locales";
 import { ui } from "@open-calculators/i18n/ui";
+import { OG_HEIGHT, OG_WIDTH, ogImagePath } from "../og";
+import SiteFooter from "../components/SiteFooter.astro";
+import { structuredData } from "../seo";
 
 interface Props {
   title: string;
   description: string;
+  /** Keep the page out of search results. */
+  noindex?: boolean;
+  /** A complete <title>; otherwise "{title} | Libre Calculator" (home keeps title). */
+  fullTitle?: string;
+  /** Leave out the catalog footer (internal pages). */
+  bare?: boolean;
 }
-const { title, description } = Astro.props;
-const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const { title, description, noindex = false, bare = false } = Astro.props;
+const site = Astro.site ?? new URL(Astro.url.origin);
+const pathname = Astro.url.pathname.endsWith("/")
+  ? Astro.url.pathname
+  : `${Astro.url.pathname}/`;
+const canonical = new URL(pathname, site).href;
+const isHome = pathname === "/";
+const fullTitle =
+  Astro.props.fullTitle ??
+  (isHome ? title : ui["ui.seo.title.suffix"].replace("{title}", title));
+const image = new URL(ogImagePath(pathname), site).href;
+const imageAlt = ui["ui.og.alt"].replace("{title}", title);
+const jsonLd = noindex ? undefined : structuredData(pathname, site);
 ---
 <!doctype html>
 <html lang={defaultLocale} dir={localeDirections[defaultLocale]}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
+    <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
     <meta property="og:site_name" content={ui["ui.app.name"]} />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content={title} />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content={String(OG_WIDTH)} />
+    <meta property="og:image:height" content={String(OG_HEIGHT)} />
+    <meta property="og:image:alt" content={imageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+    <meta name="twitter:image:alt" content={imageAlt} />
     <meta name="theme-color" content="#f6f1e8" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#14110f" media="(prefers-color-scheme: dark)" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+    {jsonLd ? <script type="application/ld+json" is:inline set:html={jsonLd}></script> : null}
     <style is:inline set:html={variableCss}></style>
     <script is:inline set:html={bootScript()}></script>
   </head>
   <body>
     <a class="oc-skip" href="#calculator">{ui["ui.skip"]}</a>
     <slot />
+    {bare ? null : <SiteFooter />}
     <script>
       if ("serviceWorker" in navigator && import.meta.env.PROD) {
         void navigator.serviceWorker.register("/sw.js").then(() => navigator.serviceWorker.ready).then(registration => {

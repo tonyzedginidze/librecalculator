@@ -45,7 +45,7 @@ export const messages = {
   "oven-temperature.visual.description":
     "For a conversion, two rulers share one marker: Celsius above, Fahrenheit below. For a fan oven, one Celsius scale shows the conventional setting, the fan setting and the gap between them.",
   "oven-temperature.visual.alternative":
-    "The temperatures in the diagram are the same numbers stated in the answer and working.",
+    "The temperatures in the diagram are the same numbers stated in the answer and the steps.",
   "oven-temperature.intro.title": "Oven settings in °C and °F",
   "oven-temperature.intro.body":
     "Recipes give oven temperatures in Celsius or Fahrenheit, and many assume a conventional oven. Convert between the scales exactly, or lower a conventional setting for a fan (convection) oven by the amount your recipe or oven manual suggests.",

@@ -1,0 +1,12 @@
+---
+import { Sidebar } from "@open-calculators/dom-ui/components";
+import { ui } from "@open-calculators/i18n/ui";
+import Base from "../layouts/Base.astro";
+---
+<Base title={ui["ui.notFound.title"]} description={ui["ui.notFound.text"]} noindex>
+  <div class="oc-app"><Sidebar client:load /><main class="oc-main" id="calculator">
+    <h1 class="oc-title">{ui["ui.notFound.title"]}</h1>
+    <p>{ui["ui.notFound.text"]}</p>
+    <p><a href="/">{ui["ui.notFound.home"]}</a></p>
+  </main></div>
+</Base>

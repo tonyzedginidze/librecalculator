@@ -48,7 +48,7 @@ export const messages = {
     "day number of the end date, counted from 0001-01-01",
   "lesson.date-difference.example.0": "Cross a leap day",
   "lesson.date-difference.example.1": "Reverse the direction",
-  "lesson.date-difference.example.2": "Count all three named dates",
+  "lesson.date-difference.example.2": "Count all 3 named dates",
   "lesson.date-difference.mistakes.title": "Common mistakes",
   "lesson.date-difference.mistakes.body":
     "A same-day span has zero days between but one date when both ends are counted. Calendar days are not exact 24-hour periods across daylight saving changes. Use the unambiguous year-month-day form.",

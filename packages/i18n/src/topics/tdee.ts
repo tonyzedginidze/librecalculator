@@ -43,7 +43,7 @@ export const messages = {
   "lesson.tdee.sources.title": "Method and references",
   "lesson.tdee.sources.body":
     "FAO/WHO/UNU Human energy requirements explains whole-day expenditure as a multiple of basal metabolism: https://www.fao.org/4/y5686e/y5686e04.htm . This calculator applies the multiplier arithmetically to the entered resting estimate; it does not equate a predicted resting rate with a measured basal rate.",
-  "lesson.tdee.example.1": "A factor of one and a half",
+  "lesson.tdee.example.1": "1,600 kcal at a factor of 1.5",
   "lesson.tdee.example.2": "Resting-only reference",
-  "lesson.tdee.example.3": "A factor of two",
+  "lesson.tdee.example.3": "1,800 kcal at a factor of 2",
 } as const;

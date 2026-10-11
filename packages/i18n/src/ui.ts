@@ -51,7 +51,7 @@ export const ui = {
   "ui.app.name": "Libre Calculator",
   "ui.catalog.heading": "Calculators",
   "ui.catalog.scope":
-    "Choose a calculator to see results, working, and explanations.",
+    "Choose a calculator to see results, step-by-step math and explanations.",
   "ui.search.label": "Search calculators",
   "ui.search.placeholder": "Search calculators",
   "ui.search.empty": "No calculators match that search.",
@@ -68,7 +68,7 @@ export const ui = {
   "ui.copy.done": "Copied",
   "ui.answer.label": "Answer",
   "ui.answer.empty": "Enter valid values to see the answer.",
-  "ui.working.heading": "Working",
+  "ui.working.heading": "Steps",
   "ui.presets": "Common choices",
   "ui.compare.old": "Old",
   "ui.compare.new": "New",
@@ -89,11 +89,11 @@ export const ui = {
   "ui.operation.group": "Calculation",
   "ui.lesson.heading": "Explanation",
   "ui.lesson.variables": "Variables",
-  "ui.lesson.expected": "Authored result",
+  "ui.lesson.expected": "Result",
   "ui.lesson.related": "Related calculators",
   "ui.lesson.missing": "That related calculator is not in this version.",
   "ui.visual.caption": "Diagram of this result",
-  "ui.answer.rounded": "Rounded for display. The working shows the full value.",
+  "ui.answer.rounded": "Rounded for display. The steps show the full value.",
   "ui.visual.value": "Answer",
   "ui.visual.reference": "Reference",
   "ui.visual.fraction": "Filled fraction of the reference",
@@ -108,8 +108,72 @@ export const ui = {
   "ui.desktop.quick.title": "Quick calculation",
   "ui.loading": "Loading calculator…",
   "ui.hero.subtitle":
-    "Choose a calculator to see results, working, and explanations.",
+    "Choose a calculator to see results, step-by-step math and explanations.",
   "ui.app.tagline": "The universe in numbers",
+  "ui.seo.home.title": "Libre Calculator: free, open-source online calculators",
+  "ui.seo.home.description":
+    "Free, open-source calculators for math, money, health, cooking, building and more. Fast, private, no sign-up, and each one explains its answer.",
+  "ui.seo.title.suffix": "{title} | Libre Calculator",
+  "ui.og.home.title": "Free, open‑source calculators",
+  "ui.og.home.text":
+    "Math, money, health, cooking, building and more. Fast, private, no sign-up.",
+  "ui.og.alt": "{title} — Libre Calculator",
+  "ui.notFound.title": "Page not found",
+  "ui.notFound.text":
+    "That page does not exist or has moved. Every calculator is listed on the home page.",
+  "ui.notFound.home": "Browse all calculators",
+  "ui.home.heading": "Free, open-source calculators that explain every answer",
+  "ui.home.intro":
+    "Pick a calculator to get an answer, the steps behind it, a diagram and a short lesson. Everything runs in your browser: no ads, no sign-up, nothing sent anywhere.",
+  "ui.seo.pack.title": "{title} calculators",
+  "ui.footer.heading": "All calculators",
+  "ui.breadcrumb.label": "Breadcrumb",
+  "ui.breadcrumb.home": "Home",
+  "ui.footer.about": "About",
+  "ui.footer.source": "Source code on GitHub",
+  "ui.footer.issue": "Report a problem",
+  "ui.about.title": "About Libre Calculator",
+  "ui.about.description":
+    "Who builds Libre Calculator, how its numbers are checked, and what happens to your data (nothing leaves your browser).",
+  "ui.about.what.heading": "What it is",
+  "ui.about.what.text":
+    "Libre Calculator is a free, open-source set of calculators for math, money, health, cooking, building, school, science and everyday units. Each calculator gives an answer, the steps that produced it, a diagram and a short lesson on the idea behind the formula.",
+  "ui.about.accuracy.heading": "How the numbers are checked",
+  "ui.about.accuracy.text":
+    "Calculations use exact decimal arithmetic rather than binary floating point, with up to 50 significant digits inside a calculation. Answers are rounded only for display. Every calculator has tests against independently worked examples, and the answer, the steps and the diagram all come from one calculation, so they cannot disagree.",
+  "ui.about.limits.heading": "Limits",
+  "ui.about.limits.text":
+    "Each lesson lists what its calculator does not cover. Health, money and building results are estimates for learning and planning, not medical, financial or engineering advice.",
+  "ui.about.privacy.heading": "Privacy",
+  "ui.about.privacy.text":
+    "Everything runs in your browser. There are no accounts, ads or trackers, and the numbers you type are never sent to a server. Your choice of calculator packs is kept in your browser's local storage so the site can work offline.",
+  "ui.about.open.heading": "Open source",
+  "ui.about.open.text":
+    "The code, formulas, tests and lessons are public on GitHub. If a number, unit or explanation looks wrong, open an issue with the inputs you used, or send a fix.",
+  "ui.pack.construction.intro":
+    "Estimate concrete, paint, flooring, roofing, tiles and lumber for a project. Each calculator states its waste allowance openly, so you can see how much extra material the estimate includes and change it.",
+  "ui.pack.cooking.intro":
+    "Scale a recipe up or down, convert cups to grams, switch oven temperatures between Celsius and Fahrenheit, work in baker's percentages and split calories per serving.",
+  "ui.pack.core.intro":
+    "The everyday essentials: percentages and percentage change, fractions, unit conversion, area, volume, the Pythagorean theorem, compound interest, loan payments and splitting a tip.",
+  "ui.pack.date-time.intro":
+    "Work out an age, the days between two dates or until an event, the paid hours in a shift, and the time in another zone, including when the date changes.",
+  "ui.pack.education.intro":
+    "Calculate a GPA, a weighted course grade, the final exam score you need to reach a target, and a test score as a percentage.",
+  "ui.pack.finance.intro":
+    "Estimate mortgage payments, savings growth, return on investment, salary as an hourly rate, margin and markup, inflation and retirement savings. Results are estimates, not account statements.",
+  "ui.pack.geometry.intro":
+    "Area, perimeter, volume and surface area for rectangles, triangles, circles, spheres and cylinders, each with a labelled diagram.",
+  "ui.pack.health.intro":
+    "Adult body estimates: BMI, resting and daily energy use, macros, body fat, water intake and the weight for a chosen BMI. Each lesson explains what the estimate cannot tell you.",
+  "ui.pack.math-everyday.intro":
+    "Discounts, mean, median and mode, standard deviation, ratios, scientific functions, random numbers and fuel economy.",
+  "ui.pack.physics.intro":
+    "Speed, force, kinetic energy, power, density and pressure from textbook formulas in SI units.",
+  "ui.pack.statistics.intro":
+    "Z-scores, confidence intervals, event probabilities and weighted averages, with the assumptions behind each one stated.",
+  "ui.pack.units.intro":
+    "Convert length, mass, temperature, speed, time and cooking measures using exact unit definitions.",
   "ui.menu.open": "Open menu",
   "ui.menu.close": "Close menu",
   "ui.menu.label": "Menu",

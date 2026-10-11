@@ -2,7 +2,7 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".github/readme/hero-dark.png">
-  <img src=".github/readme/hero-light.png" width="100%" alt="Libre Calculator, the universe in numbers. A BMI calculator with its answer, working, gauge and lesson.">
+  <img src=".github/readme/hero-light.png" width="100%" alt="Libre Calculator, the universe in numbers. A BMI calculator with its answer, steps, gauge and lesson.">
 </picture>
 
 <h1>Libre Calculator</h1>
@@ -38,12 +38,12 @@ Building the world's best calculators, free and open source.
   <img src=".github/readme/f-working-light.png" width="100%" alt="A compound interest calculator showing its inputs, final balance and formula">
 </picture>
 
-<h3>Shows the working</h3>
+<h3>Explains every answer</h3>
 
 Each result shows the steps that produced it, with a diagram and a short lesson underneath.
 
-- Working uses your inputs, not a generic example
-- Answer, working and diagram come from one calculation
+- Steps use your inputs, not a generic example
+- Answer, steps and diagram come from one calculation
 - Lessons explain the idea behind the formula
 
 </td>
@@ -178,7 +178,7 @@ You don't need to write code to make Libre Calculator better.
 
 | | How |
 |---|---|
-| **Review a calculator** | Pick one you know well and check its answer, working and lesson. If a number, unit or explanation is off, [open an issue](https://github.com/alvinunreal/opencalculators/issues/new) with the inputs you used. |
+| **Review a calculator** | Pick one you know well and check its answer, steps and lesson. If a number, unit or explanation is off, [open an issue](https://github.com/alvinunreal/opencalculators/issues/new) with the inputs you used. |
 | **Suggest a calculator** | Tell us what you wanted to calculate and couldn't. Real questions make the best calculators. |
 | **Improve a lesson** | Clearer wording, a better example or a common mistake worth mentioning. Lessons live in `packages/content`. |
 | **Translate** | All text already lives in `packages/i18n`, ready for other languages. Translation isn't open yet; tell us which language you'd help with so we can start there. |

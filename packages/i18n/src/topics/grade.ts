@@ -58,7 +58,7 @@ export const messages = {
   "grade.visual.lesson":
     "Under the answer, a bar splits the whole into its parts: points earned and missed, or what one weighted assessment adds to the course grade beside what it lost and what the rest of the course still decides.",
   "grade.visual.alternative":
-    "The same numbers appear in the answer and working, so the diagram is never the only place to read them.",
+    "The same numbers appear in the answer and the steps, so the diagram is never the only place to read them.",
   "grade.error.invalid-field": "Enter a number, such as 42 or 87.5.",
   "grade.error.invalid-domain":
     "Use scores of zero or more, points possible above zero and a weight from 0 to 100%.",

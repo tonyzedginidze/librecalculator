@@ -5,8 +5,16 @@
   "titleKey": "calculator.mortgage.title",
   "descriptionKey": "calculator.mortgage.description",
   "searchKeys": ["calculator.mortgage.title", "calculator.mortgage.search"],
-  "inputSchemaVersion": 1,
+  "inputSchemaVersion": 2,
   "operations": {
-    "amortize": ["principal", "annualRate", "months"]
+    "amortize": [
+      "homePrice",
+      "downPayment",
+      "annualRate",
+      "years",
+      "propertyTax",
+      "homeInsurance",
+      "hoa"
+    ]
   }
 }

@@ -30,14 +30,10 @@ export const messages = {
   "lesson.percentage-change.variable.delta": "signed difference, new minus old",
   "lesson.percentage-change.variable.change":
     "signed percentage change relative to the old baseline",
-  "lesson.percentage-change.example.increase":
-    "A move from 100 to 125 has a difference of 25 and a 25% change.",
-  "lesson.percentage-change.example.negative-toward-zero":
-    "Moving from −100 to −50 increases the value by 50, but the signed percentage change is −50% because the baseline is −100.",
-  "lesson.percentage-change.example.negative-away-zero":
-    "Moving from −100 to −150 has a difference of −50 and a +50% change relative to the negative baseline.",
-  "lesson.percentage-change.example.to-zero":
-    "Moving from 50 to zero has a difference of −50 and a −100% change.",
+  "lesson.percentage-change.example.increase": "From 100 to 125",
+  "lesson.percentage-change.example.negative-toward-zero": "From −100 to −50",
+  "lesson.percentage-change.example.negative-away-zero": "From −100 to −150",
+  "lesson.percentage-change.example.to-zero": "From 50 to 0",
   "lesson.percentage-change.interpretation.title":
     "Interpret the signed baseline",
   "lesson.percentage-change.interpretation.body":

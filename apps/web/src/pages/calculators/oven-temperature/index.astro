@@ -6,16 +6,19 @@ import { calculatorRoute } from "@open-calculators/dom-ui/catalog";
 import { LessonArticle, Sidebar } from "@open-calculators/dom-ui/components";
 import { presentExample as topicExamplePresenter } from "@open-calculators/dom-ui/topics/oven-temperature/examples";
 import { en } from "@open-calculators/i18n";
+import { metaDescriptions } from "@open-calculators/i18n/meta";
 import { topicMessageImports } from "@open-calculators/i18n/topics";
 import { ui } from "@open-calculators/i18n/ui";
 import TopicView from "@open-calculators/dom-ui/topics/oven-temperature/view";
 import Base from "../../../layouts/Base.astro";
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
 import LessonVideo from "../../../components/LessonVideo.astro";
 
 const item = calculatorCatalog.find((candidate) => candidate.id === "oven-temperature" && candidate.slug === "oven-temperature");
 if (!item) throw new Error("Generated web topic does not match calculator catalog: oven-temperature/oven-temperature");
 const title = en[item.titleKey] ?? item.id;
 const description = en[item.descriptionKey] ?? "";
+const metaDescription = metaDescriptions[item.id as keyof typeof metaDescriptions] ?? description;
 
 const loadLesson = lessonImports[item.id as keyof typeof lessonImports];
 const loadMessages = topicMessageImports[item.id as keyof typeof topicMessageImports];
@@ -31,12 +34,13 @@ const messages = {
   ...(topicMessagesData?.messages ?? {}),
 };
 ---
-<Base title={title} description={description}>
+<Base title={title} description={metaDescription}>
   <div class="oc-app">
     <Sidebar client:load activeId={item.id} />
     <main id="calculator" data-category={item.category}>
       <section class="oc-zone oc-zone-tool">
         <div class="oc-zone-inner">
+          <Breadcrumbs calculatorId={item.id} />
           <TopicView
             client:load
             id={item.id}

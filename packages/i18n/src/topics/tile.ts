@@ -47,7 +47,7 @@ export const messages = {
   "lesson.tile.sources.title": "Method and references",
   "lesson.tile.sources.body":
     "Square metres converted to square centimetres (× 10,000), scaled by an explicit percentage allowance, divided by one tile’s face area and rounded up once at the end. Box quantities and allowances must come from the chosen product.",
-  "lesson.tile.example.1": "Half-metre square tiles",
-  "lesson.tile.example.2": "Quarter-metre square tiles",
+  "lesson.tile.example.1": "50 cm square tiles on 10 m²",
+  "lesson.tile.example.2": "25 cm square tiles on 1 m²",
   "lesson.tile.example.3": "A count requiring rounding",
 } as const;

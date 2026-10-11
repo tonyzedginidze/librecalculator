@@ -24,7 +24,8 @@
     "content-check": "bun scripts/check-content.ts",
     "new": "bun scripts/new-calculator.ts",
     "export:art": "bun scripts/export-art.ts",
-    "readme:art": "bun scripts/readme-art.ts"
+    "readme:art": "bun scripts/readme-art.ts",
+    "generate:og": "bun scripts/generate-og.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "2.3.8",

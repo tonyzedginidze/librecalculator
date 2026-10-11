@@ -29,7 +29,7 @@ export const messages = {
   "standard-deviation.visual.description":
     "A dot plot of the values with the mean and a shaded band one standard deviation either side.",
   "standard-deviation.visual.alternative":
-    "Each value is a dot on a number line; equal values stack. A marker shows the mean and a shaded band covers one standard deviation below and above it. The exact numbers are stated in the answer and working.",
+    "Each value is a dot on a number line; equal values stack. A marker shows the mean and a shaded band covers one standard deviation below and above it. The exact numbers are stated in the answer and the steps.",
   "lesson.standard-deviation.formula.population": "σ = √(Σ(xᵢ − μ)² ÷ n)",
   "lesson.standard-deviation.formula.sample": "s = √(Σ(xᵢ − x̄)² ÷ (n − 1))",
   "lesson.standard-deviation.variable.sigma": "population standard deviation",
@@ -44,15 +44,15 @@ export const messages = {
   "lesson.standard-deviation.meaning.title": "Population or sample?",
   "lesson.standard-deviation.meaning.body":
     "Choose population when your values are the entire group you want to describe, such as every test score in one class. Choose sample when they are a sample used to estimate the spread of a larger group. Enter values separated by semicolons; a sample needs at least two.",
-  "lesson.standard-deviation.example.0": "A population with mean five",
-  "lesson.standard-deviation.example.1": "Three observations used as a sample",
+  "lesson.standard-deviation.example.0": "A population with mean 5",
+  "lesson.standard-deviation.example.1": "1, 3 and 5 as a sample",
   "lesson.standard-deviation.example.2": "Identical values have no spread",
   "lesson.standard-deviation.mistakes.title": "Common mistakes",
   "lesson.standard-deviation.mistakes.body":
     "Do not confuse variance with standard deviation: variance has squared units. Do not divide by n for the usual sample variance estimate; its divisor is n − 1. A small spread does not prove accuracy if every measurement shares a bias.",
   "lesson.standard-deviation.limits.title": "Assumptions and limits",
   "lesson.standard-deviation.limits.body":
-    "The calculator describes unweighted numerical observations and assumes no measurement error model. Sample variance uses Bessel’s correction; sample standard deviation itself is not an unbiased estimate in general. It does not establish normality or a confidence interval. Numeric observations use up to 30 significant input digits and 50 working digits; no presentation rounding enters the calculation.",
+    "The calculator describes unweighted numerical observations and assumes no measurement error model. Sample variance uses Bessel’s correction; sample standard deviation itself is not an unbiased estimate in general. It does not establish normality or a confidence interval. Numeric observations use up to 30 significant input digits and 50 internal digits; no presentation rounding enters the calculation.",
   "lesson.standard-deviation.sources.title": "Sources",
   "lesson.standard-deviation.sources.body":
     "NIST Engineering Statistics Handbook, measures of scale: https://www.itl.nist.gov/div898/handbook/eda/section3/eda356.htm",

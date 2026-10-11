@@ -43,7 +43,7 @@ export const messages = {
   "test-score.visual.lesson":
     "Under the answer, a grid draws one square per question when the test has 200 questions or fewer. Filled squares are correct answers, or the fewest correct answers that reach the target.",
   "test-score.visual.alternative":
-    "The same numbers appear in the answer and working, so the diagram is never the only place to read them.",
+    "The same numbers appear in the answer and the steps, so the diagram is never the only place to read them.",
   "test-score.error.invalid-field": "Enter a whole number, such as 20.",
   "test-score.error.invalid-domain":
     "Use 1 to 1,000,000 questions, correct answers from 0 to the number of questions, and a target from 0 to 100%.",
@@ -57,7 +57,7 @@ export const messages = {
     "Round the correct answers needed up, never to the nearest whole number: a target can fall between two counts. Partial credit, negative marking and questions worth different points need the grade calculator instead.",
   "test-score.limits.title": "Assumptions and limits",
   "test-score.limits.body":
-    "The test has 1 to 1,000,000 questions. Correct answers are a whole number from zero to the number of questions, and the target is 0 to 100%. Counts stay exact; percentages are not rounded in the working.",
+    "The test has 1 to 1,000,000 questions. Correct answers are a whole number from zero to the number of questions, and the target is 0 to 100%. Counts stay exact; percentages are not rounded in the steps.",
   "test-score.faq.q": "How do the worked examples fit together?",
   "test-score.faq.a":
     "16 right out of 20 is 80%, with 4 missed. An 80% target needs at least 16 right. A 75% target on a 7-question test needs 6 right, because 5 right is only 71.4%.",

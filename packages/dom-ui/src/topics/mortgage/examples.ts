@@ -30,9 +30,15 @@ export const presentExample: ExamplePresenter = (
   }
 
   const result = calculation.result;
+  const format = financeFormat(messages, locale);
   const fields = descriptor.fields.map((f) => {
     const raw = example.inputs[f.id] ?? "";
-    const value = f.input === "integer" ? raw : formatDecimal(raw, locale);
+    const value =
+      f.input === "integer"
+        ? raw
+        : (moneyArgs as readonly string[]).includes(f.id)
+          ? format.usd(raw)
+          : formatDecimal(raw, locale);
     return {
       id: f.id,
       label: messageText(messages, f.labelKey),
@@ -40,9 +46,7 @@ export const presentExample: ExamplePresenter = (
     };
   });
 
-  const answer = financeFormat(messages, locale).usd(
-    usdCentsToString(BigInt(result.answer.cents)),
-  );
+  const answer = format.usd(usdCentsToString(BigInt(result.answer.cents)));
   const working = result.working.map((step) =>
     renderFinanceWorking(step, moneyArgs, messages, locale),
   );

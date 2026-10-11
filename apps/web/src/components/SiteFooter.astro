@@ -1,0 +1,45 @@
+---
+// Server-rendered directory of every pack and calculator, so each page links
+// the whole catalog regardless of which packs a visitor has switched on.
+import { calculatorCatalog, packCatalog } from "@open-calculators/calculators";
+import { calculatorRoute } from "@open-calculators/dom-ui/catalog";
+import { en } from "@open-calculators/i18n";
+import { ui } from "@open-calculators/i18n/ui";
+import { repository } from "../seo";
+
+const messages: Readonly<Record<string, string>> = { ...en, ...ui };
+const packs = packCatalog.map((pack) => ({
+  id: pack.id,
+  category: pack.category,
+  title: messages[pack.titleKey] ?? pack.id,
+  items: (pack.calculatorIds as readonly string[]).map((id) => {
+    const item = calculatorCatalog.find((candidate) => candidate.id === id);
+    return {
+      href: calculatorRoute(id as never),
+      title: item ? (messages[item.titleKey] ?? id) : id,
+    };
+  }),
+}));
+---
+<footer class="oc-site-footer">
+  <div class="oc-site-footer-inner">
+    <h2 class="oc-site-footer-heading">{ui["ui.footer.heading"]}</h2>
+    <div class="oc-site-footer-grid">
+      {packs.map((pack) => (
+        <section data-category={pack.category}>
+          <h3><a href={`/packs/${pack.id}/`}>{pack.title}</a></h3>
+          <ul>
+            {pack.items.map((item) => (
+              <li><a href={item.href}>{item.title}</a></li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </div>
+    <nav class="oc-site-footer-meta">
+      <a href="/about/">{ui["ui.footer.about"]}</a>
+      <a href={repository} rel="noopener">{ui["ui.footer.source"]}</a>
+      <a href={`${repository}/issues/new`} rel="noopener">{ui["ui.footer.issue"]}</a>
+    </nav>
+  </div>
+</footer>

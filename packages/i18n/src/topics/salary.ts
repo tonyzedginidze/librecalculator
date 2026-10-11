@@ -47,7 +47,7 @@ export const messages = {
     "H = A \u00f7 (h \u00d7 w), and A = H \u00d7 h \u00d7 w.",
   "lesson.salary.mistakes.title": "Common mistakes",
   "lesson.salary.mistakes.body":
-    "Do not use 52 paid weeks for a contract that pays only working weeks. Overtime, bonuses and unpaid leave need separate adjustments.",
+    "Do not use 52 paid weeks for a contract that pays only the weeks worked. Overtime, bonuses and unpaid leave need separate adjustments.",
   "lesson.salary.limits.title": "Assumptions and limits",
   "lesson.salary.limits.body":
     "USD gross pay, constant weekly hours, and 1\u201353 paid weeks. Hourly inputs must be whole cents. Output rounds half-up to cents. No tax, overtime premiums, benefits or employment-law interpretation. Educational estimates only, not financial, tax or investment advice.",

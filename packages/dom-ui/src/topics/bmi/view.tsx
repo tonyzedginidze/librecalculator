@@ -1,6 +1,11 @@
-import type { ErrorCode, Result } from "../../../../calculators/src/bmi";
+import {
+  categories,
+  type ErrorCode,
+  type Result,
+} from "../../../../calculators/src/bmi";
 import {
   formatDecimal,
+  interpolateMessage,
   isRoundedForDisplay,
   renderWorkingStep,
 } from "../../../../i18n/src/en";
@@ -15,7 +20,14 @@ import { adapter } from "./adapter";
 
 const DIGITS = 1;
 const SCALE = { min: 15, max: 40 };
-const TICKS = [15, 20, 25, 30, 35, 40];
+const TICKS = ["15", "18.5", "25", "30", "35", "40"];
+/** WHO adult bands from the engine, clipped to the dial. */
+const BANDS = categories
+  .map((c) => ({
+    from: Math.max(SCALE.min, Number(c.from ?? SCALE.min)),
+    to: Math.min(SCALE.max, Number(c.to ?? SCALE.max)),
+  }))
+  .filter((b) => b.to > b.from);
 
 export default function View({
   title,
@@ -28,6 +40,15 @@ export default function View({
   const shown = (value: string) =>
     formatDecimal(value, locale, { fractionDigits: DIGITS });
   const answerText = (value: string) => `${shown(value)} ${unit}`;
+  const categoryVars = (result: Result) => {
+    const range = result.working.find((s) => s.id === "category")?.args.range;
+    return {
+      category: messageText(messages, result.category.labelKey),
+      range: range
+        ? interpolateMessage("{range}", { range }, { locale, messages })
+        : "",
+    };
+  };
   return (
     <CalculatorPanel<Result, ErrorCode>
       topicId="bmi"
@@ -57,6 +78,19 @@ export default function View({
           isRoundedForDisplay(e.outcome.result.answer.value, DIGITS) ? (
             <p>{ui["ui.answer.rounded"]}</p>
           ) : null}
+          {e.status === "ok" ? (
+            <>
+              <p>
+                <NumText
+                  text={fillMessage(
+                    messageText(messages, "bmi.answer.category"),
+                    categoryVars(e.outcome.result),
+                  )}
+                />
+              </p>
+              <p>{messageText(messages, "bmi.answer.limit")}</p>
+            </>
+          ) : null}
         </div>
       )}
       renderWorking={(e) =>
@@ -74,7 +108,10 @@ export default function View({
       renderVisual={(e) => {
         if (e.status !== "ok") return null;
         const v = e.outcome.result.visual;
-        const vars = { answer: shown(v.answer), reference: shown(v.reference) };
+        const vars = {
+          answer: shown(v.answer),
+          ...categoryVars(e.outcome.result),
+        };
         return (
           <VizFigure
             caption={messageText(messages, "bmi.visual.caption")}
@@ -91,16 +128,10 @@ export default function View({
               display={vars.answer}
               label={unit}
               ticks={TICKS.map((t) => ({
-                value: t,
-                label: formatDecimal(String(t), locale),
+                value: Number(t),
+                label: formatDecimal(t, locale),
               }))}
-              reference={{
-                value: Number(v.reference),
-                label: fillMessage(
-                  messageText(messages, "bmi.visual.reference"),
-                  vars,
-                ),
-              }}
+              bands={BANDS}
             />
           </VizFigure>
         );

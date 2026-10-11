@@ -36,14 +36,14 @@ export const messages = {
     "Enter the value, the mean of the group you are comparing against, and that group’s standard deviation. All three must describe the same quantity in the same units. The standard deviation must be greater than zero.",
   "lesson.z-score.formula.standard-score": "z = (x − μ) / σ",
   "lesson.z-score.example.0": "A test score of 85 when the class mean is 70",
-  "lesson.z-score.example.1": "Two standard deviations below the mean",
+  "lesson.z-score.example.1": "2 standard deviations below the mean",
   "lesson.z-score.example.2": "A value exactly at the mean",
   "lesson.z-score.mistakes.title": "Common mistakes",
   "lesson.z-score.mistakes.body":
     "A positive score means above the mean, not automatically better. Do not enter the variance in the standard-deviation field, and do not mix the mean of one group with the spread of another.",
   "lesson.z-score.limits.title": "Limits and assumptions",
   "lesson.z-score.limits.body":
-    "This calculator standardizes one value using the mean and standard deviation you supply. It does not estimate them, assume a normal distribution, compute a percentile or p-value, or flag outliers. Inputs keep up to 30 significant digits and the working uses 50; only the displayed answer is rounded.",
+    "This calculator standardizes one value using the mean and standard deviation you supply. It does not estimate them, assume a normal distribution, compute a percentile or p-value, or flag outliers. Inputs keep up to 30 significant digits and the calculation uses 50; only the displayed answer is rounded.",
   "lesson.z-score.sources.title": "Sources",
   "lesson.z-score.sources.body":
     "OpenStax Introductory Statistics 2e, normal distribution and standardization: https://openstax.org/details/books/introductory-statistics-2e",

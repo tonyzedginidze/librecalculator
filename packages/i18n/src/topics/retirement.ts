@@ -53,6 +53,6 @@ export const messages = {
   "lesson.retirement.sources.body":
     "The projection repeats one year of compound growth followed by a year-end contribution. Investor.gov explains compounding and offers related tools at https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator . The examples above are independent fixtures for this method.",
   "lesson.retirement.example.1": "A decade of contributions without growth",
-  "lesson.retirement.example.2": "One year of growth",
-  "lesson.retirement.example.3": "Two annual contributions",
+  "lesson.retirement.example.2": "1 year at 10%",
+  "lesson.retirement.example.3": "2 annual contributions at 10%",
 } as const;

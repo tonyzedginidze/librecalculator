@@ -1,4 +1,4 @@
-export { CategoryIcon } from "./components/art";
+export { CalculatorArt, CategoryIcon } from "./components/art";
 export {
   BrandMark,
   CalculatorCard,

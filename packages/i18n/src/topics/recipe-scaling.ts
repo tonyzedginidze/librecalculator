@@ -52,7 +52,7 @@ export const messages = {
   "recipe-scaling.visual.description":
     "The diagram writes the scaling as one equation: the original amount, the factor (servings wanted divided by servings in the recipe) and the scaled amount.",
   "recipe-scaling.visual.alternative":
-    "Every number in the equation also appears in the answer and the working, in the unit you entered.",
+    "Every number in the equation also appears in the answer and the steps, in the unit you entered.",
   "recipe-scaling.intro.title": "Scale a recipe up or down",
   "recipe-scaling.intro.body":
     "To cook for more or fewer people, multiply every ingredient by the same scale factor: servings wanted divided by servings in the recipe. The amount keeps whatever unit you use, whether grams, cups or teaspoons. Work backwards to find the original amount from a scaled one.",

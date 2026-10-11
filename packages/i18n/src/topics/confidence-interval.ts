@@ -36,15 +36,15 @@ export const messages = {
     "Enter the sample mean, the population standard deviation (σ, known in advance), the sample size and the critical value for the confidence level you want. Common two-sided values are 1.645 for 90%, 1.96 for 95% and 2.576 for 99%.",
   "lesson.confidence-interval.formula.normal-interval":
     "E = z* × σ / √n; interval x̄ − E to x̄ + E",
-  "lesson.confidence-interval.example.0": "A two-standard-error interval",
-  "lesson.confidence-interval.example.1": "A small sample of nine",
-  "lesson.confidence-interval.example.2": "A one-standard-error margin",
+  "lesson.confidence-interval.example.0": "A 2-standard-error interval",
+  "lesson.confidence-interval.example.1": "A small sample of 9",
+  "lesson.confidence-interval.example.2": "A 1-standard-error margin",
   "lesson.confidence-interval.mistakes.title": "Common mistakes",
   "lesson.confidence-interval.mistakes.body":
     "Do not enter a sample standard deviation and treat the result as a t interval. A 95% level describes how often the method captures the true mean over repeated samples; it is not the probability that this particular interval contains it. Independent sampling matters.",
   "lesson.confidence-interval.limits.title": "Limits and assumptions",
   "lesson.confidence-interval.limits.body":
-    "Assumes a known population σ, independent observations and a sample mean that is normally distributed or close to it for a large sample. Sample size 1 to 1,000,000; σ and the critical value above zero. It does not look up t critical values or check sampling assumptions. Inputs keep up to 30 significant digits and the working uses 50; only the displayed answer is rounded.",
+    "Assumes a known population σ, independent observations and a sample mean that is normally distributed or close to it for a large sample. Sample size 1 to 1,000,000; σ and the critical value above zero. It does not look up t critical values or check sampling assumptions. Inputs keep up to 30 significant digits and the calculation uses 50; only the displayed answer is rounded.",
   "lesson.confidence-interval.sources.title": "Sources",
   "lesson.confidence-interval.sources.body":
     "NIST Engineering Statistics Handbook, confidence limits for the mean: https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm",

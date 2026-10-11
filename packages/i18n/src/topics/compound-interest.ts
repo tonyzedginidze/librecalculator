@@ -64,18 +64,18 @@ export const messages = {
   "lesson.compound-interest.variable.years": "whole number of years",
   "lesson.compound-interest.variable.balance": "estimated ending balance",
   "lesson.compound-interest.example.annual":
-    "A $1,000 principal grows at 10% compounded once each year for two years.",
+    "$1,000 at 10% compounded yearly for 2 years",
   "lesson.compound-interest.example.zero-rate":
-    "With a zero rate, a $100 principal remains $100 after two years, even with monthly periods.",
+    "$100 at 0% compounded monthly for 2 years",
   "lesson.compound-interest.example.quarterly":
-    "A $250 principal grows at 4% compounded quarterly for one year; the final balance is settled to cents.",
+    "$250 at 4% compounded quarterly for 1 year",
   "lesson.compound-interest.method.title": "How to use the estimate",
   "lesson.compound-interest.method.body":
     "Enter the initial USD principal, nominal annual percentage rate, whole-year term, and one of the supported periods-per-year values. The rate is divided by the selected frequency for each discrete period. The year-by-year series is generated from the same growth calculation as the final answer, then each plotted balance is rounded to cents for display.",
   "lesson.compound-interest.rounding.title":
     "Estimate versus account settlement",
   "lesson.compound-interest.rounding.body":
-    "The formula keeps full working precision between compounding periods and rounds the final estimated balance to cents once. It does not model an institution's daily accrual, statement dates, rate changes, minimum-balance rules, or per-period cent rounding. A real account can therefore settle differently.",
+    "The formula keeps full internal precision between compounding periods and rounds the final estimated balance to cents once. It does not model an institution's daily accrual, statement dates, rate changes, minimum-balance rules, or per-period cent rounding. A real account can therefore settle differently.",
   "lesson.compound-interest.assumptions.title": "Limits and assumptions",
   "lesson.compound-interest.assumptions.body":
     "The rate is nominal and fixed from start to finish, the principal is a nonnegative USD amount in whole cents, and the term is 1–1000 whole years. Supported frequencies are annual, semiannual, quarterly, monthly, and daily (365 periods per year). The maximum rate is 100%. The model includes no deposits, withdrawals, fees, taxes, inflation, or currency conversion. Results that exceed the supported amount range are rejected.",

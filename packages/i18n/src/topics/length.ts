@@ -27,7 +27,7 @@ export const messages = {
   "length.visual.description":
     "The marker shows the entered length on a ruler in the source unit; the ruler below it is drawn in the target unit at the same scale, so the reading under the marker is the answer.",
   "length.visual.alternative":
-    "The visible answer and working state both values with their unit symbols.",
+    "The answer and the steps state both values with their unit symbols.",
   "length.error.invalid-field":
     "Enter a number such as 12 or 0.5 and choose both units.",
   "length.error.incompatible-units": "Choose two length units.",
@@ -45,7 +45,7 @@ export const messages = {
   "length.variable.y": "value in the unit you convert to",
   "length.limits.title": "Definitions and limits",
   "length.limits.body":
-    "An international inch is exactly 0.0254 m, so a foot is exactly 0.3048 m and a mile exactly 1,609.344 m. The older US survey foot is not offered. Answers are shown to six significant figures; the working keeps every digit.",
+    "An international inch is exactly 0.0254 m, so a foot is exactly 0.3048 m and a mile exactly 1,609.344 m. The older US survey foot is not offered. Answers are shown to six significant figures; the calculation keeps every digit.",
   "length.mistakes.title": "Common mistakes",
   "length.mistakes.body":
     "Length is not area: one metre is 3.28 feet, but one square metre is 10.76 square feet. Do not round a factor such as 2.54 before multiplying a large number. A negative value is treated as an offset in the opposite direction.",

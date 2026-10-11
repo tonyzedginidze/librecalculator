@@ -39,7 +39,7 @@ export const messages = {
     "Area must be in square metres: 1 cm² is 0.0001 m². Use only the part of the force that acts at right angles to the surface. The result is an average; real contacts can have much higher local peaks.",
   "lesson.pressure.limits.title": "Limits and assumptions",
   "lesson.pressure.limits.body":
-    "Inputs use fixed SI units; convert other units before you calculate. This is an idealised textbook relation for consistent measurements, not an engineering design or safety assessment. Values outside the supported decimal range are rejected rather than approximated. Calculations keep up to 30 significant input digits and 50 working digits; only the displayed answer is rounded.",
+    "Inputs use fixed SI units; convert other units before you calculate. This is an idealised textbook relation for consistent measurements, not an engineering design or safety assessment. Values outside the supported decimal range are rejected rather than approximated. Calculations keep up to 30 significant input digits and 50 internal digits; only the displayed answer is rounded.",
   "lesson.pressure.sources.title": "Sources",
   "lesson.pressure.sources.body":
     "OpenStax University Physics Volume 1, mechanics: https://openstax.org/details/books/university-physics-volume-1",

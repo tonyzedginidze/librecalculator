@@ -97,7 +97,7 @@ test("bar model uses the shared fraction and outside flag, not a recomputed rati
 });
 
 test("calculator routes use catalog slugs", () => {
-  expect(calculatorRoute("percentage")).toBe("/calculators/percentage");
+  expect(calculatorRoute("percentage")).toBe("/calculators/percentage/");
 });
 
 test("derives example presentation through topic presenter", () => {

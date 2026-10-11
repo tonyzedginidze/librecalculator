@@ -82,9 +82,9 @@ export const en = {
   "calculator.cylinder.search": "cylinder tank pipe volume surface area",
   "calculator.mortgage.title": "Mortgage calculator",
   "calculator.mortgage.description":
-    "Estimate a fixed-rate monthly mortgage payment, total interest and a yearly repayment schedule.",
+    "Estimate a monthly mortgage payment from home price, down payment and rate, with optional tax, insurance and HOA.",
   "calculator.mortgage.search":
-    "mortgage home loan monthly payment amortization",
+    "mortgage home loan house payment down payment property tax insurance hoa piti 30 year 15 year monthly payment amortization",
   "calculator.savings.title": "Savings calculator",
   "calculator.savings.description":
     "Project a savings balance from a starting amount, monthly deposits and an interest rate.",
@@ -312,7 +312,7 @@ export const en = {
     "cooking measures converter cups tablespoons teaspoons millilitres fluid ounces",
   "calculator.bmi.title": "BMI calculator",
   "calculator.bmi.description":
-    "Calculate adult body mass index from weight and height, with the formula and no health label attached.",
+    "Calculate adult body mass index from weight and height, with its WHO adult range and the formula.",
   "calculator.bmi.search": "bmi",
   "calculator.bmr.title": "Resting energy (BMR) calculator",
   "calculator.bmr.description":

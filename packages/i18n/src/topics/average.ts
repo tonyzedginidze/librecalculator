@@ -28,7 +28,7 @@ export const messages = {
   "average.visual.description":
     "A dot plot stacks repeated values, with markers for the mean, median and mode.",
   "average.visual.alternative":
-    "Each value is a dot on a number line; equal values stack. Labelled markers show the mean, median and mode, and the selected one is highlighted. The exact numbers are stated in the answer and working.",
+    "Each value is a dot on a number line; equal values stack. Labelled markers show the mean, median and mode, and the selected one is highlighted. The exact numbers are stated in the answer and the steps.",
   "lesson.average.formula.mean": "x̄ = Σxᵢ ÷ n",
   "lesson.average.formula.median": "M = middle of x₍₁₎ ≤ … ≤ x₍ₙ₎",
   "lesson.average.formula.mode": "Mo = the value that occurs most often",
@@ -44,15 +44,15 @@ export const messages = {
   "lesson.average.meaning.title": "Choose the centre you need",
   "lesson.average.meaning.body":
     "Enter between one and 100 values separated by semicolons, all in the same unit. Choose the mean for an arithmetic balance point, the median when a few very large or small values should not dominate, or the mode for the most common value. Every value has equal weight.",
-  "lesson.average.example.0": "Three equally spaced observations",
-  "lesson.average.example.1": "Median between two central observations",
-  "lesson.average.example.2": "One repeated observation",
+  "lesson.average.example.0": "Mean of 2, 4 and 6",
+  "lesson.average.example.1": "Median of 1, 2, 8 and 9",
+  "lesson.average.example.2": "Mode of 2, 4, 4 and 6",
   "lesson.average.mistakes.title": "Common mistakes",
   "lesson.average.mistakes.body":
     "Do not average averages unless their group sizes are equal. Sort before finding the median, and use the mean of the two central values when the count is even. A mode is not the largest value. Lists with tied frequencies or no repeated value have no single mode and are rejected.",
   "lesson.average.limits.title": "Assumptions and limits",
   "lesson.average.limits.body":
-    "This is unweighted descriptive arithmetic. Leave out missing values deliberately. The mode needs exactly one most frequent value occurring at least twice; ties are not resolved by picking one. Values use up to 30 significant digits and 50 working digits; the answer is rounded to two decimals only for display.",
+    "This is unweighted descriptive arithmetic. Leave out missing values deliberately. The mode needs exactly one most frequent value occurring at least twice; ties are not resolved by picking one. Values use up to 30 significant digits and 50 internal digits; the answer is rounded to two decimals only for display.",
   "lesson.average.sources.title": "Sources",
   "lesson.average.sources.body":
     "OpenStax Introductory Statistics 2e, descriptive statistics: https://openstax.org/details/books/introductory-statistics-2e",

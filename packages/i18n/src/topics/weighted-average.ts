@@ -34,14 +34,14 @@ export const messages = {
     "Type the values separated by semicolons, then the weights in the same order. Weights can be percentages, credits, counts or any relative importance; they do not need to add up to 1 or 100.",
   "lesson.weighted-average.formula.weighted-mean": "x̄w = Σ(wᵢ × xᵢ) / Σwᵢ",
   "lesson.weighted-average.example.0": "Double weight on the middle value",
-  "lesson.weighted-average.example.1": "Three times the weight on 80",
+  "lesson.weighted-average.example.1": "3 times the weight on 80",
   "lesson.weighted-average.example.2": "A zero weight contributes nothing",
   "lesson.weighted-average.mistakes.title": "Common mistakes",
   "lesson.weighted-average.mistakes.body":
     "Divide by the total weight, not by the number of values. Keep each weight next to its value. Negative weights are not supported and all-zero weights have no mean.",
   "lesson.weighted-average.limits.title": "Limits and assumptions",
   "lesson.weighted-average.limits.body":
-    "One to 100 values with matching weights. Weights must be zero or more with a positive total. This is a descriptive average only: no survey design, uncertainty or handling of missing data. Inputs keep up to 30 significant digits and the working uses 50; only the displayed answer is rounded.",
+    "One to 100 values with matching weights. Weights must be zero or more with a positive total. This is a descriptive average only: no survey design, uncertainty or handling of missing data. Inputs keep up to 30 significant digits and the calculation uses 50; only the displayed answer is rounded.",
   "lesson.weighted-average.sources.title": "Sources",
   "lesson.weighted-average.sources.body":
     "Weighted arithmetic mean definition: Σ(wᵢxᵢ)/Σwᵢ. Independently written examples check unequal and zero weights.",

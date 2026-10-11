@@ -17,13 +17,12 @@ export const messages = {
     "e = E ÷ n = {totalCalories} kcal ÷ {servings} = {answer} kcal",
   "calories-per-serving.formula.portion-calories": "e = E ÷ n",
   "calories-per-serving.example.portion-calories":
-    "A 1,000 kcal recipe shared four ways",
+    "A 1,000 kcal recipe split 4 ways",
   "calories-per-serving.operation.recipe-calories": "Whole recipe",
   "calories-per-serving.working.recipe-calories":
     "E = e × n = {portionCalories} kcal × {servings} = {answer} kcal",
   "calories-per-serving.formula.recipe-calories": "E = e × n",
-  "calories-per-serving.example.recipe-calories":
-    "Four servings of 250 kcal each",
+  "calories-per-serving.example.recipe-calories": "4 servings of 250 kcal each",
   "calories-per-serving.operation.portion-weight": "By portion weight",
   "calories-per-serving.working.portion-weight":
     "e = E × m ÷ M = {totalCalories} kcal × {portionGrams} g ÷ {totalGrams} g = {answer} kcal",
@@ -56,7 +55,7 @@ export const messages = {
   "calories-per-serving.visual.description":
     "Counting servings, the grid shows one cell per serving with your serving highlighted, or the equation adds equal servings into the whole. Weighing a portion, the bar splits the cooked batch into your portion and the rest.",
   "calories-per-serving.visual.alternative":
-    "The calories, servings and weights in the diagram are the same numbers stated in the answer and working.",
+    "The calories, servings and weights in the diagram are the same numbers stated in the answer and the steps.",
   "calories-per-serving.intro.title": "Calories in a homemade serving",
   "calories-per-serving.intro.body":
     "Add up the calories of every ingredient, then share the total out. Split it into equal servings, rebuild the total from a per-serving figure, or weigh the cooked dish and your portion for an estimate that does not depend on cutting equal slices.",

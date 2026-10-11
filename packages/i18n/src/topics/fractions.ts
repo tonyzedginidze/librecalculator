@@ -42,22 +42,17 @@ export const messages = {
   "lesson.fractions.variable.other-denominator":
     "second nonzero integer denominator",
   "lesson.fractions.variable.value": "exact value represented by the fraction",
-  "lesson.fractions.example.add":
-    "Use a common denominator: one half plus one third equals five sixths.",
-  "lesson.fractions.example.subtract":
-    "One half minus three quarters is negative one quarter.",
-  "lesson.fractions.example.multiply":
-    "Two thirds times nine fourths reduces to three halves, or one and one half.",
-  "lesson.fractions.example.divide":
-    "Two thirds divided by four fifths is five sixths.",
-  "lesson.fractions.example.reduce":
-    "A negative numerator and negative denominator make a positive fraction; reduce negative 42 over negative 56 to three quarters.",
+  "lesson.fractions.example.add": "1/2 + 1/3 = 5/6",
+  "lesson.fractions.example.subtract": "1/2 − 3/4 = −1/4",
+  "lesson.fractions.example.multiply": "2/3 × 9/4 = 3/2, or 1 1/2",
+  "lesson.fractions.example.divide": "2/3 ÷ 4/5 = 5/6",
+  "lesson.fractions.example.reduce": "Reduce −42/−56 to 3/4",
   "lesson.fractions.mixed.title": "Improper fractions and mixed numbers",
   "lesson.fractions.mixed.body":
     "For a signed improper fraction, divide the numerator's magnitude by the positive denominator. The quotient is the whole part and the remainder forms a proper fraction. Put the sign before the whole mixed value: −7/3 is −2 1/3, not −1 2/3. The exact signed n/d remains the primary result; the mixed form is an equivalent display.",
   "lesson.fractions.mistakes.title": "Common fraction mistakes",
   "lesson.fractions.mistakes.body":
-    "Addition and subtraction need a common denominator; add or subtract the corresponding numerators only after scaling. Multiplication multiplies numerators and denominators. Division multiplies by the reciprocal of a nonzero divisor. Never add denominators directly, and do not move a negative sign into only part of a mixed number. The engine normalizes signs and reduces all answers automatically.",
+    "Addition and subtraction need a common denominator; add or subtract the corresponding numerators only after scaling. Multiplication multiplies numerators and denominators. Division multiplies by the reciprocal of a nonzero divisor. Never add denominators directly, and do not move a negative sign into only part of a mixed number. A negative numerator over a negative denominator is positive, so −42/−56 reduces to 3/4. The engine normalizes signs and reduces all answers automatically.",
   "lesson.fractions.limits.title": "Exactness and input limits",
   "lesson.fractions.limits.body":
     "Enter signed whole integers only. Each input magnitude is limited to 1000 digits; exact normalized output numerator and denominator are limited to 2001 digits. Denominators must be nonzero, and division also rejects a zero fraction. The shaded-parts grid appears only for positive answers with a small denominator; other answers are shown as exact fractions alone. No decimal approximation is used.",

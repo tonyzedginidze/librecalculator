@@ -47,7 +47,7 @@ export const messages = {
   "lesson.lumber.sources.title": "Method and references",
   "lesson.lumber.sources.body":
     "Thickness and width in inches times length in feet gives inch-inch-feet; dividing by 12 converts to board feet of 144 cubic inches each. Nominal-to-actual sizes vary by supplier and species.",
-  "lesson.lumber.example.1": "One one-by-twelve, eight feet long",
-  "lesson.lumber.example.2": "Four actual-size two-by-fours",
-  "lesson.lumber.example.3": "Two thick wide boards",
+  "lesson.lumber.example.1": "One 1 × 12 board, 8 ft long",
+  "lesson.lumber.example.2": "Four actual-size 2 × 4s",
+  "lesson.lumber.example.3": "Two 2 × 6 boards, 10 ft long",
 } as const;

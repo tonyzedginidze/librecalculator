@@ -1289,12 +1289,16 @@ export const inputSchemas = {
     }
   },
   "mortgage": {
-    "version": 1,
+    "version": 2,
     "operations": {
       "amortize": [
-        "principal",
+        "homePrice",
+        "downPayment",
         "annualRate",
-        "months"
+        "years",
+        "propertyTax",
+        "homeInsurance",
+        "hoa"
       ]
     }
   },

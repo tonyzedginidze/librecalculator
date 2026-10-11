@@ -49,6 +49,6 @@ export const messages = {
   "lesson.roofing.sources.body":
     "By Pythagoras, a slope with rise r over run R is √(1 + (r/R)²) times longer than its run, so a uniform roof’s area is its footprint times that factor. Material allowances must come from the chosen product and installer.",
   "lesson.roofing.example.1": "Flat footprint without allowance",
-  "lesson.roofing.example.2": "A three-four-five slope",
-  "lesson.roofing.example.3": "The same slope with ten percent allowance",
+  "lesson.roofing.example.2": "A 3:4 slope on a 10 m × 8 m footprint",
+  "lesson.roofing.example.3": "The same slope with a 10% allowance",
 } as const;

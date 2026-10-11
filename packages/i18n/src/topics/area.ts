@@ -12,7 +12,7 @@ export const messages = {
   "area.visual.description":
     "The selected shape is drawn in the proportions you entered, with each measurement on a dimension line. The shaded region is the area.",
   "area.visual.alternative":
-    "The entered measurements and the area are stated in the answer and the working.",
+    "The entered measurements and the area are stated in the answer and the steps.",
   "area.error.invalid-field": "Enter a valid decimal dimension.",
   "area.error.nonpositive-dimension":
     "Every dimension must be greater than zero.",

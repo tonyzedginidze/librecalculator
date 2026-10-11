@@ -46,7 +46,7 @@ export const messages = {
   "final-grade.visual.lesson":
     "Under the answer, a percent scale marks the inputs and the result. The course grade is a weighted average, so it always sits between the coursework grade and the final exam score; the heavier the final, the closer it pulls.",
   "final-grade.visual.alternative":
-    "The same numbers appear in the answer and working, so the diagram is never the only place to read them.",
+    "The same numbers appear in the answer and the steps, so the diagram is never the only place to read them.",
   "final-grade.error.invalid-field": "Enter a number, such as 82 or 87.5.",
   "final-grade.error.invalid-domain":
     "Use grades of zero or more and a weight from 0 to 100%, above 0 to solve for the final and below 100 to solve for coursework.",

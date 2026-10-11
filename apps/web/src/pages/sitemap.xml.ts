@@ -5,6 +5,7 @@ export const GET: APIRoute = ({ site }) => {
   const base = site ?? new URL("https://librecalculator.com");
   const paths = [
     "/",
+    "/about/",
     ...packCatalog.map((pack) => `/packs/${pack.id}/`),
     ...calculatorCatalog.map((item) => `/calculators/${item.slug}/`),
   ];

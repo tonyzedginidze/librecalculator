@@ -58,7 +58,7 @@ export const messages = {
   "lesson.inflation.sources.title": "Method and references",
   "lesson.inflation.sources.body":
     "The projection compounds a constant annual rate. Official U.S. inflation is measured by the Consumer Price Index from the Bureau of Labor Statistics at https://www.bls.gov/cpi/ ; this calculator does not use that data. The examples above are independent fixtures for the formula.",
-  "lesson.inflation.example.1": "Two years at ten percent",
+  "lesson.inflation.example.1": "2 years at 10%",
   "lesson.inflation.example.2": "Cash buying power after inflation",
   "lesson.inflation.example.3": "No inflation",
 } as const;

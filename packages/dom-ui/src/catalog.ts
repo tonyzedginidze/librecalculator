@@ -6,7 +6,7 @@ import { en } from "../../i18n/src/en";
 export function calculatorRoute(id: CalculatorId): string {
   const item = calculatorCatalog.find((candidate) => candidate.id === id);
   if (!item) throw new Error(`Unknown calculator ID: ${id}`);
-  return `/calculators/${item.slug}`;
+  return `/calculators/${item.slug}/`;
 }
 
 export const categoryOrder = [

@@ -43,7 +43,7 @@ export const messages = {
   "lesson.work-hours.variable.item3":
     "1 if the shift ends the next day, else 0",
   "lesson.work-hours.variable.item4": "unpaid break in minutes",
-  "lesson.work-hours.example.0": "A shift with a half-hour break",
+  "lesson.work-hours.example.0": "09:00 to 17:00 with a 30-minute break",
   "lesson.work-hours.example.1": "An overnight shift",
   "lesson.work-hours.example.2": "A short shift",
   "lesson.work-hours.mistakes.title": "Common mistakes",

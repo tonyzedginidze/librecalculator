@@ -48,7 +48,7 @@ export const messages = {
   "lesson.paint.sources.title": "Method and references",
   "lesson.paint.sources.body":
     "Area × coats gives the total area painted; dividing by the label coverage gives litres, scaled by an explicit percentage allowance. Coverage must come from the chosen product; no standard rate is assumed.",
-  "lesson.paint.example.1": "Two coats on forty square metres",
-  "lesson.paint.example.2": "One coat on a small wall",
-  "lesson.paint.example.3": "Three coats with an allowance",
+  "lesson.paint.example.1": "2 coats on 40 m²",
+  "lesson.paint.example.2": "1 coat on a 12 m² wall",
+  "lesson.paint.example.3": "3 coats on 30 m² with a 5% allowance",
 } as const;

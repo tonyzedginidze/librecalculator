@@ -42,7 +42,7 @@ export default function MortgageView(props: TopicViewProps) {
       messages={messages}
       locale={locale}
       getCopyText={(e) =>
-        e.status === "ok" ? cents(e.outcome.result.regularPaymentCents) : ""
+        e.status === "ok" ? cents(e.outcome.result.totalMonthlyCents) : ""
       }
       extra={
         <p className="oc-finance-disclosure" role="note">
@@ -58,47 +58,58 @@ export default function MortgageView(props: TopicViewProps) {
             </div>
           );
         const r = e.outcome.result;
-        const years = r.schedule.length / 12;
+        const payoff = fillMessage(m("mortgage.ui.term.years"), {
+          years: formatDecimal(String(r.years), locale),
+        });
         return (
           <div className="oc-answer" aria-live="polite">
-            <p className="oc-kicker">{m("mortgage.ui.regular-payment")}</p>
+            <p className="oc-kicker">
+              {m(
+                r.hasMonthlyCosts
+                  ? "mortgage.ui.total-monthly"
+                  : "mortgage.ui.regular-payment",
+              )}
+            </p>
             <div className="oc-answer-scroll">
               <p className="oc-answer-value">
-                <NumText text={cents(r.regularPaymentCents)} />
+                <NumText text={cents(r.totalMonthlyCents)} />
               </p>
             </div>
             <div className="oc-fin-answer-stats">
               <StatGrid
                 items={[
+                  ...(r.hasMonthlyCosts
+                    ? [
+                        {
+                          label: m("mortgage.ui.principal-interest"),
+                          display: cents(r.regularPaymentCents),
+                        },
+                      ]
+                    : []),
+                  {
+                    label: m("mortgage.ui.loan-amount"),
+                    display: fillMessage(m("mortgage.ui.loan-amount.value"), {
+                      loan: cents(r.principalCents),
+                      percent: f.percent(r.downPaymentPercent),
+                    }),
+                  },
                   {
                     label: m("mortgage.ui.total-interest"),
                     display: cents(r.totalInterestCents),
                   },
                   {
                     label: m("mortgage.ui.total-paid"),
-                    display: cents(r.answer.cents),
+                    display: cents(r.totalPaidCents),
                   },
-                  {
-                    label: m("mortgage.ui.final-payment"),
-                    display: cents(r.finalPaymentCents),
-                  },
-                  {
-                    label: m("mortgage.ui.term"),
-                    display: fillMessage(
-                      m(
-                        Number.isInteger(years)
-                          ? "mortgage.ui.term.years"
-                          : "mortgage.ui.term.months",
-                      ),
-                      {
-                        years: formatDecimal(String(years), locale),
-                        months: formatDecimal(
-                          String(r.schedule.length),
-                          locale,
-                        ),
-                      },
-                    ),
-                  },
+                  ...(r.finalPaymentCents !== r.regularPaymentCents
+                    ? [
+                        {
+                          label: m("mortgage.ui.final-payment"),
+                          display: cents(r.finalPaymentCents),
+                        },
+                      ]
+                    : []),
+                  { label: m("mortgage.ui.term"), display: payoff },
                 ]}
               />
             </div>
@@ -125,10 +136,59 @@ export default function MortgageView(props: TopicViewProps) {
         const vars = {
           principal: cents(r.principalCents),
           interest: cents(r.totalInterestCents),
-          total: cents(r.answer.cents),
+          total: cents(r.totalPaidCents),
+        };
+        const monthly = {
+          payment: cents(r.regularPaymentCents),
+          tax: cents(r.monthlyPropertyTaxCents),
+          insurance: cents(r.monthlyInsuranceCents),
+          hoa: cents(r.monthlyHoaCents),
+          total: cents(r.totalMonthlyCents),
         };
         return (
           <>
+            {r.hasMonthlyCosts ? (
+              <VizFigure
+                caption={m("mortgage.visual.monthly.caption")}
+                summary={fillMessage(
+                  m("mortgage.visual.monthly.summary"),
+                  monthly,
+                )}
+              >
+                <SplitBar
+                  total={{
+                    label: m("mortgage.ui.total-monthly"),
+                    display: monthly.total,
+                  }}
+                  parts={[
+                    {
+                      label: m("mortgage.ui.principal-interest"),
+                      value: Number(r.regularPaymentCents),
+                      display: monthly.payment,
+                      tone: "accent" as const,
+                    },
+                    {
+                      label: m("mortgage.visual.monthly.tax"),
+                      value: Number(r.monthlyPropertyTaxCents),
+                      display: monthly.tax,
+                      tone: "soft" as const,
+                    },
+                    {
+                      label: m("mortgage.visual.monthly.insurance"),
+                      value: Number(r.monthlyInsuranceCents),
+                      display: monthly.insurance,
+                      tone: "ink" as const,
+                    },
+                    {
+                      label: m("mortgage.visual.monthly.hoa"),
+                      value: Number(r.monthlyHoaCents),
+                      display: monthly.hoa,
+                      tone: "muted" as const,
+                    },
+                  ].filter((part, index) => index === 0 || part.value > 0)}
+                />
+              </VizFigure>
+            ) : null}
             <VizFigure
               caption={m("mortgage.visual.caption")}
               summary={fillMessage(m("mortgage.visual.summary"), vars)}
@@ -157,7 +217,7 @@ export default function MortgageView(props: TopicViewProps) {
             <details className="oc-fin-schedule">
               <summary>
                 {fillMessage(m("mortgage.ui.schedule.heading"), {
-                  years: formatDecimal(String(r.years.length), locale),
+                  years: formatDecimal(String(r.yearly.length), locale),
                 })}
               </summary>
               <div className="oc-fin-schedule-scroll">
@@ -171,7 +231,7 @@ export default function MortgageView(props: TopicViewProps) {
                     </tr>
                   </thead>
                   <tbody>
-                    {r.years.map((y) => (
+                    {r.yearly.map((y) => (
                       <tr key={y.year}>
                         <th scope="row">
                           <NumText

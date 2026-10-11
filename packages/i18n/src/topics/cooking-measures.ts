@@ -40,7 +40,7 @@ export const messages = {
   "cooking-measures.visual.description":
     "The marker shows the entered volume on a scale in the source unit; the scale below it is drawn in the target unit, so the reading under the marker is the answer.",
   "cooking-measures.visual.alternative":
-    "The visible answer and working state both values with their unit symbols.",
+    "The answer and the steps state both values with their unit symbols.",
   "cooking-measures.error.invalid-field":
     "Enter a number such as 12 or 0.5 and choose both units.",
   "cooking-measures.error.incompatible-units": "Choose two volume units.",

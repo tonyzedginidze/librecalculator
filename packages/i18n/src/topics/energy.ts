@@ -44,7 +44,7 @@ export const messages = {
     "Square the speed, not the mass. Convert km/h to m/s (divide by 3.6) before calculating. The value depends on the frame you measure speed from.",
   "lesson.energy.limits.title": "Limits and assumptions",
   "lesson.energy.limits.body":
-    "Inputs use fixed SI units; convert other units before you calculate. This is an idealised textbook relation for consistent measurements, not an engineering design or safety assessment. Values outside the supported decimal range are rejected rather than approximated. Calculations keep up to 30 significant input digits and 50 working digits; only the displayed answer is rounded.",
+    "Inputs use fixed SI units; convert other units before you calculate. This is an idealised textbook relation for consistent measurements, not an engineering design or safety assessment. Values outside the supported decimal range are rejected rather than approximated. Calculations keep up to 30 significant input digits and 50 internal digits; only the displayed answer is rounded.",
   "lesson.energy.sources.title": "Sources",
   "lesson.energy.sources.body":
     "OpenStax University Physics Volume 1, mechanics: https://openstax.org/details/books/university-physics-volume-1",

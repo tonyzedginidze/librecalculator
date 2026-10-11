@@ -47,7 +47,7 @@ export const messages = {
   "lesson.concrete.sources.title": "Method and references",
   "lesson.concrete.sources.body":
     "Volume of a rectangular solid, length × width × depth, scaled by an explicit percentage allowance. Product yields and site allowances must come from the chosen supplier; no standard product yield is assumed.",
-  "lesson.concrete.example.1": "A five by four metre slab, 10 cm deep",
-  "lesson.concrete.example.2": "A one-metre cube without allowance",
+  "lesson.concrete.example.1": "A 5 m × 4 m slab, 10 cm deep",
+  "lesson.concrete.example.2": "A 1 m cube without allowance",
   "lesson.concrete.example.3": "A small 20 cm pad",
 } as const;

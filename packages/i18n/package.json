@@ -8,6 +8,7 @@
     "./ui": "./src/ui.ts",
     "./topics": "./src/topics/index.generated.ts",
     "./topics/*": "./src/topics/*.ts",
-    "./locales": "./src/locales.ts"
+    "./locales": "./src/locales.ts",
+    "./meta": "./src/meta.ts"
   }
 }

@@ -51,7 +51,7 @@ export const messages = {
   "lesson.macros.sources.title": "Method and references",
   "lesson.macros.sources.body":
     "USDA National Agricultural Library describes general energy factors of 4kcal/g for protein and carbohydrate and 9kcal/g for fat: https://www.nal.usda.gov/programs/fnic . These are arithmetic factors rather than an endorsement of a calorie level or distribution.",
-  "lesson.macros.example.1": "Protein in an eighteen-hundred-calorie scenario",
+  "lesson.macros.example.1": "Protein at 1,800 kcal a day",
   "lesson.macros.example.2": "Carbohydrate in the same scenario",
   "lesson.macros.example.3": "Fat in the same scenario",
 } as const;

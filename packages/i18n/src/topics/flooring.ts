@@ -47,7 +47,7 @@ export const messages = {
   "lesson.flooring.sources.title": "Method and references",
   "lesson.flooring.sources.body":
     "Rectangle area scaled by an explicit percentage allowance, divided by the coverage of one pack and rounded up once at the end. Pack coverage and cutting allowance must come from the chosen product; no standard pack size is assumed.",
-  "lesson.flooring.example.1": "Twenty square metres in two-metre packs",
+  "lesson.flooring.example.1": "20 m² in 2 m² packs",
   "lesson.flooring.example.2": "Rounding a fractional pack up",
   "lesson.flooring.example.3": "A small room with cutting allowance",
 } as const;

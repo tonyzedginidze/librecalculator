@@ -24,7 +24,7 @@ export const messages = {
   "gpa.formula.gpa-combined": "GPA = (G₁ × C₁ + G₂ × C₂) ÷ (C₁ + C₂)",
   "gpa.formula.gpa-target": "Q = G × C",
   "gpa.example.gpa-average": "42 quality points over 12 credits",
-  "gpa.example.gpa-combined": "Two 12-credit terms at 3.0 and 3.5",
+  "gpa.example.gpa-combined": "12-credit terms at 3.0 and 3.5",
   "gpa.example.gpa-target": "A 4.0 target over 12 credits",
   "gpa.visual.caption.gpa-average": "Quality points divided by credits",
   "gpa.visual.caption.gpa-combined":
@@ -47,7 +47,7 @@ export const messages = {
   "gpa.visual.lesson":
     "Under the answer, the term GPA appears as quality points divided by credits. When two terms are combined, bars compare each term with the combined GPA, which always lands between them and nearer the term with more credits.",
   "gpa.visual.alternative":
-    "The same numbers appear in the answer and working, so the diagram is never the only place to read them.",
+    "The same numbers appear in the answer and the steps, so the diagram is never the only place to read them.",
   "gpa.error.invalid-field": "Enter a number, such as 3.5 or 15.",
   "gpa.error.invalid-domain":
     "Use zero or more grade points and more than zero credits.",

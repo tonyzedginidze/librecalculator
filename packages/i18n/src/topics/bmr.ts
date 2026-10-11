@@ -46,7 +46,7 @@ export const messages = {
   "lesson.bmr.sources.title": "Method and references",
   "lesson.bmr.sources.body":
     "Mifflin MD and colleagues, 1990, A new predictive equation for resting energy expenditure in healthy individuals: https://pubmed.ncbi.nlm.nih.gov/2305711/ . The simplified sex-specific equations are reproduced from the abstract; the study included adults aged 19\u201378.",
-  "lesson.bmr.example.1": "Male coefficient at seventy kilograms",
+  "lesson.bmr.example.1": "Male coefficient at 70 kg",
   "lesson.bmr.example.2": "Female coefficient for the same measurements",
   "lesson.bmr.example.3": "A different adult male scenario",
 } as const;

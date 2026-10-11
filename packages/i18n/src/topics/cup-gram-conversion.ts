@@ -29,7 +29,7 @@ export const messages = {
     "h = k ÷ 2 = {gramsPerCup} g ÷ 2 = {answer} g",
   "cup-gram-conversion.formula.half-cup-grams": "h = k ÷ 2",
   "cup-gram-conversion.example.half-cup-grams":
-    "Half a cup of flour at 120 g per cup",
+    "½ cup of flour at 120 g per cup",
   "cup-gram-conversion.error.invalid-field":
     "Enter a number, such as 2 or 120.",
   "cup-gram-conversion.error.nonpositive-dimension":
@@ -43,7 +43,7 @@ export const messages = {
   "cup-gram-conversion.visual.description":
     "Two rulers share one position: cups above, grams below. Each whole cup on the top ruler sits over the weight of one cup on the bottom ruler, so the marker reads the same amount in both units.",
   "cup-gram-conversion.visual.alternative":
-    "The cups, grams and grams-per-cup values in the diagram are the same numbers stated in the answer and working.",
+    "The cups, grams and grams-per-cup values in the diagram are the same numbers stated in the answer and the steps.",
   "cup-gram-conversion.intro.title":
     "Cups measure volume, grams measure weight",
   "cup-gram-conversion.intro.body":

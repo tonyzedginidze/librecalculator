@@ -2474,7 +2474,7 @@ body:has(.oc-settings-dialog[open]) {
 /* Stat grid */
 .oc-viz-stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
   gap: 0.5rem;
   margin: 0;
 }
@@ -2774,7 +2774,149 @@ body:has(.oc-settings-dialog[open]) {
     ), color-mix(in srgb, var(--oc-accent) 7%, var(--oc-surface));
 }
 /* end pack: date-time */
+/* Break between words only; a figure like $408,140.64 never splits mid-number. */
 .oc-viz-stats dd .oc-viz-fig {
   white-space: normal;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+}
+
+/* ───────── Page heading (home, packs, about) ───────── */
+.oc-home-head {
+  margin: 0.5rem 0 1.5rem;
+}
+
+.oc-home-title {
+  margin: 0 0 0.5rem;
+  font-family: var(--oc-font-serif);
+  font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.2rem);
+  font-weight: 560;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+.oc-home-intro {
+  max-width: 44rem;
+  margin: 0;
+  color: var(--oc-muted);
+  font-size: 1.02rem;
+  line-height: 1.55;
+}
+
+.oc-main.oc-prose {
+  max-width: 44rem;
+  margin-inline: 0;
+  padding-inline: clamp(1rem, 4vw, 3rem);
+}
+
+.oc-main.oc-prose h2 {
+  margin: 1.8rem 0 0.4rem;
+  font-family: var(--oc-font-serif);
+  font-size: 1.25rem;
+  font-weight: 560;
+}
+
+.oc-main.oc-prose p {
+  margin: 0 0 0.8rem;
+}
+
+/* ───────── Site footer: full catalog directory ───────── */
+.oc-site-footer {
+  border-top: 1px solid var(--oc-line);
+  background: var(--oc-canvas);
+  color: var(--oc-muted);
+  font-size: 0.9rem;
+}
+
+.oc-site-footer-inner {
+  width: min(100% - 2rem, 76rem);
+  margin-inline: auto;
+  padding-block: 2.5rem 2rem;
+}
+
+.oc-site-footer-heading {
+  margin: 0 0 1.25rem;
+  color: var(--oc-ink);
+  font-family: var(--oc-font-serif);
+  font-size: 1.2rem;
+  font-weight: 560;
+}
+
+.oc-site-footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  gap: 1.5rem 2rem;
+}
+
+.oc-site-footer h3 {
+  margin: 0 0 0.45rem;
+  font-size: 0.78rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.oc-site-footer h3 a {
+  color: var(--oc-accent);
+}
+
+.oc-site-footer ul {
+  display: grid;
+  gap: 0.3rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.oc-site-footer a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.oc-site-footer a:hover,
+.oc-site-footer a:focus-visible {
+  color: var(--oc-ink);
+  text-decoration: underline;
+}
+
+.oc-site-footer-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--oc-line);
+}
+
+/* ───────── Breadcrumbs ───────── */
+.oc-breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem 0;
+  margin: 0 0 0.9rem;
+  padding: 0;
+  color: var(--oc-muted);
+  font-size: 0.85rem;
+  list-style: none;
+}
+
+.oc-breadcrumbs li + li::before {
+  content: "›";
+  margin-inline: 0.45rem;
+  color: var(--oc-line);
+}
+
+.oc-breadcrumbs a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.oc-breadcrumbs a:hover,
+.oc-breadcrumbs a:focus-visible {
+  color: var(--oc-accent);
+  text-decoration: underline;
+}
+
+.oc-breadcrumbs [aria-current="page"] {
+  color: var(--oc-ink);
 }

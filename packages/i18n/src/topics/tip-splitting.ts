@@ -54,11 +54,9 @@ export const messages = {
   "lesson.tip-splitting.variable.people": "positive integer number of people",
   "lesson.tip-splitting.variable.total": "subtotal plus settled tip",
   "lesson.tip-splitting.example.remainder":
-    "A $10.00 subtotal with a 15% tip makes an $11.50 total for three people: one pays $3.84 and two pay $3.83.",
-  "lesson.tip-splitting.example.even":
-    "A $100.00 subtotal with a 20% tip makes a $120.00 total, exactly $30.00 each for four people.",
-  "lesson.tip-splitting.example.zero":
-    "A zero subtotal remains zero even at a 1000% tip rate; one person's allocated share is zero.",
+    "$10.00 with a 15% tip, split 3 ways",
+  "lesson.tip-splitting.example.even": "$100.00 with a 20% tip, split 4 ways",
+  "lesson.tip-splitting.example.zero": "$0.00 with a 1000% tip, 1 person",
   "lesson.tip-splitting.allocation.title": "How leftover cents are assigned",
   "lesson.tip-splitting.allocation.body":
     "After the tip is settled, convert USD total G to integer cents(G) and divide by people count N to obtain integer quotient q (base share in cents) and remainder r (0 ≤ r < N). Exactly N − r people receive q cents; the first r people receive q + 1 cents. The result reports only these two share groups and their counts, and their count-weighted sum equals cents(G) exactly.",

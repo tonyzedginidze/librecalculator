@@ -37,15 +37,13 @@ export const messages = {
   "lesson.water-intake.limits.title": "Assumptions and limits",
   "lesson.water-intake.limits.body":
     "Adult context 20\u2013120, weight 20\u2013350kg, scenario factor 1\u201350mL/kg/day. This is not a clinical hydration guideline or advice for fluid restriction, kidney or heart disease, illness, pregnancy, breastfeeding or endurance exercise. Educational information only, not medical advice, diagnosis or an individualized nutrition plan.",
-  "lesson.water-intake.faq.q":
-    "Is thirty millilitres per kilogram a prescribed target?",
+  "lesson.water-intake.faq.q": "Is 30 mL per kilogram a prescribed target?",
   "lesson.water-intake.faq.a":
     "No. It is the example value used to demonstrate the conversion. The calculator does not prescribe a factor or personal fluid target.",
   "lesson.water-intake.sources.title": "Method and references",
   "lesson.water-intake.sources.body":
     "CDC explains that water needs vary with age, activity, pregnancy and breastfeeding and that food can contribute water: https://www.cdc.gov/healthy-weight-growth/water-healthy-drinks/ . CDC is cited for these limitations, not as the source or endorsement of the user-entered mL/kg factor.",
-  "lesson.water-intake.example.1":
-    "Seventy kilograms at a chosen factor of thirty",
-  "lesson.water-intake.example.2": "Eighty kilograms at twenty-five",
-  "lesson.water-intake.example.3": "Sixty kilograms at forty",
+  "lesson.water-intake.example.1": "70 kg at a chosen 30 mL/kg",
+  "lesson.water-intake.example.2": "80 kg at 25 mL/kg",
+  "lesson.water-intake.example.3": "60 kg at 40 mL/kg",
 } as const;

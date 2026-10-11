@@ -37,7 +37,7 @@ export const messages = {
     "Use the path actually travelled, not the straight-line displacement. The average over a whole trip is not the mean of the speeds in each part when those parts take different times. Convert minutes and kilometres to seconds and metres first.",
   "lesson.speed.limits.title": "Limits and assumptions",
   "lesson.speed.limits.body":
-    "Inputs use fixed SI units; convert other units before you calculate. This is an idealised textbook relation for consistent measurements, not an engineering design or safety assessment. Values outside the supported decimal range are rejected rather than approximated. Calculations keep up to 30 significant input digits and 50 working digits; only the displayed answer is rounded.",
+    "Inputs use fixed SI units; convert other units before you calculate. This is an idealised textbook relation for consistent measurements, not an engineering design or safety assessment. Values outside the supported decimal range are rejected rather than approximated. Calculations keep up to 30 significant input digits and 50 internal digits; only the displayed answer is rounded.",
   "lesson.speed.sources.title": "Sources",
   "lesson.speed.sources.body":
     "OpenStax University Physics Volume 1, mechanics: https://openstax.org/details/books/university-physics-volume-1",

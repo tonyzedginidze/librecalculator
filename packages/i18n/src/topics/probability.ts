@@ -45,7 +45,7 @@ export const messages = {
     "Each operation has its own picture: a bar split into A and not A, a unit square whose overlap is A × B, or two overlapping circles labelled with the probability of each part.",
   "probability.visual.alternative":
     "Every probability shown in the picture is also stated in text from the same calculation.",
-  "lesson.probability.intro.title": "Working with probabilities",
+  "lesson.probability.intro.title": "Using probabilities",
   "lesson.probability.intro.body":
     "A probability is a number from 0 (impossible) to 1 (certain). Combining two probabilities depends on how the events relate, so pick the operation that matches your situation.",
   "lesson.probability.meaning.title": "Which operation to choose",
@@ -55,7 +55,7 @@ export const messages = {
   "lesson.probability.formula.independent-both": "P(A and B) = P(A) × P(B)",
   "lesson.probability.formula.event-union":
     "P(A or B) = P(A) + P(B) − P(A and B)",
-  "lesson.probability.example.0": "The complement of a one-in-five chance",
+  "lesson.probability.example.0": "The complement of a 1-in-5 chance",
   "lesson.probability.example.1": "Two independent events both happening",
   "lesson.probability.example.2": "Counting the overlap only once",
   "lesson.probability.mistakes.title": "Common mistakes",
@@ -63,12 +63,12 @@ export const messages = {
     "Adding two probabilities counts their overlap twice. Multiplying them gives the chance of both only under independence. A probability of 0.2 means 20%, not 0.2%. The calculator cannot tell whether your events are independent.",
   "lesson.probability.limits.title": "Limits and assumptions",
   "lesson.probability.limits.body":
-    "All probabilities are decimals from 0 to 1. For A or B, the overlap must lie between max(0, A + B − 1) and min(A, B). No conditional probability, distributions, counting rules or uncertainty in the inputs. Inputs keep up to 30 significant digits and the working uses 50; only the displayed answer is rounded.",
+    "All probabilities are decimals from 0 to 1. For A or B, the overlap must lie between max(0, A + B − 1) and min(A, B). No conditional probability, distributions, counting rules or uncertainty in the inputs. Inputs keep up to 30 significant digits and the calculation uses 50; only the displayed answer is rounded.",
   "lesson.probability.sources.title": "Sources",
   "lesson.probability.sources.body":
     "OpenStax Introductory Statistics 2e, probability topics: https://openstax.org/details/books/introductory-statistics-2e",
   "lesson.probability.faq.q":
-    "Why can an overlap be invalid even when it is between 0 and 1?",
+    "Why can an overlap between 0 and 1 still be invalid?",
   "lesson.probability.faq.a":
     "The chance of both cannot exceed the chance of either one, and it must be large enough that A or B does not exceed 1. Both limits are checked.",
   "lesson.probability.variable.item1": "probability of event A",

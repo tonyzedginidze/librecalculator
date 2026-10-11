@@ -41,7 +41,7 @@ export const messages = {
   "baking-ratios.visual.description":
     "Two bars on one scale: flour is the 100% reference and the ingredient bar is its baker's percentage of that length. Percentages above 100 draw a bar longer than the flour.",
   "baking-ratios.visual.alternative":
-    "The weights and the percentage in the diagram are the same numbers stated in the answer and working.",
+    "The weights and the percentage in the diagram are the same numbers stated in the answer and the steps.",
   "baking-ratios.intro.title": "Every ingredient as a share of flour",
   "baking-ratios.intro.body":
     "Bakers write recipes as percentages of flour weight. Flour is always 100%, and 65% water means 65 g of water for every 100 g of flour. Use it to read a recipe's hydration, scale a dough to any size, or work out how much flour pairs with a known ingredient.",

@@ -59,7 +59,7 @@ export const messages = {
   "lesson.margin-markup.sources.title": "Method and references",
   "lesson.margin-markup.sources.body":
     "Margin and markup divide the same per-unit profit by different bases: the selling price or the cost. The U.S. Small Business Administration covers pricing and business finances at https://www.sba.gov/business-guide/manage-your-business/manage-your-finances . The examples above are independent fixtures for both ratios.",
-  "lesson.margin-markup.example.1": "Margin on an eighty-dollar cost",
+  "lesson.margin-markup.example.1": "Margin on an $80 cost",
   "lesson.margin-markup.example.2": "Markup on the same transaction",
   "lesson.margin-markup.example.3": "Selling below cost",
 } as const;

@@ -1,0 +1,36 @@
+---
+// Visible trail matching the BreadcrumbList JSON-LD: Home › Pack › Calculator.
+import { calculatorCatalog, packCatalog } from "@open-calculators/calculators";
+import { en } from "@open-calculators/i18n";
+import { ui } from "@open-calculators/i18n/ui";
+
+interface Props {
+  calculatorId?: string;
+  packId?: string;
+}
+const messages: Readonly<Record<string, string>> = { ...en, ...ui };
+const item = calculatorCatalog.find((candidate) => candidate.id === Astro.props.calculatorId);
+const pack = packCatalog.find((candidate) =>
+  item
+    ? (candidate.calculatorIds as readonly string[]).includes(item.id)
+    : candidate.id === Astro.props.packId,
+);
+const trail = [
+  { name: ui["ui.breadcrumb.home"], href: "/" },
+  ...(pack ? [{ name: messages[pack.titleKey] ?? pack.id, href: `/packs/${pack.id}/` }] : []),
+  ...(item ? [{ name: messages[item.titleKey] ?? item.id, href: `/calculators/${item.slug}/` }] : []),
+];
+---
+<nav class="oc-breadcrumbs" aria-label={ui["ui.breadcrumb.label"]}>
+  <ol>
+    {trail.map((crumb, index) => (
+      <li>
+        {index === trail.length - 1 ? (
+          <span aria-current="page">{crumb.name}</span>
+        ) : (
+          <a href={crumb.href}>{crumb.name}</a>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>

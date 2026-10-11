@@ -1,8 +1,10 @@
 ---
-import { calculatorCatalog, packCatalog } from "@open-calculators/calculators";
-import { Sidebar } from "@open-calculators/dom-ui/components";
+import { packCatalog } from "@open-calculators/calculators";
+import { catalogItems } from "@open-calculators/dom-ui/catalog";
+import { CalculatorCard, Sidebar } from "@open-calculators/dom-ui/components";
 import { en } from "@open-calculators/i18n";
 import { ui } from "@open-calculators/i18n/ui";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import Base from "../../layouts/Base.astro";
 export function getStaticPaths() {
   return packCatalog.map(pack => ({ params: { pack: pack.id }, props: { pack } }));
@@ -10,13 +12,21 @@ export function getStaticPaths() {
 const { pack } = Astro.props;
 const messages: Readonly<Record<string, string>> = { ...en, ...ui };
 const title = messages[pack.titleKey] ?? pack.id;
-const description = messages[pack.descriptionKey] ?? "";
+const intro = messages[`ui.pack.${pack.id}.intro`] ?? messages[pack.descriptionKey] ?? "";
+const seoTitle = ui["ui.seo.title.suffix"].replace(
+  "{title}",
+  ui["ui.seo.pack.title"].replace("{title}", title),
+);
 const ids = new Set<string>(pack.calculatorIds);
-const items = calculatorCatalog.filter(item => ids.has(item.id));
+const items = catalogItems.filter(item => ids.has(item.id));
 ---
-<Base title={title} description={description}>
+<Base title={title} fullTitle={seoTitle} description={intro}>
   <div class="oc-app"><Sidebar client:load /><main class="oc-main" id="calculator" data-category={pack.category}>
-    <h1 class="oc-title">{title}</h1><p>{description}</p>
-    <ul>{items.map(item => <li><a href={`/calculators/${item.slug}`}>{en[item.titleKey]}</a><p>{en[item.descriptionKey]}</p></li>)}</ul>
+    <Breadcrumbs packId={pack.id} />
+    <header class="oc-home-head">
+      <h1 class="oc-home-title">{ui["ui.seo.pack.title"].replace("{title}", title)}</h1>
+      <p class="oc-home-intro">{intro}</p>
+    </header>
+    <div class="oc-grid">{items.map(item => <CalculatorCard item={item} />)}</div>
   </main></div>
 </Base>

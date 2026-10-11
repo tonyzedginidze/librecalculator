@@ -33,7 +33,7 @@ export const messages = {
     "A diameter is twice the radius. Entering a diameter into the radius field makes the computed area four times too large. Circumference measures a length in m; area measures a region in m\u00b2.",
   "circle.limits.title": "Assumptions and limits",
   "circle.limits.body":
-    "The shape is an exact Euclidean circle. Radius must be positive. Diameter is 2r; area \u03c0r\u00b2 and circumference 2\u03c0r are approximate because \u03c0 has a finite working representation. Canonical inputs are limited to 30 significant digits, 256 characters and adjusted exponent magnitude 100. Computation uses 50 significant digits without intermediate presentation rounding; output overflow fails explicitly. Approximate fixtures use absolute tolerance 1e-12 plus relative tolerance 1e-12.",
+    "The shape is an exact Euclidean circle. Radius must be positive. Diameter is 2r; area \u03c0r\u00b2 and circumference 2\u03c0r are approximate because \u03c0 has a finite internal representation. Canonical inputs are limited to 30 significant digits, 256 characters and adjusted exponent magnitude 100. Computation uses 50 significant digits without intermediate presentation rounding; output overflow fails explicitly. Approximate fixtures use absolute tolerance 1e-12 plus relative tolerance 1e-12.",
   "circle.faq.q": "How do the three measurements relate?",
   "circle.faq.a":
     "For radius 1 m, area is \u03c0 m\u00b2, circumference is 2\u03c0 m and diameter is 2 m. Doubling radius multiplies area by four and circumference by two.",

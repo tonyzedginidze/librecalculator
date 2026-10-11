@@ -30,7 +30,7 @@ export const messages = {
   "discount.visual.description":
     "The original price split into the part you pay and the part you save.",
   "discount.visual.alternative":
-    "A bar for the original price is divided into the sale price and the amount saved. When the new price is higher than the original, two bars compare the prices instead. The exact amounts are also stated in the answer and working.",
+    "A bar for the original price is divided into the sale price and the amount saved. When the new price is higher than the original, two bars compare the prices instead. The exact amounts are also stated in the answer and the steps.",
   "discount.error.invalid-field": "Enter a valid decimal number.",
   "discount.error.zero-denominator": "The original price must not be zero.",
   "discount.error.output-overflow":
@@ -53,10 +53,10 @@ export const messages = {
   "lesson.discount.example.percent": "From 200 down to 150",
   "lesson.discount.mistakes.title": "Common mistakes",
   "lesson.discount.mistakes.body":
-    "Do not subtract the percentage from the price directly: 15% off 80 is not 80 − 15. Take the percentage of the price first. Successive discounts do not add up: 20% off followed by 10% off is 28% off in total, not 30%, because the second discount applies to the already reduced price. When working backwards, divide by the original price, not the sale price.",
+    "Do not subtract the percentage from the price directly: 15% off 80 is not 80 − 15. Take the percentage of the price first. Successive discounts do not add up: 20% off followed by 10% off is 28% off in total, not 30%, because the second discount applies to the already reduced price. To find the discount from two prices, divide by the original price, not the sale price.",
   "lesson.discount.limits.title": "Assumptions and numerical limits",
   "lesson.discount.limits.body":
-    "Inputs are signed finite decimals with up to 30 significant digits, without grouping separators or exponent notation. Arithmetic uses 50 significant working digits and nothing is rounded until it is displayed, so a real shop may round the final price to the nearest cent differently. Tax, shipping and coupons are not included. Discounts above 100% or below 0% are allowed and give a negative sale price or a price increase.",
+    "Inputs are signed finite decimals with up to 30 significant digits, without grouping separators or exponent notation. Arithmetic uses 50 significant internal digits and nothing is rounded until it is displayed, so a real shop may round the final price to the nearest cent differently. Tax, shipping and coupons are not included. Discounts above 100% or below 0% are allowed and give a negative sale price or a price increase.",
   "lesson.discount.faq.stack.q": "Do two discounts add together?",
   "lesson.discount.faq.stack.a":
     "No. Each discount applies to the price left after the previous one. Run the calculator once per step, using the previous sale price as the next original price.",

@@ -133,52 +133,57 @@ export function SettingsDialog(props: {
           props.onClose();
       }}
     >
-      <header className="oc-settings-head">
-        <span className="oc-settings-emblem">
-          <PackIcon id="settings" />
-        </span>
-        <div>
-          <h2 id="oc-settings-title">{ui["ui.settings.title"]}</h2>
-          <p id="oc-settings-description">
-            {ui["ui.settings.pack-description"]}
-          </p>
-        </div>
-        <button
-          type="button"
-          className="oc-settings-close"
-          aria-label={ui["ui.settings.close"]}
-          onClick={props.onClose}
-        >
-          <svg
-            viewBox="0 0 24 24"
-            width="20"
-            height="20"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.75"
-            aria-hidden="true"
-          >
-            <path d="M18 6L6 18M6 6l12 12" />
-          </svg>
-        </button>
-      </header>
-      <div className="oc-settings-body">
-        <PackPicker active={props.active} toggle={props.toggle} />
-        {props.children}
-      </div>
-      <footer className="oc-settings-foot">
-        <span>
-          {props.active.length === 1
-            ? ui["ui.packs.enabled.one"]
-            : ui["ui.packs.enabled"].replace(
-                "{count}",
-                String(props.active.length),
-              )}
-        </span>
-        <button type="button" onClick={props.onClose}>
-          {ui["ui.settings.done"]}
-        </button>
-      </footer>
+      {/* Contents mount only while open so closed settings stay out of page text. */}
+      {props.open ? (
+        <>
+          <header className="oc-settings-head">
+            <span className="oc-settings-emblem">
+              <PackIcon id="settings" />
+            </span>
+            <div>
+              <h2 id="oc-settings-title">{ui["ui.settings.title"]}</h2>
+              <p id="oc-settings-description">
+                {ui["ui.settings.pack-description"]}
+              </p>
+            </div>
+            <button
+              type="button"
+              className="oc-settings-close"
+              aria-label={ui["ui.settings.close"]}
+              onClick={props.onClose}
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.75"
+                aria-hidden="true"
+              >
+                <path d="M18 6L6 18M6 6l12 12" />
+              </svg>
+            </button>
+          </header>
+          <div className="oc-settings-body">
+            <PackPicker active={props.active} toggle={props.toggle} />
+            {props.children}
+          </div>
+          <footer className="oc-settings-foot">
+            <span>
+              {props.active.length === 1
+                ? ui["ui.packs.enabled.one"]
+                : ui["ui.packs.enabled"].replace(
+                    "{count}",
+                    String(props.active.length),
+                  )}
+            </span>
+            <button type="button" onClick={props.onClose}>
+              {ui["ui.settings.done"]}
+            </button>
+          </footer>
+        </>
+      ) : null}
     </dialog>
   );
 }

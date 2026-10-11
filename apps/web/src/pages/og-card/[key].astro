@@ -1,0 +1,173 @@
+---
+// Development-only source for the social cards. scripts/generate-og.ts
+// screenshots each route into public/og/<key>.png; production builds skip it.
+import { calculatorCatalog, packCatalog } from "@open-calculators/calculators";
+import { BrandMark, CalculatorArt } from "@open-calculators/dom-ui/components";
+import { variableCss } from "@open-calculators/design/css";
+import "@open-calculators/design/ui.css";
+import { en } from "@open-calculators/i18n";
+import { ui } from "@open-calculators/i18n/ui";
+import { OG_HEIGHT, OG_WIDTH, ogKeys } from "../../og";
+
+export function getStaticPaths() {
+  if (import.meta.env.PROD) return [];
+  return ogKeys.map((key) => ({ params: { key } }));
+}
+
+const messages: Readonly<Record<string, string>> = { ...en, ...ui };
+const { key } = Astro.params;
+const pack = packCatalog.find((candidate) => `pack-${candidate.id}` === key);
+const item = calculatorCatalog.find((candidate) => candidate.slug === key);
+const featured = ["percentage", "compound-interest", "area", "bmi"];
+
+const category = item?.category ?? pack?.category ?? "math";
+const eyebrow = item
+  ? messages[`ui.category.${item.category}`]
+  : pack
+    ? ui["ui.catalog.count.other"].replace(
+        "{count}",
+        String(pack.calculatorIds.length),
+      )
+    : ui["ui.app.tagline"];
+const title = item
+  ? messages[item.titleKey]
+  : pack
+    ? messages[pack.titleKey]
+    : ui["ui.og.home.title"];
+const description = item
+  ? messages[item.descriptionKey]
+  : pack
+    ? messages[pack.descriptionKey]
+    : ui["ui.og.home.text"];
+const art: string[] = item
+  ? [item.id]
+  : pack
+    ? pack.calculatorIds.slice(0, 4)
+    : featured;
+const artCategory = (id: string) =>
+  calculatorCatalog.find((candidate) => candidate.id === id)?.category ??
+  category;
+const host = Astro.site?.host ?? "";
+---
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <style is:inline set:html={variableCss}></style>
+    <style>
+      html, body { margin: 0; background: var(--oc-canvas); }
+      :global(astro-dev-toolbar) { display: none !important; }
+      .og {
+        box-sizing: border-box;
+        display: grid;
+        grid-template-columns: 1fr 560px;
+        width: var(--og-w);
+        height: var(--og-h);
+        overflow: hidden;
+        color: var(--oc-ink);
+        background: var(--oc-canvas);
+      }
+      .og-copy {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        padding: 60px 56px 52px 68px;
+      }
+      .og-brand { display: flex; align-items: center; gap: 16px; }
+      .og-brand :global(.oc-brand-mark) { width: 54px; height: 54px; }
+      .og-brand-name {
+        font-family: var(--oc-font-serif);
+        font-size: 34px;
+        font-weight: 600;
+      }
+      .og-main { margin-block: auto; }
+      .og-eyebrow {
+        margin: 0 0 16px;
+        color: var(--oc-accent);
+        font-size: 21px;
+        font-weight: 650;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .og-title {
+        margin: 0;
+        font-family: var(--oc-font-serif);
+        font-size: 64px;
+        font-weight: 600;
+        line-height: 1.04;
+        letter-spacing: -0.01em;
+        text-wrap: balance;
+      }
+      .og[data-home] .og-title { font-size: 58px; }
+      .og-text {
+        display: -webkit-box;
+        margin: 22px 0 0;
+        overflow: hidden;
+        color: var(--oc-muted);
+        font-size: 27px;
+        line-height: 1.35;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+      }
+      .og-host {
+        color: var(--oc-muted);
+        font-family: var(--oc-font-mono);
+        font-size: 22px;
+      }
+      .og-panel {
+        display: grid;
+        align-content: center;
+        padding: 40px;
+        border-left: 1px solid var(--oc-line);
+        background: linear-gradient(160deg, var(--oc-accent-soft), var(--oc-canvas));
+      }
+      .og-panel[data-count="1"] { padding: 20px; }
+      .og-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+      }
+      .og-tile {
+        overflow: hidden;
+        border: 1px solid var(--oc-line);
+        border-radius: 6px;
+        background: linear-gradient(160deg, var(--oc-accent-soft), var(--oc-surface));
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      class="og"
+      data-category={category}
+      data-home={!item && !pack ? "" : undefined}
+      style={`--og-w:${OG_WIDTH}px;--og-h:${OG_HEIGHT}px`}
+    >
+      <div class="og-copy">
+        <div class="og-brand">
+          <BrandMark />
+          <span class="og-brand-name">{ui["ui.app.name"]}</span>
+        </div>
+        <div class="og-main">
+          <p class="og-eyebrow">{eyebrow}</p>
+          <h1 class="og-title">{title}</h1>
+          <p class="og-text">{description}</p>
+        </div>
+        <span class="og-host">{host}</span>
+      </div>
+      <div class="og-panel" data-count={art.length}>
+        {art.length === 1 ? (
+          <CalculatorArt id={art[0] as string} />
+        ) : (
+          <div class="og-grid">
+            {art.map((id) => (
+              <div class="og-tile" data-category={artCategory(id)}>
+                <CalculatorArt id={id} />
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  </body>
+</html>

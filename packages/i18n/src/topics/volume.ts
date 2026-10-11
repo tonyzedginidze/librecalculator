@@ -12,7 +12,7 @@ export const messages = {
   "volume.visual.description":
     "The selected solid is drawn in the proportions you entered, with each measurement on a dimension line. The shaded body is the volume.",
   "volume.visual.alternative":
-    "The entered measurements and the volume are stated in the answer and the working.",
+    "The entered measurements and the volume are stated in the answer and the steps.",
   "volume.error.invalid-field": "Enter a valid decimal dimension.",
   "volume.error.nonpositive-dimension":
     "Every dimension must be greater than zero.",

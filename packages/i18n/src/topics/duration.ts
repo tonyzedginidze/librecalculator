@@ -23,7 +23,7 @@ export const messages = {
   "duration.visual.description":
     "The marker shows the entered duration on a scale in the source unit; the scale below it is drawn in the target unit, so the reading under the marker is the answer.",
   "duration.visual.alternative":
-    "The visible answer and working state both values with their unit symbols.",
+    "The answer and the steps state both values with their unit symbols.",
   "duration.error.invalid-field":
     "Enter a number such as 12 or 0.5 and choose both units.",
   "duration.error.incompatible-units": "Choose two duration units.",
@@ -41,7 +41,7 @@ export const messages = {
   "duration.variable.y": "value in the unit you convert to",
   "duration.limits.title": "Definitions and limits",
   "duration.limits.body":
-    "A minute is 60 s, an hour 3,600 s, a day 86,400 s and a week 604,800 s. Months and years are left out because their length varies. Answers are shown to six significant figures; the working keeps every digit.",
+    "A minute is 60 s, an hour 3,600 s, a day 86,400 s and a week 604,800 s. Months and years are left out because their length varies. Answers are shown to six significant figures; the calculation keeps every digit.",
   "duration.mistakes.title": "Common mistakes",
   "duration.mistakes.body":
     "Hours are not decimal clock time: 1.5 h is 1 hour 30 minutes, not 1 hour 50 minutes. A calendar day that crosses a daylight-saving change can last 23 or 25 hours; this converter always uses 24.",

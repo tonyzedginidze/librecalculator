@@ -29,7 +29,7 @@ export const messages = {
   "ratio.visual.description":
     "The ratio you entered beside the equivalent ratio the calculator found.",
   "ratio.visual.alternative":
-    "Two ratios are written side by side with an equals sign: the one entered and its equivalent, either reduced to a value per one or scaled to a new first amount. The exact numbers are stated in the answer and working.",
+    "Two ratios are written side by side with an equals sign: the one entered and its equivalent, either reduced to a value per one or scaled to a new first amount. The exact numbers are stated in the answer and the steps.",
   "lesson.ratio.formula.quotient": "q = A ÷ B",
   "lesson.ratio.formula.scale-ratio": "B′ = A′ × B ÷ A",
   "lesson.ratio.variable.quotient": "value of the ratio (A per one B)",
@@ -43,8 +43,8 @@ export const messages = {
   "lesson.ratio.meaning.title": "Choose the question",
   "lesson.ratio.meaning.body":
     "Choose simplify to one to find A ÷ B, the value of the ratio, so 16 : 9 becomes 1.78 : 1. Choose scale to keep the same proportion at a new size: enter the original pair and a new first amount, and the calculator finds the matching second amount, so 16 : 9 at a width of 1,920 needs a height of 1,080. Keep the order and units consistent.",
-  "lesson.ratio.example.0": "Two compared with four",
-  "lesson.ratio.example.1": "Scale a two to three mixture",
+  "lesson.ratio.example.0": "2 compared with 4",
+  "lesson.ratio.example.1": "Scale a 2:3 mixture",
   "lesson.ratio.example.2": "A zero first quantity",
   "lesson.ratio.mistakes.title": "Common mistakes",
   "lesson.ratio.mistakes.body":

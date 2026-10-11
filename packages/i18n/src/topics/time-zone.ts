@@ -85,7 +85,7 @@ export const messages = {
     "total minutes; ⌊t ÷ 1440⌋ is the day shift",
   "lesson.time-zone.example.0": "Next day at 01:30",
   "lesson.time-zone.example.1": "Previous day at 23:00",
-  "lesson.time-zone.example.2": "A half-hour offset at 17:30",
+  "lesson.time-zone.example.2": "A UTC+05:30 offset at 17:30",
   "lesson.time-zone.mistakes.title": "Common mistakes",
   "lesson.time-zone.mistakes.body":
     "A city’s offset can change with daylight saving time and with history. Do not treat an offset as a named time zone or assume it holds all year. Keep the minus sign for places west of UTC.",

@@ -25,7 +25,7 @@ async function syncPacks(ids) {
       await caches.delete(name);
 }
 self.addEventListener("install", (event) => {
-  event.waitUntil(syncPacks(["core"]));
+  event.waitUntil(syncPacks(["core"]).then(() => self.skipWaiting()));
 });
 self.addEventListener("activate", (event) => {
   event.waitUntil(
@@ -51,7 +51,14 @@ self.addEventListener("fetch", (event) => {
     (async () => {
       let path = url.pathname;
       if (!path.includes(".") && !path.endsWith("/")) path += "/";
-      // Serve cached HTML and hashed chunks from the same build, even while online.
+      // Pages go to the network first so a new deploy shows up on the next
+      // visit; the cache is the offline fallback. Hashed chunks never change,
+      // so they are served from the cache first.
+      if (event.request.mode === "navigate") {
+        try {
+          return await fetch(event.request);
+        } catch {}
+      }
       for (const name of (await caches.keys()).filter((name) =>
         name.startsWith(prefix),
       )) {

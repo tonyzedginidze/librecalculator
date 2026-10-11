@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 // Videos are large, so they stream instead of shipping in the app. Point
 // VITE_VIDEO_BASE_URL at the R2 public bucket/domain; until then, use the site.
 const VIDEO_BASE: string = (
-  import.meta.env.VITE_VIDEO_BASE_URL ?? "https://librecalculator.com/videos"
+  import.meta.env.VITE_VIDEO_BASE_URL ?? "https://videos.librecalculator.com"
 ).replace(/\/$/, "");
 
 type Chapter = { id: string; title: string; start: number };

@@ -16,6 +16,8 @@
     "dev:desktop": "cd apps/desktop && bunx tauri dev",
     "dev:desktop:ui": "cd apps/desktop && bun run dev",
     "build:web": "cd apps/web && bun run build",
+    "upload:videos": "bun scripts/upload-videos.ts",
+    "deploy": "bun run build:web && rm -rf apps/web/dist/videos && bunx wrangler deploy",
     "build:desktop": "cd apps/desktop && bun run build",
     "test": "bun test",
     "typecheck": "tsc --noEmit",

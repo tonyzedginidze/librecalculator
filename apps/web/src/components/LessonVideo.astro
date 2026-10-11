@@ -25,6 +25,8 @@ type Entry = {
 };
 
 const publicDir = join(process.cwd(), "public");
+// Local files tell us what exists; production serves them from R2.
+const videoBase = (import.meta.env.PUBLIC_VIDEO_BASE_URL ?? "/videos").replace(/\/$/, "");
 const languages: Record<string, { name: string }> = JSON.parse(
   readFileSync(join(process.cwd(), "../../videos/languages.json"), "utf8"),
 );
@@ -34,7 +36,7 @@ for (const [lang, info] of Object.entries(languages)) {
   const base = join(publicDir, "videos", id, lang);
   if (!existsSync(`${base}.mp4`) || !existsSync(`${base}.json`)) continue;
   const meta = JSON.parse(readFileSync(`${base}.json`, "utf8"));
-  const url = `/videos/${id}/${lang}`;
+  const url = `${videoBase}/${id}/${lang}`;
   entries[lang] = {
     name: info.name,
     duration: meta.duration,

@@ -568,13 +568,7 @@ export function Sidebar(props: {
             <div className="oc-side-creator-bubble">
               <p>{ui["ui.creator.message"]}</p>
               <p className="oc-side-creator-ask">{ui["ui.creator.ask"]}</p>
-              <a
-                href={`${repositoryUrl}#ways-to-help`}
-                target="_blank"
-                rel="noopener"
-              >
-                {ui["ui.creator.cta"]} →
-              </a>
+              <a href="/help/">{ui["ui.creator.cta"]} →</a>
             </div>
           </aside>
           <a

@@ -159,6 +159,37 @@ export const ui = {
   "ui.about.open.heading": "Open source",
   "ui.about.open.text":
     "The code, formulas, tests and lessons are public on GitHub. If a number, unit or explanation looks wrong, open an issue with the inputs you used, or send a fix.",
+  "ui.help.title": "How you can help",
+  "ui.help.heading": "Built in the open, made better by people who use it.",
+  "ui.help.description":
+    "Libre Calculator is free and open source. Star it, share your ideas, lend your expertise or build a calculator with us.",
+  "ui.help.intro":
+    "Libre Calculator is a free, open-source project, built in the open and improved by the people who use it. Whether you share it, suggest ideas, contribute your expertise or write code, you help more people understand the numbers that shape their world.",
+  "ui.help.share.heading": "Spread the word.",
+  "ui.help.share.text":
+    "Star Libre Calculator on GitHub and share it with someone who'd use it.",
+  "ui.help.share.action": "Star on GitHub",
+  "ui.help.ideas.heading": "Share your ideas.",
+  "ui.help.ideas.text":
+    "Tell us what you'd like to calculate next, or what could work better.",
+  "ui.help.ideas.action": "Share an idea",
+  "ui.help.ideas.issueTitle": "Idea: ",
+  "ui.help.expertise.heading": "Lend your expertise.",
+  "ui.help.expertise.text":
+    "Accountants, nurses, builders, chefs, teachers, engineers, scientists, coaches, and anyone who works with these numbers every day. Suggest improvements or new calculators from your field, and be credited as a contributor.",
+  "ui.help.expertise.action": "Make a suggestion",
+  "ui.help.expertise.issueTitle": "Suggestion from my field: ",
+  "ui.help.build.heading": "Build with us.",
+  "ui.help.build.text":
+    "Developers can add new calculators. Start a discussion, pick one and open a pull request.",
+  "ui.help.build.action": "View on GitHub",
+  "ui.help.translate.heading": "Translation, coming soon.",
+  "ui.help.translate.text":
+    "Want to help bring Libre Calculator to your language? Get in touch.",
+  "ui.help.translate.action": "Get in touch",
+  "ui.help.translate.issueTitle": "Translation: ",
+  "ui.help.tagline": "A more numerate world, together.",
+  "ui.footer.help": "How you can help",
   "ui.pack.construction.intro":
     "Estimate concrete, paint, flooring, roofing, tiles and lumber for a project. Each calculator states its waste allowance openly, so you can see how much extra material the estimate includes and change it.",
   "ui.pack.cooking.intro":

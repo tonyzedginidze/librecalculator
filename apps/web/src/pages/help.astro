@@ -1,0 +1,47 @@
+---
+import { HelpHero, HelpIcon, Sidebar } from "@open-calculators/dom-ui/components";
+import type { HelpIconName } from "@open-calculators/dom-ui/components";
+import { ui } from "@open-calculators/i18n/ui";
+import Base from "../layouts/Base.astro";
+import { repository } from "../seo";
+
+const issue = (title: string) =>
+  `${repository}/issues/new?title=${encodeURIComponent(title)}`;
+
+const ways: readonly {
+  key: HelpIconName;
+  category: string;
+  href: string;
+}[] = [
+  { key: "share", category: "math", href: repository },
+  { key: "ideas", category: "units", href: issue(ui["ui.help.ideas.issueTitle"]) },
+  { key: "expertise", category: "finance", href: issue(ui["ui.help.expertise.issueTitle"]) },
+  { key: "build", category: "geometry", href: `${repository}/blob/main/docs/new-calculator.md` },
+  { key: "translate", category: "health", href: issue(ui["ui.help.translate.issueTitle"]) },
+];
+---
+<Base title={ui["ui.help.title"]} description={ui["ui.help.description"]}>
+  <div class="oc-app"><Sidebar client:load /><main class="oc-main oc-help" id="calculator">
+    <header class="oc-home-head">
+      <h1 class="oc-home-title">{ui["ui.help.heading"]}</h1>
+      <p class="oc-home-intro">{ui["ui.help.intro"]}</p>
+    </header>
+    <figure class="oc-help-hero"><HelpHero /></figure>
+    <ol class="oc-help-ways">
+      {ways.map((way, index) => (
+        <li class="oc-help-way" data-category={way.category}>
+          <div class="oc-tile-art"><HelpIcon name={way.key} /></div>
+          <div class="oc-help-way-body">
+            <span class="oc-help-way-number">{String(index + 1).padStart(2, "0")}</span>
+            <h2 class="oc-help-way-title">{ui[`ui.help.${way.key}.heading`]}</h2>
+            <p class="oc-help-way-text">{ui[`ui.help.${way.key}.text`]}</p>
+            <a class="oc-help-action" href={way.href} rel="noopener">
+              {ui[`ui.help.${way.key}.action`]} <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </li>
+      ))}
+    </ol>
+    <p class="oc-help-tagline">{ui["ui.help.tagline"]}</p>
+  </main></div>
+</Base>

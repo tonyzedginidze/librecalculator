@@ -7,5 +7,6 @@ export {
   webNav,
 } from "./components/browse";
 export { CalculatorPanel } from "./components/calculator";
+export { HelpHero, HelpIcon, type HelpIconName } from "./components/help-art";
 export { LessonArticle } from "./components/lesson";
 export { Select, type SelectOption } from "./components/select";

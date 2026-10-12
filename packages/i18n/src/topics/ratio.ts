@@ -39,7 +39,7 @@ export const messages = {
   "lesson.ratio.variable.newSecond": "matching new second amount",
   "lesson.ratio.intro.title": "What a ratio tells you",
   "lesson.ratio.intro.body":
-    "A ratio compares two quantities in a specified order. The quotient first ÷ second describes how much of the second quantity corresponds to one first value. Scaling preserves the same relative amounts while changing the size.",
+    "A ratio compares two quantities in a specified order. The quotient first ÷ second describes how much of the first quantity corresponds to one unit of the second. Scaling preserves the same relative amounts while changing the size.",
   "lesson.ratio.meaning.title": "Choose the question",
   "lesson.ratio.meaning.body":
     "Choose simplify to one to find A ÷ B, the value of the ratio, so 16 : 9 becomes 1.78 : 1. Choose scale to keep the same proportion at a new size: enter the original pair and a new first amount, and the calculator finds the matching second amount, so 16 : 9 at a width of 1,920 needs a height of 1,080. Keep the order and units consistent.",

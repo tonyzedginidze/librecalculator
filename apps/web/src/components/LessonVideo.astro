@@ -3,7 +3,7 @@
 // public/videos/<id>/ (<lang>.mp4, <lang>.9x16.mp4, <lang>.jpg, <lang>.json
 // with chapters) and renders nothing when there is no video. Without
 // JavaScript the native <video controls> still works; the script upgrades it.
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { formatMessage } from "@open-calculators/i18n/locales";
 import { ui } from "@open-calculators/i18n/ui";
@@ -37,13 +37,17 @@ for (const [lang, info] of Object.entries(languages)) {
   if (!existsSync(`${base}.mp4`) || !existsSync(`${base}.json`)) continue;
   const meta = JSON.parse(readFileSync(`${base}.json`, "utf8"));
   const url = `${videoBase}/${id}/${lang}`;
+  // R2 files are cached for a week under fixed names; a version from the file
+  // time gives every rebuild a fresh URL.
+  const at = (suffix: string) =>
+    `${url}${suffix}?v=${Math.round(statSync(`${base}${suffix}`).mtimeMs / 1000).toString(36)}`;
   entries[lang] = {
     name: info.name,
     duration: meta.duration,
     chapters: meta.chapters,
-    wide: { src: `${url}.mp4`, poster: `${url}.jpg` },
+    wide: { src: at(".mp4"), poster: at(".jpg") },
     ...(existsSync(`${base}.9x16.mp4`)
-      ? { tall: { src: `${url}.9x16.mp4`, poster: `${url}.9x16.jpg` } }
+      ? { tall: { src: at(".9x16.mp4"), poster: at(".9x16.jpg") } }
       : {}),
   };
 }

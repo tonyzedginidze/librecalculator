@@ -63,13 +63,19 @@ let failed = 0;
 async function worker() {
   while (next < jobs.length) {
     const job = jobs[next++] as (typeof jobs)[number];
-    const ok = (await upload(job)) || (await upload(job));
+    // The R2 API rate-limits bursts ("Too Many Requests"); back off and retry.
+    let ok = false;
+    for (let attempt = 1; attempt <= 5 && !ok; attempt++) {
+      ok = await upload(job);
+      if (!ok) await Bun.sleep(attempt * 15_000);
+    }
     if (!ok) {
       failed++;
       console.error(`FAILED ${job.key}`);
     } else if (next % 20 === 0) console.log(`${next}/${jobs.length}`);
   }
 }
-await Promise.all(Array.from({ length: 4 }, worker));
+// Large files fail under more parallel uploads; two at a time is reliable.
+await Promise.all(Array.from({ length: 2 }, worker));
 console.log(`uploaded ${jobs.length - failed}/${jobs.length} to ${bucket}`);
 process.exit(failed ? 1 : 0);

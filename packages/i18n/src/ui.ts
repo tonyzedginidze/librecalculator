@@ -193,7 +193,7 @@ export const ui = {
     "Every calculator and its worked explanation in a window of its own. Press {shortcut} from any app to open the quick panel and find a calculator by name.",
   "ui.download.shortcut": "Cmd/Ctrl Shift C",
   "ui.download.heroAlt":
-    "The Libre Calculator window next to the quick panel and its keyboard shortcut",
+    "The Libre Calculator desktop app showing the compound interest calculator, with the quick panel open over it after pressing Command Shift C",
   "ui.download.for": "Download for {os}",
   "ui.download.details": "Version {version} · {arch} · {size} MB",
   "ui.download.size": "{size} MB",

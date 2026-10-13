@@ -140,7 +140,7 @@ export function structuredData(pathname: string, site: URL) {
       description: ui["ui.download.description"],
       url: url("/download/"),
       downloadUrl: `${repository}/releases/latest`,
-      image: url("/download/desktop-light.png"),
+      image: url("/download/desktop-light.webp"),
       applicationCategory: "UtilitiesApplication",
       operatingSystem: "macOS, Windows, Linux",
       isAccessibleForFree: true,

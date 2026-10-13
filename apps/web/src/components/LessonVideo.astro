@@ -27,9 +27,11 @@ type Entry = {
 const publicDir = join(process.cwd(), "public");
 // Local files tell us what exists; production serves them from R2.
 const videoBase = (import.meta.env.PUBLIC_VIDEO_BASE_URL ?? "/videos").replace(/\/$/, "");
-const languages: Record<string, { name: string }> = JSON.parse(
-  readFileSync(join(process.cwd(), "../../videos/languages.json"), "utf8"),
-);
+// videos/ is kept locally, so a fresh clone (or CI) builds without videos.
+const languagesFile = join(process.cwd(), "../../videos/languages.json");
+const languages: Record<string, { name: string }> = existsSync(languagesFile)
+  ? JSON.parse(readFileSync(languagesFile, "utf8"))
+  : {};
 
 const entries: Record<string, Entry> = {};
 for (const [lang, info] of Object.entries(languages)) {

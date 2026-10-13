@@ -1,0 +1,22 @@
+---
+import { DownloadPanel, Sidebar } from "@open-calculators/dom-ui/components";
+import { formatMessage } from "@open-calculators/i18n/locales";
+import { ui } from "@open-calculators/i18n/ui";
+import Base from "../layouts/Base.astro";
+---
+<Base title={ui["ui.download.title"]} description={ui["ui.download.description"]}>
+  <div class="oc-app"><Sidebar client:load /><main class="oc-main oc-download-page" id="calculator">
+    <header class="oc-home-head">
+      <h1 class="oc-home-title">{ui["ui.download.heading"]}</h1>
+      <p class="oc-home-intro">
+        {formatMessage(ui["ui.download.intro"], { shortcut: ui["ui.download.shortcut"] })}
+      </p>
+    </header>
+    <DownloadPanel client:load>
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="/download/desktop-dark.png" />
+        <img src="/download/desktop-light.png" width="960" height="540" alt={ui["ui.download.heroAlt"]} />
+      </picture>
+    </DownloadPanel>
+  </main></div>
+</Base>

@@ -28,6 +28,7 @@ import {
 } from "../motion";
 import { allPackIds, SettingsDialog, useActivePacks } from "../packs";
 import { CalculatorArt, CategoryIcon, SearchIcon } from "./art";
+import { SidebarDownload } from "./download";
 import { PackIcon } from "./pack-icon";
 import { Chevron } from "./select";
 
@@ -571,6 +572,7 @@ export function Sidebar(props: {
               <a href="/help/">{ui["ui.creator.cta"]} →</a>
             </div>
           </aside>
+          <SidebarDownload />
           <a
             className="oc-side-github"
             href={repositoryUrl}

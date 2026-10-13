@@ -7,6 +7,7 @@ export const GET: APIRoute = ({ site }) => {
     "/",
     "/about/",
     "/help/",
+    "/download/",
     ...packCatalog.map((pack) => `/packs/${pack.id}/`),
     ...calculatorCatalog.map((item) => `/calculators/${item.slug}/`),
   ];

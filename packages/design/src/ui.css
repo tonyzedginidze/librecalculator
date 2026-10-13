@@ -3250,3 +3250,442 @@ body:has(.oc-settings-dialog[open]) {
 .oc-letter-links a:hover {
   text-decoration: underline;
 }
+
+/* Desktop download: sidebar card and the /download page. */
+.oc-os-icon {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+.oc-os-icon-line {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.oc-side-download {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin: 0.15rem 0 0.4rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--oc-line);
+  border-radius: 6px;
+  background: var(--oc-surface);
+  color: var(--oc-ink);
+  text-decoration: none;
+  transition:
+    border-color 160ms var(--oc-ease),
+    box-shadow 200ms var(--oc-ease),
+    transform 200ms var(--oc-ease);
+}
+.oc-side-download:hover {
+  border-color: var(--oc-accent);
+  box-shadow: 0 6px 16px -10px
+    color-mix(in srgb, var(--oc-accent) 55%, transparent);
+  transform: translateY(-1px);
+}
+.oc-side-download:focus-visible {
+  outline: 2px solid var(--oc-focus);
+  outline-offset: 2px;
+}
+.oc-side-download-mark {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0.45rem;
+  border-radius: 50%;
+  background: var(--oc-accent);
+  color: var(--oc-canvas);
+}
+.oc-side-download-copy {
+  display: grid;
+  min-width: 0;
+  line-height: 1.25;
+}
+.oc-side-download-copy strong {
+  font-size: 0.9rem;
+  font-weight: 620;
+}
+.oc-side-download-copy span {
+  color: var(--oc-muted);
+  font-size: 0.78rem;
+}
+.oc-side-download-arrow {
+  flex: none;
+  width: 0.95rem;
+  height: 0.95rem;
+  margin-left: auto;
+  fill: none;
+  stroke: var(--oc-muted);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition:
+    transform 200ms var(--oc-ease),
+    stroke 160ms var(--oc-ease);
+}
+.oc-side-download:hover .oc-side-download-arrow {
+  stroke: var(--oc-accent);
+  transform: translateY(2px);
+}
+
+.oc-download-page {
+  container-type: inline-size;
+}
+.oc-download {
+  display: grid;
+  gap: 2rem;
+  max-width: 60rem;
+}
+.oc-download-cta {
+  display: grid;
+  justify-items: start;
+  gap: 0.6rem;
+}
+.oc-download-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  min-width: min(100%, 22rem);
+  padding: 0.85rem 1.2rem 0.85rem 0.95rem;
+  border-radius: 10px;
+  background: var(--oc-ink);
+  color: var(--oc-canvas);
+  text-decoration: none;
+  box-shadow:
+    0 1px 0 color-mix(in srgb, var(--oc-canvas) 18%, transparent) inset,
+    0 10px 24px -14px color-mix(in srgb, var(--oc-ink) 70%, transparent);
+  transition:
+    transform 200ms var(--oc-ease),
+    box-shadow 200ms var(--oc-ease),
+    background-color 160ms var(--oc-ease);
+}
+.oc-download-primary:hover {
+  background: var(--oc-accent);
+  transform: translateY(-2px);
+  box-shadow:
+    0 1px 0 color-mix(in srgb, var(--oc-canvas) 18%, transparent) inset,
+    0 16px 30px -16px color-mix(in srgb, var(--oc-accent) 80%, transparent);
+}
+.oc-download-primary:active {
+  transform: translateY(0);
+}
+.oc-download-primary:focus-visible {
+  outline: 2px solid var(--oc-focus);
+  outline-offset: 3px;
+}
+.oc-download-primary[aria-busy="true"] .oc-download-primary-copy span {
+  animation: oc-download-pulse 1.4s var(--oc-ease) infinite alternate;
+}
+@keyframes oc-download-pulse {
+  to {
+    opacity: 0.45;
+  }
+}
+.oc-download-primary-icon {
+  display: grid;
+  flex: none;
+  width: 1.9rem;
+  height: 1.9rem;
+}
+.oc-download-primary-copy {
+  display: grid;
+  min-width: 0;
+  line-height: 1.25;
+}
+.oc-download-primary-copy strong {
+  font-size: 1.08rem;
+  font-weight: 640;
+}
+.oc-download-primary-copy span {
+  font-size: 0.8rem;
+  opacity: 0.78;
+  font-variant-numeric: tabular-nums;
+}
+.oc-download-primary-glyph {
+  flex: none;
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-left: auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 200ms var(--oc-ease);
+}
+.oc-download-primary:hover .oc-download-primary-glyph {
+  transform: translateY(2px);
+}
+.oc-download-started {
+  display: block;
+  min-height: 1.2em;
+  margin: 0;
+  color: var(--oc-accent);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.oc-download-mobile {
+  max-width: 34rem;
+  margin: 0;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--oc-line);
+  border-radius: 6px;
+  background: var(--oc-surface);
+}
+
+.oc-download-hero {
+  margin: 0;
+}
+.oc-download-hero img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+}
+
+.oc-download-section {
+  display: grid;
+  gap: 0.9rem;
+}
+.oc-download-heading {
+  margin: 0;
+  font-family: var(--oc-font-serif);
+  font-size: 1.35rem;
+  font-weight: 560;
+  letter-spacing: -0.01em;
+}
+.oc-download-note {
+  margin: 0;
+  color: var(--oc-muted);
+}
+.oc-download-systems {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1rem;
+}
+.oc-download-system {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 0.75rem;
+  padding: 1rem;
+  border: 1px solid var(--oc-line);
+  border-radius: 6px;
+  background: var(--oc-surface);
+}
+.oc-download-system[data-current] {
+  border-color: var(--oc-accent);
+  box-shadow: 0 0 0 1px var(--oc-accent);
+}
+.oc-download-system-head {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  line-height: 1.25;
+}
+.oc-download-system-head h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 640;
+}
+.oc-download-system-head > span:not([class]) {
+  display: grid;
+}
+.oc-download-system-head > span:not([class]) > span {
+  color: var(--oc-muted);
+  font-size: 0.78rem;
+}
+.oc-download-system-mark {
+  display: grid;
+  flex: none;
+  width: 2.2rem;
+  height: 2.2rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  background: var(--oc-canvas);
+  color: var(--oc-ink);
+  box-shadow: 0 0 0 1px var(--oc-line);
+}
+.oc-download-system[data-current] .oc-download-system-mark {
+  background: var(--oc-accent);
+  color: var(--oc-canvas);
+  box-shadow: none;
+}
+.oc-download-badge {
+  position: absolute;
+  top: 0;
+  right: 0.9rem;
+  translate: 0 -50%;
+  padding: 0.12rem 0.55rem;
+  border-radius: 999px;
+  background: var(--oc-accent);
+  color: var(--oc-canvas);
+  font-size: 0.72rem;
+  font-weight: 620;
+  white-space: nowrap;
+}
+.oc-download-files {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.oc-download-files a {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 0.15rem;
+  border-top: 1px solid var(--oc-line);
+  color: var(--oc-ink);
+  font-size: 0.88rem;
+  text-decoration: none;
+}
+.oc-download-files a:hover .oc-download-file-format {
+  color: var(--oc-accent);
+}
+.oc-download-files a:focus-visible {
+  outline: 2px solid var(--oc-focus);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+.oc-download-file-copy {
+  display: grid;
+  gap: 0.05rem;
+  min-width: 0;
+  line-height: 1.3;
+}
+.oc-download-file-format {
+  font-weight: 560;
+  transition: color 160ms var(--oc-ease);
+}
+.oc-download-file-meta {
+  color: var(--oc-muted);
+  font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.oc-download-file-glyph {
+  flex: none;
+  margin-left: auto;
+  width: 0.9rem;
+  height: 0.9rem;
+  fill: none;
+  stroke: var(--oc-muted);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.oc-download-files a:hover .oc-download-file-glyph {
+  stroke: var(--oc-accent);
+}
+.oc-download-fallback {
+  color: var(--oc-muted);
+  font-size: 0.85rem;
+}
+.oc-download-steps {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.oc-download-steps li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--oc-line);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+.oc-download-steps li[data-current] {
+  border-color: var(--oc-accent);
+  background: var(--oc-accent-soft);
+}
+.oc-download-steps .oc-os-icon {
+  flex: none;
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-top: 0.1rem;
+  color: var(--oc-muted);
+}
+.oc-download-steps li[data-current] .oc-os-icon {
+  color: var(--oc-accent);
+}
+.oc-download-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.2rem;
+  margin: 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--oc-line);
+  color: var(--oc-muted);
+  font-size: 0.85rem;
+}
+.oc-download-meta a {
+  color: var(--oc-ink);
+}
+@media (prefers-reduced-motion: reduce) {
+  .oc-side-download,
+  .oc-download-primary,
+  .oc-download-primary-glyph,
+  .oc-side-download-arrow {
+    transition: none;
+  }
+  .oc-download-primary[aria-busy="true"] .oc-download-primary-copy span {
+    animation: none;
+  }
+}
+
+.oc-side-download-wrap {
+  display: grid;
+  margin: 0.15rem 0 0.4rem;
+}
+.oc-side-download-wrap .oc-side-download {
+  margin: 0;
+}
+.oc-side-download-all {
+  justify-self: end;
+  margin-top: 0.3rem;
+  padding: 0 0.2rem;
+  color: var(--oc-muted);
+  font-size: 0.75rem;
+  text-decoration: none;
+}
+.oc-side-download-all:hover {
+  color: var(--oc-accent);
+  text-decoration: underline;
+}
+.oc-download-other {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.1rem 0.15rem;
+  color: var(--oc-muted);
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+.oc-download-other:hover {
+  color: var(--oc-accent);
+}
+.oc-download-other:hover > :not(.oc-download-other-icons) {
+  text-decoration: underline;
+}
+.oc-download-other-icons {
+  display: inline-flex;
+  gap: 0.3rem;
+}
+.oc-download-other-icons .oc-os-icon {
+  width: 0.9rem;
+  height: 0.9rem;
+}
+#oc-download-all {
+  scroll-margin-top: 1.5rem;
+}

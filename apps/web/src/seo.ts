@@ -132,5 +132,21 @@ export function structuredData(pathname: string, site: URL) {
       ]),
     );
   }
+  if (section === "download") {
+    graph.push({
+      "@type": "SoftwareApplication",
+      "@id": `${url("/download/")}#app`,
+      name: ui["ui.app.name"],
+      description: ui["ui.download.description"],
+      url: url("/download/"),
+      downloadUrl: `${repository}/releases/latest`,
+      image: url("/download/desktop-light.png"),
+      applicationCategory: "UtilitiesApplication",
+      operatingSystem: "macOS, Windows, Linux",
+      isAccessibleForFree: true,
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+      publisher: { "@id": `${home}#organization` },
+    });
+  }
   return JSON.stringify({ "@context": "https://schema.org", "@graph": graph });
 }

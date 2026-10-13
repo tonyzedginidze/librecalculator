@@ -10,11 +10,12 @@
 The universe in numbers.<br>
 Building the world's best calculators, free and open source.
 
-[Website](https://librecalculator.com) · [Calculator packs](#calculator-packs) · [Get started](#get-started) · [Ways to help](#ways-to-help) · [Docs](docs/README.md)
+[Website](https://librecalculator.com) · [Download](https://librecalculator.com/download/) · [Calculator packs](#calculator-packs) · [Get started](#get-started) · [Ways to help](#ways-to-help) · [Docs](docs/README.md)
 
 [![Stars](https://img.shields.io/github/stars/tonyzedginidze/librecalculator?style=flat-square&labelColor=1c1712&color=7a3e22)](https://github.com/tonyzedginidze/librecalculator/stargazers)
 [![Last commit](https://img.shields.io/github/last-commit/tonyzedginidze/librecalculator?style=flat-square&labelColor=1c1712&color=2b7a4b)](https://github.com/tonyzedginidze/librecalculator/commits/main)
 [![Issues](https://img.shields.io/github/issues/tonyzedginidze/librecalculator?style=flat-square&labelColor=1c1712&color=2f5d8a)](https://github.com/tonyzedginidze/librecalculator/issues)
+[![Desktop release](https://img.shields.io/github/v/release/tonyzedginidze/librecalculator?style=flat-square&labelColor=1c1712&color=7a3e22&label=desktop)](https://github.com/tonyzedginidze/librecalculator/releases/latest)
 [![Built with Bun](https://img.shields.io/badge/built_with-Bun-6a4c93?style=flat-square&labelColor=1c1712)](https://bun.sh)
 
 </div>
@@ -97,6 +98,27 @@ Engines are pure functions with written numeric contracts and fixture tests. Ari
 </tr>
 </table>
 
+## Desktop app
+
+<a href="https://librecalculator.com/download/">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset=".github/readme/desktop-dark.webp">
+    <img src=".github/readme/desktop-light.webp" width="100%" alt="The Libre Calculator desktop app showing the compound interest calculator, with the quick panel open over it after pressing Command Shift C">
+  </picture>
+</a>
+
+<div align="center">
+
+Every calculator in a window of its own. Press <kbd>Cmd/Ctrl</kbd> <kbd>Shift</kbd> <kbd>C</kbd> in any app, type a few letters, and the calculator opens.
+
+[![macOS](https://img.shields.io/badge/macOS-Apple_Silicon_%7C_Intel-7a3e22?style=for-the-badge&logo=apple&logoColor=white&labelColor=1c1712)](https://github.com/tonyzedginidze/librecalculator/releases/latest)
+[![Windows](https://img.shields.io/badge/Windows-x64_%7C_ARM-2f5d8a?style=for-the-badge&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI%2BPHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0zIDEyVjYuNzVsNi0xLjMydjYuNDh6bTE3LTl2OC43NWwtMTAgLjE1VjUuMjF6TTMgMTNsNiAuMDl2Ni44MWwtNi0xLjE1em0xNyAuMjVWMjJsLTEwLTEuOTFWMTMuMXoiLz48L3N2Zz4%3D&labelColor=1c1712)](https://github.com/tonyzedginidze/librecalculator/releases/latest)
+[![Linux](https://img.shields.io/badge/Linux-deb_%7C_rpm_%7C_AppImage-2b7a4b?style=for-the-badge&logo=linux&logoColor=white&labelColor=1c1712)](https://github.com/tonyzedginidze/librecalculator/releases/latest)
+
+Free and open source. [librecalculator.com/download](https://librecalculator.com/download/) picks the right file for your computer.
+
+</div>
+
 ## Calculator packs
 
 <picture>
@@ -129,7 +151,7 @@ Engines are pure functions with written numeric contracts and fixture tests. Ari
 
 The quickest way is the website: [librecalculator.com](https://librecalculator.com).
 
-The desktop app is on the [releases page](https://github.com/tonyzedginidze/librecalculator/releases/latest) for macOS, Windows (x64 and ARM) and Linux (deb, rpm and AppImage, x64 and ARM).
+Or get the [desktop app](https://librecalculator.com/download/) for macOS, Windows (x64 and ARM) and Linux (deb, rpm and AppImage, x64 and ARM). Every build is also on the [releases page](https://github.com/tonyzedginidze/librecalculator/releases/latest).
 
 To run it locally you need Bun **1.4.2** and Node **24.21.0**.
 

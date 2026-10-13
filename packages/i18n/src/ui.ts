@@ -143,22 +143,16 @@ export const ui = {
   "ui.sidebar.github.text": "Star it or read the code",
   "ui.about.title": "About Libre Calculator",
   "ui.about.description":
-    "Who builds Libre Calculator, how its numbers are checked, and what happens to your data (nothing leaves your browser).",
-  "ui.about.what.heading": "What it is",
-  "ui.about.what.text":
-    "Libre Calculator is a free, open-source set of calculators for math, money, health, cooking, building, school, science and everyday units. Each calculator gives an answer, the steps that produced it, a diagram and a short lesson on the idea behind the formula.",
-  "ui.about.accuracy.heading": "How the numbers are checked",
+    "A note from Tony, who builds Libre Calculator: free calculators that explain their answers, with no accounts and nothing sent from your device.",
+  "ui.about.letter.1":
+    "Hi, I'm Tony. I build Libre Calculator on my own, a little at a time, because I think working something out should be easy and shouldn't cost anything. Whatever you came here to figure out, I hope you found the answer and that the explanation underneath made it make sense.",
+  "ui.about.letter.2":
+    "The site is free and you don't need an account. Your numbers never leave your device. I test every calculator carefully, but I'm one person, so if something looks wrong or isn't clear, please let me know and I'll put it right. The same goes for a calculator you wish existed. Most of what gets built next starts with someone asking for it.",
+  "ui.about.letter.3": "Thanks for stopping by.",
+  "ui.about.signature": "Tony",
+  "ui.about.contact": "Tell me what you think",
   "ui.about.accuracy.text":
     "Calculations use exact decimal arithmetic rather than binary floating point, with up to 50 significant digits inside a calculation. Answers are rounded only for display. Every calculator has tests against independently worked examples, and the answer, the steps and the diagram all come from one calculation, so they cannot disagree.",
-  "ui.about.limits.heading": "Limits",
-  "ui.about.limits.text":
-    "Each lesson lists what its calculator does not cover. Health, money and building results are estimates for learning and planning, not medical, financial or engineering advice.",
-  "ui.about.privacy.heading": "Privacy",
-  "ui.about.privacy.text":
-    "Everything runs in your browser. There are no accounts, ads or trackers, and the numbers you type are never sent to a server. Your choice of calculator packs is kept in your browser's local storage so the site can work offline.",
-  "ui.about.open.heading": "Open source",
-  "ui.about.open.text":
-    "The code, formulas, tests and lessons are public on GitHub. If a number, unit or explanation looks wrong, open an issue with the inputs you used, or send a fix.",
   "ui.help.title": "How you can help",
   "ui.help.heading": "Built in the open, made better by people who use it.",
   "ui.help.description":

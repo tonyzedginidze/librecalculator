@@ -3196,3 +3196,57 @@ body:has(.oc-settings-dialog[open]) {
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 }
+
+/* ───────── About: a letter from the creator ───────── */
+.oc-main.oc-letter {
+  max-width: 38rem;
+  margin-inline: 0;
+  padding-inline: clamp(1rem, 4vw, 3rem);
+  padding-top: clamp(1.5rem, 5vw, 3.5rem);
+}
+.oc-letter .oc-kicker {
+  margin-bottom: 1.75rem;
+}
+.oc-letter-photo {
+  display: inline-block;
+  margin-bottom: 1.25rem;
+  border-radius: 50%;
+}
+.oc-letter-photo img {
+  display: block;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow:
+    0 0 0 3px var(--oc-surface),
+    0 0 0 4px var(--oc-line);
+}
+.oc-letter p {
+  margin: 0 0 1.1rem;
+  font-family: var(--oc-font-serif);
+  font-size: 1.18rem;
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+.oc-letter .oc-letter-signature {
+  margin: 1.6rem 0 2.25rem;
+  font-size: 1.5rem;
+  font-style: italic;
+}
+.oc-letter-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.5rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--oc-line);
+  font-size: 0.93rem;
+}
+.oc-letter-links a {
+  color: var(--oc-accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+.oc-letter-links a:hover {
+  text-decoration: underline;
+}

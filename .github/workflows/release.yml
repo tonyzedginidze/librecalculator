@@ -34,12 +34,16 @@ jobs:
         if: github.ref_type == 'tag'
         run: |
           tag="${GITHUB_REF_NAME}"
-          prerelease=""
-          [[ "$tag" == *-* ]] && prerelease="--prerelease"
-          gh release create "$tag" --draft --verify-tag $prerelease \
-            --title "Libre Calculator ${tag#v}" \
-            --notes-file .github/release-notes.md --generate-notes
-          id=$(gh api "repos/${GITHUB_REPOSITORY}/releases" --jq ".[] | select(.tag_name == \"$tag\") | .id" | head -n1)
+          prerelease=false
+          if [[ "$tag" == *-* ]]; then prerelease=true; fi
+          # The API returns the new id directly; listing releases right after
+          # creating a draft can miss it. GitHub appends generated notes to body.
+          id=$(gh api "repos/${GITHUB_REPOSITORY}/releases" \
+            -f tag_name="$tag" -f name="Libre Calculator ${tag#v}" \
+            -F body=@.github/release-notes.md \
+            -F draft=true -F prerelease=$prerelease -F generate_release_notes=true \
+            --jq .id)
+          test -n "$id"
           echo "id=$id" >> "$GITHUB_OUTPUT"
 
   build:
@@ -124,10 +128,16 @@ jobs:
     steps:
       - name: Add checksums and publish
         run: |
-          tag="${GITHUB_REF_NAME}"
+          release="repos/${GITHUB_REPOSITORY}/releases/${{ needs.prepare.outputs.release_id }}"
           mkdir assets && cd assets
-          gh release download "$tag" --repo "$GITHUB_REPOSITORY"
+          # Drafts cannot be looked up by tag, so fetch the assets by id.
+          gh api "$release/assets" --paginate --jq '.[] | "\(.id)\t\(.name)"' |
+            while IFS=$'\t' read -r id name; do
+              gh api -H "Accept: application/octet-stream" "repos/${GITHUB_REPOSITORY}/releases/assets/$id" > "$name"
+            done
+          test "$(ls | wc -l)" -gt 0
           sha256sum -- * > SHA256SUMS.txt
           cat SHA256SUMS.txt
-          gh release upload "$tag" SHA256SUMS.txt --repo "$GITHUB_REPOSITORY" --clobber
-          gh release edit "$tag" --repo "$GITHUB_REPOSITORY" --draft=false
+          upload=$(gh api "$release" --jq .upload_url | sed 's/{.*//')
+          gh api "$upload?name=SHA256SUMS.txt" -H "Content-Type: text/plain" --input SHA256SUMS.txt --jq .name
+          gh api -X PATCH "$release" -F draft=false --jq .html_url

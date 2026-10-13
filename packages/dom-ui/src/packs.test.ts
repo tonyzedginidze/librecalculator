@@ -25,3 +25,13 @@ test("enabled pack calculators join categories and disabling the last pack hides
   ).toHaveLength(8);
   expect(filterItems(active(["core"]), "", "geometry")).toHaveLength(3);
 });
+
+test("search ranks title matches above description matches", () => {
+  const ids = (query: string) =>
+    filterItems(catalogItems, query).map((item) => item.id);
+  // Percentage's description says "compare"; the title match must win.
+  expect(ids("comp")[0]).toBe("compound-interest");
+  expect(ids("interest")[0]).toBe("compound-interest");
+  // A word inside the title outranks keyword and description hits.
+  expect(ids("payment")[0]).toBe("loan-payments");
+});

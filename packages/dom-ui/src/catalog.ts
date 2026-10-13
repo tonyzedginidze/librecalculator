@@ -77,7 +77,7 @@ export function filterItems(
   category: Category | "all" = "all",
 ): CatalogItem[] {
   const needle = query.trim().toLowerCase();
-  return items.filter(
+  const matches = items.filter(
     (item) =>
       (category === "all" || item.category === category) &&
       (!needle ||
@@ -85,4 +85,19 @@ export function filterItems(
           .toLowerCase()
           .includes(needle)),
   );
+  if (!needle) return matches;
+  // Title matches first, so "comp" finds Compound interest before a
+  // description that happens to say "compare". Ties keep catalog order.
+  const relevance = (item: CatalogItem) => {
+    const title = item.title.toLowerCase();
+    if (title.startsWith(needle)) return 0;
+    if (title.split(/[\s-]+/).some((word) => word.startsWith(needle))) return 1;
+    if (title.includes(needle)) return 2;
+    if (item.keywords.includes(needle)) return 3;
+    return 4;
+  };
+  return matches
+    .map((item) => ({ item, score: relevance(item) }))
+    .sort((a, b) => a.score - b.score)
+    .map(({ item }) => item);
 }

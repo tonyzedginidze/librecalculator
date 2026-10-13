@@ -19,6 +19,7 @@
     "upload:videos": "bun scripts/upload-videos.ts",
     "deploy": "bun run build:web && rm -rf apps/web/dist/videos && bunx wrangler deploy",
     "build:desktop": "cd apps/desktop && bun run build",
+    "release": "bun scripts/release.ts",
     "test": "bun test",
     "typecheck": "tsc --noEmit",
     "lint": "biome check .",

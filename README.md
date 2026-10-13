@@ -129,6 +129,8 @@ Engines are pure functions with written numeric contracts and fixture tests. Ari
 
 The quickest way is the website: [librecalculator.com](https://librecalculator.com).
 
+The desktop app is on the [releases page](https://github.com/tonyzedginidze/librecalculator/releases/latest) for macOS, Windows (x64 and ARM) and Linux (deb, rpm and AppImage, x64 and ARM).
+
 To run it locally you need Bun **1.4.2** and Node **24.21.0**.
 
 ```sh

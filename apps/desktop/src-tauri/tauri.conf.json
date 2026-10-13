@@ -1,7 +1,7 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "Libre Calculator",
-  "version": "0.1.0",
+  "version": "../package.json",
   "identifier": "com.librecalculator.desktop",
   "build": {
     "beforeDevCommand": "bun run dev",
@@ -54,8 +54,33 @@
   "bundle": {
     "active": true,
     "targets": "all",
+    "publisher": "Libre Calculator",
+    "homepage": "https://librecalculator.com",
+    "category": "Utility",
+    "shortDescription": "Calculators that show their working",
+    "longDescription": "Libre Calculator is a free collection of calculators. Every result comes with a worked explanation of how it was reached, and a quick panel opens from anywhere with a keyboard shortcut.",
+    "copyright": "Libre Calculator contributors",
     "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico",
       "icons/icon.png"
-    ]
+    ],
+    "macOS": {
+      "signingIdentity": "-",
+      "minimumSystemVersion": "11.0"
+    },
+    "windows": {
+      "nsis": {
+        "installMode": "currentUser"
+      }
+    },
+    "linux": {
+      "rpm": {
+        "release": "1"
+      }
+    }
   }
 }

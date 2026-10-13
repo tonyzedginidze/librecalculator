@@ -19,5 +19,8 @@
 - [math](numerical-contracts-math.md), [date and time](numerical-contracts-date-time.md), [statistics](numerical-contracts-statistics.md), [physics](numerical-contracts-physics.md)
 - [health](numerical-contracts-health.md), [construction](numerical-contracts-construction.md), [cooking](numerical-contracts-cooking.md), [education](numerical-contracts-education.md)
 
+**Shipping**
+- [releasing.md](releasing.md): desktop versioning, CI and the release workflow
+
 **Evidence and verification**
 - [verification-matrix.md](verification-matrix.md), [evidence/](evidence/)

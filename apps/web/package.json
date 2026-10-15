@@ -2,6 +2,7 @@
   "name": "@open-calculators/web",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "astro dev --host 127.0.0.1",

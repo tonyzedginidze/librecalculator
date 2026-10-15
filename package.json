@@ -1,6 +1,7 @@
 {
   "name": "open-calculators",
   "private": true,
+  "license": "MIT",
   "packageManager": "bun@1.4.2",
   "workspaces": [
     "packages/*",

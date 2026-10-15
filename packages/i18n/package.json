@@ -2,6 +2,7 @@
   "name": "@open-calculators/i18n",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "exports": {
     ".": "./src/en.ts",

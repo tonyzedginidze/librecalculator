@@ -113,7 +113,6 @@ export const ui = {
   "ui.seo.home.title": "Libre Calculator: free, open-source online calculators",
   "ui.seo.home.description":
     "Free, open-source calculators for math, money, health, cooking, building and more. Fast, private, no sign-up, and each one explains its answer.",
-  "ui.seo.title.suffix": "{title} | Libre Calculator",
   "ui.og.home.title": "Free, open‑source calculators",
   "ui.og.home.text":
     "Math, money, health, cooking, building and more. Fast, private, no sign-up.",

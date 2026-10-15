@@ -6,7 +6,7 @@ import { calculatorRoute } from "@open-calculators/dom-ui/catalog";
 import { LessonArticle, Sidebar } from "@open-calculators/dom-ui/components";
 import { presentExample as topicExamplePresenter } from "@open-calculators/dom-ui/topics/roi/examples";
 import { en } from "@open-calculators/i18n";
-import { metaDescriptions } from "@open-calculators/i18n/meta";
+import { metaDescriptions, seoTitles } from "@open-calculators/i18n/meta";
 import { topicMessageImports } from "@open-calculators/i18n/topics";
 import { ui } from "@open-calculators/i18n/ui";
 import TopicView from "@open-calculators/dom-ui/topics/roi/view";
@@ -19,6 +19,7 @@ if (!item) throw new Error("Generated web topic does not match calculator catalo
 const title = en[item.titleKey] ?? item.id;
 const description = en[item.descriptionKey] ?? "";
 const metaDescription = metaDescriptions[item.id as keyof typeof metaDescriptions] ?? description;
+const seoTitle = seoTitles[item.id as keyof typeof seoTitles] ?? title;
 
 const loadLesson = lessonImports[item.id as keyof typeof lessonImports];
 const loadMessages = topicMessageImports[item.id as keyof typeof topicMessageImports];
@@ -34,7 +35,7 @@ const messages = {
   ...(topicMessagesData?.messages ?? {}),
 };
 ---
-<Base title={title} description={metaDescription}>
+<Base title={title} fullTitle={seoTitle} description={metaDescription}>
   <div class="oc-app">
     <Sidebar client:load activeId={item.id} />
     <main id="calculator" data-category={item.category}>

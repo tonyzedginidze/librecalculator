@@ -13,10 +13,7 @@ const { pack } = Astro.props;
 const messages: Readonly<Record<string, string>> = { ...en, ...ui };
 const title = messages[pack.titleKey] ?? pack.id;
 const intro = messages[`ui.pack.${pack.id}.intro`] ?? messages[pack.descriptionKey] ?? "";
-const seoTitle = ui["ui.seo.title.suffix"].replace(
-  "{title}",
-  ui["ui.seo.pack.title"].replace("{title}", title),
-);
+const seoTitle = ui["ui.seo.pack.title"].replace("{title}", title);
 const ids = new Set<string>(pack.calculatorIds);
 const items = catalogItems.filter(item => ids.has(item.id));
 ---

@@ -13,3 +13,5 @@ apps/web/public/videos/
 # Kept locally, not pushed
 /videos/
 /lfs/
+/local/
+.wrangler/

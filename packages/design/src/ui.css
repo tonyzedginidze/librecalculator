@@ -3653,7 +3653,7 @@ body:has(.oc-settings-dialog[open]) {
 }
 .oc-side-download-all {
   justify-self: end;
-  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
   padding: 0 0.2rem;
   color: var(--oc-muted);
   font-size: 0.75rem;

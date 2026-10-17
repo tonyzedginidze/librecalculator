@@ -82,6 +82,10 @@ export function SidebarDownload() {
   const { best } = useDesktopRelease();
   return (
     <div className="oc-side-download-wrap">
+      <a className="oc-side-download-all" href="/download/">
+        {ui["ui.download.sidebar.all"]}
+        <span aria-hidden="true"> →</span>
+      </a>
       <a
         className="oc-side-download"
         href={best?.asset.url ?? "/download/"}
@@ -102,10 +106,6 @@ export function SidebarDownload() {
           </span>
         </span>
         <DownloadGlyph className="oc-side-download-arrow" />
-      </a>
-      <a className="oc-side-download-all" href="/download/">
-        {ui["ui.download.sidebar.all"]}
-        <span aria-hidden="true"> →</span>
       </a>
     </div>
   );

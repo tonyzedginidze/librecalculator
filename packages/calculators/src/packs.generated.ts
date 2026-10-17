@@ -93,7 +93,8 @@ export const packCatalog = [
       "salary",
       "margin-markup",
       "inflation",
-      "retirement"
+      "retirement",
+      "meeting-cost"
     ],
     "default": false
   },
@@ -232,6 +233,7 @@ export const calculatorPacks = {
   "margin-markup": "finance",
   "inflation": "finance",
   "retirement": "finance",
+  "meeting-cost": "finance",
   "rectangle": "geometry",
   "triangle": "geometry",
   "circle": "geometry",

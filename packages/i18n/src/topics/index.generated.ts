@@ -36,6 +36,7 @@ export const topicMessageImports = {
   "macros": () => import("./macros"),
   "margin-markup": () => import("./margin-markup"),
   "mass": () => import("./mass"),
+  "meeting-cost": () => import("./meeting-cost"),
   "mortgage": () => import("./mortgage"),
   "oven-temperature": () => import("./oven-temperature"),
   "paint": () => import("./paint"),

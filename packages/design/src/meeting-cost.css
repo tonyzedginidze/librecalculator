@@ -1,0 +1,283 @@
+/* Meeting cost: attendee groups, preset chips and the live ticker. */
+
+.oc-meeting-groups {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.oc-meeting-groups legend {
+  padding: 0;
+  margin-bottom: 0.3rem;
+}
+
+.oc-meeting-head,
+.oc-meeting-row {
+  display: grid;
+  grid-template-columns: 8.75rem auto minmax(0, 1fr) var(--oc-control-h);
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.oc-meeting-head {
+  color: var(--oc-muted);
+  font-size: 0.78rem;
+}
+
+.oc-meeting-row + .oc-meeting-row {
+  margin-top: 0.4rem;
+}
+
+.oc-meeting-times {
+  color: var(--oc-muted);
+}
+
+.oc-meeting-remove,
+.oc-meeting-add {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+.oc-meeting-remove {
+  width: var(--oc-control-h);
+  padding: 0;
+  border-color: transparent;
+  background: transparent;
+  color: var(--oc-muted);
+}
+
+.oc-meeting-add {
+  justify-self: start;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.oc-meeting-remove svg,
+.oc-meeting-add svg {
+  width: 1rem;
+  height: 1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.oc-meeting-stepper {
+  display: grid;
+  grid-template-columns: var(--oc-control-h) minmax(0, 1fr) var(--oc-control-h);
+  gap: 0.25rem;
+}
+
+.oc-meeting-stepper > button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.oc-meeting-stepper svg {
+  width: 0.95rem;
+  height: 0.95rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.oc-meeting-stepper input {
+  text-align: center;
+}
+
+.oc-meeting-picker {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.oc-meeting-picker legend {
+  padding: 0;
+  margin-bottom: 0.4rem;
+}
+
+.oc-meeting-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.oc-meeting-options > button {
+  min-height: 2.25rem;
+  padding: 0 0.8rem;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  white-space: nowrap;
+}
+
+.oc-meeting-options > button[data-active] {
+  border-color: var(--oc-accent);
+  background: var(--oc-accent-soft);
+  color: var(--oc-accent);
+  font-weight: 600;
+}
+
+.oc-meeting-custom {
+  margin-top: 0.5rem;
+  max-width: 14rem;
+}
+
+.oc-meeting-assumptions {
+  border: 1px solid var(--oc-line);
+  border-radius: 8px;
+  background: var(--oc-surface);
+}
+
+.oc-meeting-assumptions > summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 0.75rem;
+  padding: 0.75rem 0.9rem;
+  cursor: pointer;
+}
+
+.oc-meeting-assumptions > summary .oc-quiet {
+  font-size: 0.85rem;
+}
+
+.oc-meeting-assumptions-body {
+  display: grid;
+  gap: 0.9rem;
+  padding: 0 0.9rem 0.9rem;
+}
+
+@media (max-width: 520px) {
+  .oc-meeting-head,
+  .oc-meeting-row {
+    grid-template-columns: 7.75rem auto minmax(0, 1fr) var(--oc-control-h);
+    gap: 0.3rem;
+  }
+}
+
+.oc-meeting-note {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+.oc-meeting-subhead {
+  margin-bottom: -0.6rem;
+}
+
+.oc-meeting-ticker {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border: 1px solid var(--oc-line);
+  border-radius: 6px;
+  background: var(--oc-surface);
+}
+
+.oc-meeting-ticker:fullscreen {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 1rem;
+  padding: 4rem;
+  text-align: center;
+  font-size: 1.6rem;
+}
+
+.oc-meeting-ticker-figures {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 2rem;
+  margin: 0.4rem 0 0.8rem;
+}
+
+.oc-meeting-ticker-figures > div {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.oc-meeting-ticker-money,
+.oc-meeting-ticker-clock {
+  font-family: var(--oc-font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 1.9rem;
+  line-height: 1.1;
+}
+
+.oc-meeting-ticker-money {
+  color: var(--oc-accent);
+}
+
+.oc-meeting-ticker:fullscreen .oc-meeting-ticker-money {
+  font-size: 5rem;
+}
+
+.oc-meeting-ticker:fullscreen .oc-meeting-ticker-clock {
+  font-size: 2.5rem;
+}
+
+.oc-meeting-ticker-track {
+  height: 0.5rem;
+  border-radius: 999px;
+  background: var(--oc-line);
+  overflow: hidden;
+  width: 100%;
+}
+
+.oc-meeting-ticker-track > span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--oc-accent);
+  transition: width 100ms linear;
+}
+
+.oc-meeting-ticker[data-over] .oc-meeting-ticker-track > span {
+  background: var(--oc-bar-negative);
+}
+
+.oc-meeting-ticker-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .oc-meeting-ticker-track > span {
+    transition: none;
+  }
+}
+
+.oc-meeting-assumptions > summary {
+  list-style: none;
+  position: relative;
+  padding-inline-end: 2.25rem;
+}
+
+.oc-meeting-assumptions > summary::-webkit-details-marker {
+  display: none;
+}
+
+.oc-meeting-assumptions > summary::after {
+  content: "";
+  position: absolute;
+  inset-inline-end: 1rem;
+  top: 50%;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-right: 2px solid var(--oc-muted);
+  border-bottom: 2px solid var(--oc-muted);
+  transform: translateY(-70%) rotate(45deg);
+  transition: transform 150ms ease;
+}
+
+.oc-meeting-assumptions[open] > summary::after {
+  transform: translateY(-30%) rotate(-135deg);
+}

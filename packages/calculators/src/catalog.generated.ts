@@ -397,6 +397,17 @@ export const calculatorCatalog = [
     ]
   },
   {
+    "id": "meeting-cost",
+    "slug": "meeting-cost",
+    "category": "finance",
+    "titleKey": "calculator.meeting-cost.title",
+    "descriptionKey": "calculator.meeting-cost.description",
+    "searchKeys": [
+      "calculator.meeting-cost.title",
+      "calculator.meeting-cost.search"
+    ]
+  },
+  {
     "id": "mortgage",
     "slug": "mortgage",
     "category": "finance",
@@ -1285,6 +1296,25 @@ export const inputSchemas = {
         "value",
         "source",
         "target"
+      ]
+    }
+  },
+  "meeting-cost": {
+    "version": 1,
+    "operations": {
+      "meeting-cost": [
+        "attendees",
+        "minutes",
+        "frequency",
+        "refocus",
+        "overhead",
+        "hours"
+      ],
+      "budget-minutes": [
+        "attendees",
+        "budget",
+        "overhead",
+        "hours"
       ]
     }
   },

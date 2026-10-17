@@ -36,6 +36,7 @@ export const lessonImports = {
   "macros": () => import("./macros/index"),
   "margin-markup": () => import("./margin-markup/index"),
   "mass": () => import("./mass/index"),
+  "meeting-cost": () => import("./meeting-cost/index"),
   "mortgage": () => import("./mortgage/index"),
   "oven-temperature": () => import("./oven-temperature/index"),
   "paint": () => import("./paint/index"),

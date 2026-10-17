@@ -1,4 +1,4 @@
-import { type ReactNode, useState } from "react";
+import { Fragment, type ReactNode, useState } from "react";
 import type { CalculatorId } from "../../../calculators/src/catalog.generated";
 import type { FieldDescriptor } from "../../../calculators/src/contracts";
 import { ui } from "../../../i18n/src/ui";
@@ -24,6 +24,14 @@ export function CalculatorPanel<R, Code extends string = string>(props: {
   renderWorking?: (evaluation: Evaluation<R, Code>) => ReactNode;
   renderVisual?: (evaluation: Evaluation<R, Code>) => ReactNode;
   choiceOptions?: (field: FieldDescriptor) => SelectOption[];
+  /**
+   * A topic's own editor for a field, given each field's error message; return
+   * undefined for the default input, or null to show nothing in its place.
+   */
+  renderField?: (
+    field: FieldDescriptor,
+    errorOf: (fieldId: string) => string | null,
+  ) => ReactNode;
   extra?: ReactNode;
 }) {
   const { controller, messages } = props;
@@ -83,6 +91,16 @@ export function CalculatorPanel<R, Code extends string = string>(props: {
                       `${props.topicId}.error.${evaluation.code}`,
                     )
                   : null;
+              const custom = props.renderField?.(field, (id) =>
+                evaluation.status === "error" && evaluation.field === id
+                  ? messageText(
+                      messages,
+                      `${props.topicId}.error.${evaluation.code}`,
+                    )
+                  : fieldIssue(evaluation, id),
+              );
+              if (custom !== undefined)
+                return <Fragment key={field.id}>{custom}</Fragment>;
 
               if (field.input === "text") {
                 return (

@@ -269,6 +269,63 @@ export const financeScenes: Record<string, ReactNode> = {
       />
     </>
   ),
+  // A conference table seen from above, chairs around it, its price on top.
+  "meeting-cost": (
+    <>
+      {[124, 160, 196].map((x) => (
+        <g key={x}>
+          <rect
+            x={x - 13}
+            y="44"
+            width="26"
+            height="16"
+            rx="8"
+            {...detail}
+            fill={surface}
+          />
+          <rect
+            x={x - 13}
+            y="120"
+            width="26"
+            height="16"
+            rx="8"
+            {...detail}
+            fill={surface}
+          />
+        </g>
+      ))}
+      <rect
+        x="62"
+        y="77"
+        width="16"
+        height="26"
+        rx="8"
+        {...detail}
+        fill={surface}
+      />
+      <rect
+        x="242"
+        y="77"
+        width="16"
+        height="26"
+        rx="8"
+        {...detail}
+        fill={surface}
+      />
+      <rect
+        x="86"
+        y="66"
+        width="148"
+        height="48"
+        rx="24"
+        fill={soft}
+        {...outline}
+      />
+      <text x="160" y="97" fontSize="21" fill={accent} {...figure}>
+        $237
+      </text>
+    </>
+  ),
 };
 
 /** Each operation answers a different question, so each has its own drawing. */
@@ -331,6 +388,20 @@ export const financeOperationPaths: Record<string, ReactNode> = {
       <circle cx="9" cy="12" r="6" />
       <path d="M9 9v6M18.5 4v13M16 14.5l2.5 2.5 2.5-2.5" />
     </>
+  ),
+  // A table with people on both sides: what this meeting costs.
+  "meeting-cost": (
+    <>
+      <rect x="5" y="10" width="14" height="4" rx="2" />
+      <circle cx="8.5" cy="5.5" r="1.75" />
+      <circle cx="15.5" cy="5.5" r="1.75" />
+      <circle cx="8.5" cy="18.5" r="1.75" />
+      <circle cx="15.5" cy="18.5" r="1.75" />
+    </>
+  ),
+  // An hourglass: how long a budget lasts.
+  "budget-minutes": (
+    <path d="M7 3.5h10M7 20.5h10M8 3.5v2.5l4 6-4 6v2.5M16 3.5v2.5l-4 6 4 6v2.5" />
   ),
   // A growth line reaching a flag.
   project: (

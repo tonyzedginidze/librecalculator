@@ -11,7 +11,8 @@
     "salary",
     "margin-markup",
     "inflation",
-    "retirement"
+    "retirement",
+    "meeting-cost"
   ],
   "default": false
 }

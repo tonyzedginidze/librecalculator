@@ -50,6 +50,7 @@ export const seoTitles = {
   pressure: "Pressure calculator: P = F/A in pascals",
   probability: "Probability calculator: A and B, A or B, not A",
   pythagorean: "Pythagorean theorem calculator: find the missing side",
+  "meeting-cost": "Meeting cost calculator: what does this meeting cost?",
   "random-number": "Random number generator: pick a number in any range",
   ratio: "Ratio calculator: simplify and scale ratios",
   "recipe-scaling": "Recipe scaling calculator: adjust servings",
@@ -177,6 +178,8 @@ export const metaDescriptions = {
     "Scale any recipe up or down to a new number of servings, find the scale factor, or work back to the original amount. Free, with clear steps.",
   rectangle:
     "Find a rectangle's area, perimeter or diagonal from width and height, with the formula, each step and a labelled diagram. Free and instant.",
+  "meeting-cost":
+    "Add who is in the room and what they earn to see a meeting's cost per meeting, per month and per year, with a live ticker. Free, steps shown.",
   retirement:
     "Project how your current savings and yearly contributions could grow by retirement at a return you choose. Free, with every step shown.",
   roi: "Work out the return on an investment after fees, as a profit amount and a percentage, with the ROI formula and every step shown. Free.",

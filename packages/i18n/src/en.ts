@@ -338,6 +338,11 @@ export const en = {
   "calculator.ideal-weight.description":
     "Find the weight that matches a BMI you choose at your height. It does not claim an ideal personal weight.",
   "calculator.ideal-weight.search": "ideal weight",
+  "calculator.meeting-cost.title": "Meeting cost calculator",
+  "calculator.meeting-cost.description":
+    "See what a meeting costs from who attends and what they earn, per meeting and per year, with a live cost ticker.",
+  "calculator.meeting-cost.search":
+    "meeting cost salary hourly time team standup recurring calendar",
 } as const;
 
 export type MessageKey = keyof typeof en;

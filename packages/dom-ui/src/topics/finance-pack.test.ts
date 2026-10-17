@@ -13,6 +13,7 @@ const ids = [
   "margin-markup",
   "inflation",
   "retirement",
+  "meeting-cost",
 ] as const;
 
 test("money shows two cent digits or none; negatives use a minus sign", () => {

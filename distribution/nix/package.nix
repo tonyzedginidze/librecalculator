@@ -14,9 +14,9 @@
   libsoup_3,
   webkitgtk_4_1,
   libayatana-appindicator,
-  libxdo,
+  xdotool,
   libxkbcommon,
-  xorg,
+  libx11,
 }:
 
 stdenv.mkDerivation (finalAttrs: {
@@ -66,7 +66,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   preFixup = ''
     gappsWrapperArgs+=(
-      --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [ libayatana-appindicator libxdo libxkbcommon xorg.libX11 ]}"
+      --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [ libayatana-appindicator xdotool libxkbcommon libx11 ]}"
     )
   '';
 

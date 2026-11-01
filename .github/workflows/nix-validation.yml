@@ -12,6 +12,9 @@ jobs:
   nix:
     runs-on: ubuntu-24.04
     timeout-minutes: 25
+    defaults:
+      run:
+        shell: bash
     steps:
       - uses: actions/checkout@v4
       - uses: cachix/install-nix-action@v31

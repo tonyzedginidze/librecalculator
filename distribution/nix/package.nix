@@ -76,6 +76,7 @@ stdenv.mkDerivation (finalAttrs: {
     changelog = "https://github.com/tonyzedginidze/librecalculator/releases/tag/v${finalAttrs.version}";
     license = lib.licenses.mit;
     sourceProvenance = [ lib.sourceTypes.binaryNativeCode ];
+    maintainers = with lib.maintainers; [ tonyzedginidze ];
     mainProgram = "libre-calculator-desktop";
     platforms = [ "x86_64-linux" ];
   };

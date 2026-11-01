@@ -7,6 +7,7 @@ pkgs.mkShell {
     xwininfo
     dbus
     imagemagick
+    nixfmt
   ];
   DBUS_TEST_CONFIG = "${pkgs.dbus}/share/dbus-1/session.conf";
 }

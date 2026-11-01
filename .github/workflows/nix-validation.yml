@@ -20,13 +20,19 @@ jobs:
       - uses: cachix/install-nix-action@v31
         with:
           extra_nix_config: sandbox = true
+      - name: Format contribution files for review
+        run: |
+          mkdir -p distribution-evidence
+          nix-shell distribution/nix/shell.nix --run 'nixfmt distribution/nix/package.nix distribution/nix/maintainer-entry.nix'
+          cp distribution/nix/package.nix distribution-evidence/review-package.nix
+          cp distribution/nix/maintainer-entry.nix distribution-evidence/review-maintainer-entry.nix
       - name: Build binary package with sandboxing
         run: |
           mkdir -p distribution-evidence
           nix-build distribution/nix/default.nix --out-link result --option sandbox true 2>&1 | tee distribution-evidence/nix-build.txt
       - name: Launch packaged app
         run: |
-          nix-shell distribution/nix/shell.nix --run 'dbus-run-session --config-file="$DBUS_TEST_CONFIG" -- xvfb-run -a bash distribution/nix/smoke.sh'
+          nix-shell distribution/nix/shell.nix --run 'dbus-run-session --config-file="$DBUS_TEST_CONFIG" -- xvfb-run -a -s "-screen 0 1600x1000x24" bash distribution/nix/smoke.sh'
       - uses: actions/upload-artifact@v4
         if: always()
         with:

@@ -58,7 +58,7 @@ Next steps, in order of value:
 - Run the `Windows Store MSIX` workflow to obtain the `librecalculator-windows-store` artifact, containing an unsigned MSIX, SHA-256 checksum, source metadata, and Windows launch evidence.
 - Upload the MSIX directly through the existing product's MSIX submission flow. Microsoft signs the Store-distributed package; this file is not a signed sideloading installer.
 - `scripts/package-windows-store.ps1` derives the four-part Store version from the stable desktop version and generates Store tiles from the existing application icon.
-- `scripts/smoke-windows-store.ps1` checks the built executable and records a native Windows screenshot; it does not test MSIX installation or certify the app.
+- `scripts/smoke-windows-store.ps1` checks the built executable and records a native Windows screenshot, then installs and launches a separately signed copy through its package identity. The temporary certificate is removed afterwards and is never included in the upload artifact. These checks do not replace Store certification.
 - The `runFullTrust` capability supports the native Tauri desktop process, tray, local preferences, and global shortcut. It does not request administrator privileges.
 - The desktop privacy policy is https://librecalculator.com/privacy/.
 - Review package validation, listing screenshots, privacy information, age ratings, and certification notes before submitting each update.

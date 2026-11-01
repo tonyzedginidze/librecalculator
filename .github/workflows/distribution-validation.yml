@@ -34,8 +34,25 @@ jobs:
         timeout-minutes: 5
         shell: pwsh
         run: |
-          winget install --manifest distribution/winget/0.1.0 --silent --source winget --verbose-logs --accept-package-agreements --accept-source-agreements --disable-interactivity | Tee-Object distribution-evidence/winget-install.txt
-          if ($LASTEXITCODE -ne 0) { throw "Manifest installation failed." }
+          $install = Start-Process winget -ArgumentList 'install --manifest distribution/winget/0.1.0 --silent --verbose-logs --accept-package-agreements --accept-source-agreements --disable-interactivity' -PassThru -RedirectStandardOutput distribution-evidence/winget-install.txt -RedirectStandardError distribution-evidence/winget-error.txt
+          for ($attempt = 0; $attempt -lt 12 -and -not $install.HasExited; $attempt++) {
+            Start-Sleep -Seconds 10
+            Get-CimInstance Win32_Process | Where-Object { $_.Name -match 'Libre|setup|Edge|winget' } | Select-Object Name, ProcessId, ParentProcessId, CommandLine | ConvertTo-Json | Set-Content "distribution-evidence/processes-$attempt.json"
+            Get-Content distribution-evidence/winget-install.txt
+          }
+          if (-not $install.HasExited) {
+            Add-Type -AssemblyName System.Windows.Forms
+            Add-Type -AssemblyName System.Drawing
+            $bounds = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds
+            $bitmap = [System.Drawing.Bitmap]::new($bounds.Width, $bounds.Height)
+            $graphics = [System.Drawing.Graphics]::FromImage($bitmap)
+            $graphics.CopyFromScreen($bounds.Location, [System.Drawing.Point]::Empty, $bounds.Size)
+            $bitmap.Save("$pwd/distribution-evidence/install-screen.png")
+            $graphics.Dispose()
+            $bitmap.Dispose()
+            throw "Installer did not exit within two minutes."
+          }
+          if ($install.ExitCode -ne 0) { throw "Manifest installation failed: $($install.ExitCode)." }
           $apps = Get-ItemProperty HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* -ErrorAction SilentlyContinue
           $app = $apps | Where-Object { $_.DisplayName -eq 'Libre Calculator' } | Select-Object -First 1
           if (-not $app) { throw "Installed application was not registered." }

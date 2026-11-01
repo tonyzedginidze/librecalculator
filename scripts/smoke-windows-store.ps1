@@ -35,3 +35,42 @@ try {
 } finally {
     if (-not $process.HasExited) { Stop-Process -Id $process.Id -Force }
 }
+
+# Test an independently signed copy. The upload artifact remains unsigned so
+# the Store can sign it; no development certificate ships with that artifact.
+[xml]$manifest = Get-Content store-output/package/AppxManifest.xml
+$identity = [string]$manifest.Package.Identity.Name
+$certificate = New-SelfSignedCertificate -Type CodeSigningCert -Subject $manifest.Package.Identity.Publisher -CertStoreLocation Cert:\CurrentUser\My
+$certificateFile = Join-Path $env:RUNNER_TEMP "librecalculator-smoke.cer"
+$testPackage = Join-Path $env:RUNNER_TEMP "librecalculator-smoke.msix"
+$installed = $false
+try {
+    Export-Certificate -Cert $certificate -FilePath $certificateFile | Out-Null
+    Import-Certificate -FilePath $certificateFile -CertStoreLocation Cert:\LocalMachine\TrustedPeople | Out-Null
+    Copy-Item (Get-ChildItem store-output/*.msix | Select-Object -First 1).FullName $testPackage
+    $signTool = Get-ChildItem "${env:ProgramFiles(x86)}/Windows Kits/10/bin/*/x64/signtool.exe" |
+        Sort-Object { [version]$_.Directory.Parent.Name } -Descending | Select-Object -First 1
+    & $signTool.FullName sign /fd SHA256 /sha1 $certificate.Thumbprint $testPackage
+    if ($LASTEXITCODE -ne 0) { throw "Could not sign the temporary installation test package." }
+    Add-AppxPackage -Path $testPackage
+    $installed = $true
+    $package = Get-AppxPackage -Name $identity
+    if (-not $package) { throw "Installed Store package was not found." }
+    Start-Process explorer.exe -ArgumentList "shell:AppsFolder\$($package.PackageFamilyName)!LibreCalculator"
+    $deadline = (Get-Date).AddSeconds(45)
+    do {
+        Start-Sleep -Seconds 1
+        $packagedProcess = Get-Process -Name libre-calculator-desktop -ErrorAction SilentlyContinue |
+            Where-Object { $_.MainWindowHandle -ne 0 } | Select-Object -First 1
+    } while (-not $packagedProcess -and (Get-Date) -lt $deadline)
+    if (-not $packagedProcess) { throw "Installed package did not open a window." }
+    Start-Sleep -Seconds 5
+    if ($packagedProcess.HasExited) { throw "Installed package exited unexpectedly." }
+    "Installed and launched $($package.PackageFullName) through its AppsFolder identity." | Set-Content store-output/smoke-install.txt
+    Stop-Process -Id $packagedProcess.Id -Force
+} finally {
+    if ($installed) { Get-AppxPackage -Name $identity | Remove-AppxPackage }
+    Remove-Item "Cert:\CurrentUser\My\$($certificate.Thumbprint)" -ErrorAction SilentlyContinue
+    Remove-Item "Cert:\LocalMachine\TrustedPeople\$($certificate.Thumbprint)" -ErrorAction SilentlyContinue
+    Remove-Item $certificateFile, $testPackage -ErrorAction SilentlyContinue
+}

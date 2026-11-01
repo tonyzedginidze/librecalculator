@@ -25,19 +25,12 @@ jobs:
           snap list librecalculator | tee distribution-evidence/snap-list.txt
           snap connections librecalculator | tee distribution-evidence/snap-connections.txt
           sudo apt-get update
-          sudo apt-get install -y xvfb x11-utils dbus-x11
-          dbus-run-session -- xvfb-run -a sh -c '
-            snap run librecalculator > distribution-evidence/snap-launch.txt 2>&1 &
-            app_pid=$!
-            trap "kill $app_pid 2>/dev/null || true" EXIT
-            for attempt in $(seq 1 30); do
-              sleep 1
-              if ! kill -0 "$app_pid" 2>/dev/null; then cat distribution-evidence/snap-launch.txt; exit 1; fi
-              if xwininfo -root -tree | tee distribution-evidence/snap-windows.txt | grep -q "Libre Calculator"; then exit 0; fi
-            done
-            cat distribution-evidence/snap-launch.txt
-            exit 1
-          '
+          sudo apt-get install -y xvfb x11-utils dbus-user-session imagemagick
+          sudo loginctl enable-linger "$USER"
+          sudo systemctl start "user@$(id -u).service"
+          export XDG_RUNTIME_DIR="/run/user/$(id -u)"
+          export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
+          systemd-run --user --scope --quiet --collect xvfb-run -a --auth-file="$HOME/.Xauthority" bash distribution/snapcraft/smoke.sh
       - uses: actions/upload-artifact@v4
         if: always()
         with:

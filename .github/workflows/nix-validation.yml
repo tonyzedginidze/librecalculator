@@ -23,7 +23,7 @@ jobs:
           nix-build distribution/nix/default.nix --out-link result --option sandbox true 2>&1 | tee distribution-evidence/nix-build.txt
       - name: Launch packaged app
         run: |
-          nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/d357a2b54f0b6dc4aeb4e993190a52cf151b6f24.tar.gz -p xvfb-run xorg.xwininfo dbus imagemagick --run 'dbus-run-session -- xvfb-run -a bash distribution/nix/smoke.sh'
+          nix-shell distribution/nix/shell.nix --run 'dbus-run-session --config-file="$DBUS_TEST_CONFIG" -- xvfb-run -a bash distribution/nix/smoke.sh'
       - uses: actions/upload-artifact@v4
         if: always()
         with:

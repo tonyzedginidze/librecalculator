@@ -1,5 +1,22 @@
 /** Interface chrome only. Calculator and lesson prose stay in topic message modules. */
 export const ui = {
+  "ui.privacy.title": "Libre Calculator desktop privacy",
+  "ui.privacy.description":
+    "How the Libre Calculator desktop app handles your information.",
+  "ui.privacy.updated": "Last updated: 1 November 2026",
+  "ui.privacy.local.title": "Calculations and settings",
+  "ui.privacy.local.body":
+    "The desktop app calculates on your device. It does not send your calculation inputs or results to us. Preferences such as the theme, enabled calculator packs and keyboard shortcut are stored locally. The app does not require an account and contains no advertising or analytics SDK.",
+  "ui.privacy.network.title": "Videos and external links",
+  "ui.privacy.network.body":
+    "Optional tutorial videos, posters and chapter information are requested from videos.librecalculator.com. These requests reveal the requested calculator video and standard network information, such as your IP address, to the hosting infrastructure. Calculation inputs are not included. Links you open to our website, GitHub or other sites are subject to those sites' privacy practices. The Microsoft Store and the Windows WebView2 runtime are Microsoft services with their own privacy practices.",
+  "ui.privacy.control.title": "Your control",
+  "ui.privacy.control.body":
+    "You can use the calculators without an internet connection; online videos will be unavailable. You can remove local application data through Windows settings or by deleting the application's local settings. We do not sell calculation data or use it for advertising. This policy covers the desktop application, rather than third-party services or websites you choose to visit.",
+  "ui.privacy.contact.title": "Questions",
+  "ui.privacy.contact.body":
+    "For privacy questions or support, open an issue in the public source repository. Do not include private calculation inputs or other sensitive information in a public issue.",
+  "ui.privacy.contact.link": "Contact through GitHub",
   "ui.settings.pack-description":
     "Choose your tools. Enabled packs add calculators to their categories.",
   "ui.settings.close": "Close settings",

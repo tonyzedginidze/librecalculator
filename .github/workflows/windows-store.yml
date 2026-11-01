@@ -6,7 +6,27 @@ on:
 permissions:
   contents: read
 jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.21.0
+      - run: bun install --frozen-lockfile
+      - run: |
+          bun run check:generated
+          bun run check:web-topics
+          bun run content-check
+          bun run test
+          bun run typecheck
+          bun run lint
+          bun run build:web
   package:
+    needs: checks
     runs-on: windows-latest
     timeout-minutes: 40
     env:
@@ -27,21 +47,15 @@ jobs:
           workspaces: apps/desktop/src-tauri -> target
           key: windows-store-static
       - run: bun install --frozen-lockfile
-      - name: Check JavaScript and content
-        shell: bash
-        run: |
-          bun run check:generated
-          bun run check:web-topics
-          bun run content-check
-          bun run test
-          bun run typecheck
-          bun run lint
       - name: Build desktop binary
         working-directory: apps/desktop
         run: bun run tauri build --target x86_64-pc-windows-msvc --no-bundle
       - name: Package for the Store
         shell: pwsh
         run: ./scripts/package-windows-store.ps1 -Executable apps/desktop/src-tauri/target/x86_64-pc-windows-msvc/release/libre-calculator-desktop.exe
+      - name: Smoke test Windows app
+        shell: pwsh
+        run: ./scripts/smoke-windows-store.ps1
       - name: Record build source
         shell: pwsh
         run: |
@@ -54,3 +68,5 @@ jobs:
             store-output/*.msix
             store-output/SHA256SUMS.txt
             store-output/BUILD-METADATA.txt
+            store-output/smoke-*.png
+            store-output/smoke-*.txt

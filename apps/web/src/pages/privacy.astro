@@ -1,0 +1,19 @@
+---
+import { Sidebar } from "@open-calculators/dom-ui/components";
+import { ui } from "@open-calculators/i18n/ui";
+import Base from "../layouts/Base.astro";
+import { repository } from "../seo";
+
+const sections = ["local", "network", "control", "contact"] as const;
+---
+<Base title={ui["ui.privacy.title"]} description={ui["ui.privacy.description"]} noindex>
+  <div class="oc-app"><Sidebar client:load /><main class="oc-main oc-letter" id="calculator">
+    <h1>{ui["ui.privacy.title"]}</h1>
+    <p>{ui["ui.privacy.updated"]}</p>
+    {sections.map((section) => <section>
+      <h2>{ui[`ui.privacy.${section}.title`]}</h2>
+      <p>{ui[`ui.privacy.${section}.body`]}</p>
+    </section>)}
+    <p><a href={`${repository}/issues/new`} rel="noopener">{ui["ui.privacy.contact.link"]}</a></p>
+  </main></div>
+</Base>

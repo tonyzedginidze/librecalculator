@@ -53,7 +53,7 @@ jobs:
             throw "Installer did not exit within two minutes."
           }
           if ($install.ExitCode -ne 0) { throw "Manifest installation failed: $($install.ExitCode)." }
-          $apps = Get-ItemProperty HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* -ErrorAction SilentlyContinue
+          $apps = Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* -ErrorAction SilentlyContinue
           $app = $apps | Where-Object { $_.DisplayName -eq 'Libre Calculator' } | Select-Object -First 1
           if (-not $app) { throw "Installed application was not registered." }
           $app | Select-Object DisplayName, DisplayVersion, Publisher, InstallLocation, DisplayIcon | ConvertTo-Json | Set-Content distribution-evidence/installed-app.json

@@ -1,0 +1,44 @@
+name: Distribution validation
+on:
+  workflow_dispatch:
+  push:
+    branches: ["distribution/**"]
+permissions:
+  contents: read
+jobs:
+  winget:
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Windows Package Manager if needed
+        shell: pwsh
+        run: |
+          if (-not (Get-Command winget -ErrorAction SilentlyContinue)) {
+            Install-Module -Name Microsoft.WinGet.Client -Force -Repository PSGallery -Scope CurrentUser
+            Import-Module Microsoft.WinGet.Client
+            Repair-WinGetPackageManager -Force -Latest
+          }
+          "$env:LOCALAPPDATA\Microsoft\WindowsApps" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+      - name: Validate and install with WinGet
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Path distribution-evidence -Force | Out-Null
+          winget --version
+          winget validate --manifest distribution/winget/0.1.0 | Tee-Object distribution-evidence/winget-validate.txt
+          if ($LASTEXITCODE -ne 0) { throw "Manifest validation failed." }
+          winget settings --enable LocalManifestFiles
+          if ($LASTEXITCODE -ne 0) { throw "Could not enable local manifest installation." }
+          winget install --manifest distribution/winget/0.1.0 --silent --accept-package-agreements --accept-source-agreements --disable-interactivity | Tee-Object distribution-evidence/winget-install.txt
+          if ($LASTEXITCODE -ne 0) { throw "Manifest installation failed." }
+          $apps = Get-ItemProperty HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* -ErrorAction SilentlyContinue
+          $app = $apps | Where-Object { $_.DisplayName -eq 'Libre Calculator' } | Select-Object -First 1
+          if (-not $app) { throw "Installed application was not registered." }
+          $app | Select-Object DisplayName, DisplayVersion, Publisher, InstallLocation, DisplayIcon | ConvertTo-Json | Set-Content distribution-evidence/installed-app.json
+          if ($app.DisplayVersion -ne '0.1.0') { throw "Installed version does not match manifest." }
+          if ($app.Publisher -ne 'Libre Calculator') { throw "Installed publisher does not match manifest." }
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: winget-validation
+          path: distribution-evidence/

@@ -1,0 +1,50 @@
+name: librecalculator
+base: core24
+version: '0.1.0'
+title: Libre Calculator
+summary: Free calculators that show their working
+description: |
+  Libre Calculator shows worked steps, formulas and visual explanations for
+  percentages, fractions, geometry, unit conversions, compound interest,
+  loan payments and tip splitting. The desktop app includes a quick panel
+  with a configurable keyboard shortcut.
+
+  Free and open source under the MIT license. Source and canonical releases:
+  https://github.com/tonyzedginidze/librecalculator
+grade: stable
+confinement: strict
+license: MIT
+website: https://librecalculator.com
+contact: tony@boringdystopia.ai
+issues: https://github.com/tonyzedginidze/librecalculator/issues
+source-code: https://github.com/tonyzedginidze/librecalculator
+platforms:
+  amd64:
+    build-on: [amd64]
+    build-for: [amd64]
+
+layout:
+  /usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/webkit2gtk-4.1:
+    bind: $SNAP/gnome-platform/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/webkit2gtk-4.1
+
+apps:
+  librecalculator:
+    command: usr/bin/libre-calculator-desktop
+    desktop: usr/share/applications/librecalculator.desktop
+    extensions: [gnome]
+    plugs: [network]
+
+parts:
+  librecalculator:
+    plugin: dump
+    source: https://github.com/tonyzedginidze/librecalculator/releases/download/v0.1.0/Libre.Calculator_0.1.0_amd64.deb
+    source-type: deb
+    source-checksum: sha256/f4cebcae62a68de1a0fc062a7d9e2abbb3b14a096ca731ceed79018e27f73d24
+    stage-packages:
+      - libayatana-appindicator3-1
+      - libxdo3
+    override-build: |
+      craftctl default
+      sed -i 's|^Icon=.*|Icon=${SNAP}/usr/share/icons/hicolor/512x512/apps/libre-calculator-desktop.png|' "$CRAFT_PART_INSTALL/usr/share/applications/Libre Calculator.desktop"
+    organize:
+      usr/share/applications/Libre Calculator.desktop: usr/share/applications/librecalculator.desktop

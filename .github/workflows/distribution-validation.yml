@@ -11,14 +11,14 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
-      - name: Install Windows Package Manager if needed
+      - name: Update Windows Package Manager
         shell: pwsh
         run: |
-          if (-not (Get-Command winget -ErrorAction SilentlyContinue)) {
+          if (-not (Get-Module -ListAvailable Microsoft.WinGet.Client)) {
             Install-Module -Name Microsoft.WinGet.Client -Force -Repository PSGallery -Scope CurrentUser
-            Import-Module Microsoft.WinGet.Client
-            Repair-WinGetPackageManager -Force -Latest
           }
+          Import-Module Microsoft.WinGet.Client
+          Repair-WinGetPackageManager -Force -Latest
           "$env:LOCALAPPDATA\Microsoft\WindowsApps" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
       - name: Validate and install with WinGet
         shell: pwsh

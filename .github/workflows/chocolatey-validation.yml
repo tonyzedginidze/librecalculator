@@ -1,0 +1,41 @@
+name: Chocolatey validation
+on:
+  workflow_dispatch:
+  push:
+    branches: ["distribution/**"]
+    paths:
+      - "distribution/chocolatey/**"
+      - ".github/workflows/chocolatey-validation.yml"
+permissions:
+  contents: read
+jobs:
+  chocolatey:
+    runs-on: windows-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Pack, install and uninstall
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Path distribution-evidence -Force | Out-Null
+          choco --version
+          choco pack distribution/chocolatey/librecalculator.nuspec --output-directory distribution-evidence
+          if ($LASTEXITCODE -ne 0) { throw 'Chocolatey package creation failed.' }
+          choco install librecalculator --version 0.1.0 --source "$pwd/distribution-evidence;https://community.chocolatey.org/api/v2/" --yes --no-progress --execution-timeout 180 | Tee-Object distribution-evidence/chocolatey-install.txt
+          if ($LASTEXITCODE -notin @(0, 3010, 1641)) { throw 'Chocolatey installation failed.' }
+          $app = Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* | Where-Object { $_.DisplayName -eq 'Libre Calculator' } | Select-Object -First 1
+          if (-not $app -or $app.DisplayVersion -ne '0.1.0' -or $app.Publisher -ne 'Libre Calculator') { throw 'Installed application metadata does not match.' }
+          $app | Select-Object DisplayName, DisplayVersion, Publisher, InstallLocation | ConvertTo-Json | Set-Content distribution-evidence/installed-app.json
+          choco uninstall librecalculator --yes --no-progress --execution-timeout 180 | Tee-Object distribution-evidence/chocolatey-uninstall.txt
+          if ($LASTEXITCODE -notin @(0, 3010, 1641)) { throw 'Chocolatey uninstallation failed.' }
+          $remaining = Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* | Where-Object { $_.DisplayName -eq 'Libre Calculator' }
+          if ($remaining) { throw 'Libre Calculator remains registered after uninstall.' }
+      - name: Collect Chocolatey log
+        if: always()
+        shell: pwsh
+        run: Copy-Item "$env:ChocolateyInstall/logs/chocolatey.log" distribution-evidence/ -ErrorAction SilentlyContinue
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: chocolatey-validation
+          path: distribution-evidence/

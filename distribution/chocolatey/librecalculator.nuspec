@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <id>librecalculator</id>
+    <version>0.1.0</version>
+    <title>Libre Calculator</title>
+    <authors>Tony Zedginidze</authors>
+    <owners>tonyzedginidze</owners>
+    <projectUrl>https://librecalculator.com</projectUrl>
+    <iconUrl>https://librecalculator.com/logo-512.png</iconUrl>
+    <licenseUrl>https://github.com/tonyzedginidze/librecalculator/blob/main/LICENSE</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <projectSourceUrl>https://github.com/tonyzedginidze/librecalculator</projectSourceUrl>
+    <packageSourceUrl>https://github.com/tonyzedginidze/librecalculator/tree/distribution/package-channels/distribution/chocolatey</packageSourceUrl>
+    <bugTrackerUrl>https://github.com/tonyzedginidze/librecalculator/issues</bugTrackerUrl>
+    <tags>calculator mathematics education unit-converter</tags>
+    <summary>Free calculators that show their working.</summary>
+    <description>Libre Calculator is a free, MIT-licensed calculator app with worked steps, formulas and visual explanations. It includes percentages, fractions, geometry, unit conversions, compound interest, loan payments and tip splitting. The desktop app includes a quick calculator panel with a configurable global keyboard shortcut.
+
+This package installs the official Windows x64 MSI. The Windows installer is unsigned. Source code and canonical releases are available in the project's GitHub repository.</description>
+    <releaseNotes>https://github.com/tonyzedginidze/librecalculator/releases/tag/v0.1.0</releaseNotes>
+    <copyright>Copyright (c) 2026 Tony Zedginidze</copyright>
+    <dependencies>
+      <dependency id="vcredist140" version="14.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>

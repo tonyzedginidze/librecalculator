@@ -3,6 +3,9 @@ on:
   workflow_dispatch:
   push:
     branches: ["distribution/**"]
+    paths:
+      - "distribution/winget/**"
+      - ".github/workflows/distribution-validation.yml"
 permissions:
   contents: read
 jobs:

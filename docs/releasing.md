@@ -47,3 +47,18 @@ Next steps, in order of value:
 2. Windows signing (for example Azure Trusted Signing) to remove the SmartScreen warning.
 3. The Tauri updater plugin with a signing key, so installed apps update themselves from `latest.json`.
 4. Store and package-manager channels: Homebrew cask, winget, Flathub, Snap.
+
+## Microsoft Store
+
+- The Store product is `9NN27D9NNFF1`: https://apps.microsoft.com/detail/9NN27D9NNFF1.
+- Alvin approved the existing `AlvinUnreal` publisher for this distribution channel.
+- The MSIX manifest lives in `apps/desktop/store/AppxManifest.xml`; its identity is `AlvinUnreal.LibreCalculator`.
+- `.github/workflows/windows-store.yml` builds a Windows x64 binary with the static C runtime, packages it with the Windows SDK, and checks that the executable opens the calculator UI.
+- The Store package currently targets Windows 11 or later and requires the Windows WebView2 runtime.
+- Run the `Windows Store MSIX` workflow to obtain the `librecalculator-windows-store` artifact, containing an unsigned MSIX, SHA-256 checksum, source metadata, and Windows launch evidence.
+- Upload the MSIX directly through the existing product's MSIX submission flow. Microsoft signs the Store-distributed package; this file is not a signed sideloading installer.
+- `scripts/package-windows-store.ps1` derives the four-part Store version from the stable desktop version and generates Store tiles from the existing application icon.
+- `scripts/smoke-windows-store.ps1` checks the built executable and records a native Windows screenshot; it does not test MSIX installation or certify the app.
+- The `runFullTrust` capability supports the native Tauri desktop process, tray, local preferences, and global shortcut. It does not request administrator privileges.
+- The desktop privacy policy is https://librecalculator.com/privacy/.
+- Review package validation, listing screenshots, privacy information, age ratings, and certification notes before submitting each update.

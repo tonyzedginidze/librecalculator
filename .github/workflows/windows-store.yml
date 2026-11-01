@@ -46,6 +46,7 @@ jobs:
         with:
           workspaces: apps/desktop/src-tauri -> target
           key: windows-store-static
+          cache-on-failure: true
       - run: bun install --frozen-lockfile
       - name: Build desktop binary
         working-directory: apps/desktop
@@ -61,6 +62,7 @@ jobs:
         run: |
           "Source: $env:GITHUB_SHA`nRun: $env:GITHUB_SERVER_URL/$env:GITHUB_REPOSITORY/actions/runs/$env:GITHUB_RUN_ID" | Set-Content store-output/BUILD-METADATA.txt
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: librecalculator-windows-store
           if-no-files-found: error

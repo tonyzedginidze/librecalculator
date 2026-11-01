@@ -20,7 +20,8 @@ jobs:
           Import-Module Microsoft.WinGet.Client
           Repair-WinGetPackageManager -Force -Latest
           "$env:LOCALAPPDATA\Microsoft\WindowsApps" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-      - name: Validate and install with WinGet
+      - name: Validate WinGet manifests
+        timeout-minutes: 3
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Path distribution-evidence -Force | Out-Null
@@ -29,7 +30,11 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw "Manifest validation failed." }
           winget settings --enable LocalManifestFiles
           if ($LASTEXITCODE -ne 0) { throw "Could not enable local manifest installation." }
-          winget install --manifest distribution/winget/0.1.0 --silent --accept-package-agreements --accept-source-agreements --disable-interactivity | Tee-Object distribution-evidence/winget-install.txt
+      - name: Install with WinGet
+        timeout-minutes: 5
+        shell: pwsh
+        run: |
+          winget install --manifest distribution/winget/0.1.0 --silent --source winget --verbose-logs --accept-package-agreements --accept-source-agreements --disable-interactivity | Tee-Object distribution-evidence/winget-install.txt
           if ($LASTEXITCODE -ne 0) { throw "Manifest installation failed." }
           $apps = Get-ItemProperty HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* -ErrorAction SilentlyContinue
           $app = $apps | Where-Object { $_.DisplayName -eq 'Libre Calculator' } | Select-Object -First 1
@@ -37,6 +42,11 @@ jobs:
           $app | Select-Object DisplayName, DisplayVersion, Publisher, InstallLocation, DisplayIcon | ConvertTo-Json | Set-Content distribution-evidence/installed-app.json
           if ($app.DisplayVersion -ne '0.1.0') { throw "Installed version does not match manifest." }
           if ($app.Publisher -ne 'Libre Calculator') { throw "Installed publisher does not match manifest." }
+      - name: Collect WinGet logs
+        if: always()
+        shell: pwsh
+        run: |
+          Get-ChildItem "$env:LOCALAPPDATA\Packages\Microsoft.DesktopAppInstaller_*\LocalState\DiagOutputDir\*.log" -ErrorAction SilentlyContinue | Copy-Item -Destination distribution-evidence
       - uses: actions/upload-artifact@v4
         if: always()
         with:

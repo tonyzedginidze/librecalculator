@@ -1,0 +1,31 @@
+name: Nix validation
+on:
+  workflow_dispatch:
+  push:
+    branches: ["distribution/**"]
+    paths:
+      - "distribution/nix/**"
+      - ".github/workflows/nix-validation.yml"
+permissions:
+  contents: read
+jobs:
+  nix:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+        with:
+          extra_nix_config: sandbox = true
+      - name: Build binary package with sandboxing
+        run: |
+          mkdir -p distribution-evidence
+          nix-build distribution/nix/default.nix --out-link result --option sandbox true 2>&1 | tee distribution-evidence/nix-build.txt
+      - name: Launch packaged app
+        run: |
+          nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/d357a2b54f0b6dc4aeb4e993190a52cf151b6f24.tar.gz -p xvfb-run xorg.xwininfo dbus imagemagick --run 'dbus-run-session -- xvfb-run -a bash distribution/nix/smoke.sh'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nix-validation
+          path: distribution-evidence/

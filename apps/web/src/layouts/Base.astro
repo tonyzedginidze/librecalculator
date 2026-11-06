@@ -82,6 +82,24 @@ const jsonLd = noindex ? undefined : structuredData(pathname, site);
         }).catch(() => {});
       }
     </script>
+    <script is:inline>
+      // Production site only: OpenPanel (cookieless page views) and Relay (our cross-promo, which reports through window.op).
+      (function () {
+        if (location.hostname !== "librecalculator.com") return;
+        window.op = window.op || function () { (window.op.q = window.op.q || []).push(arguments); };
+        window.op("init", { apiUrl: "https://op.boringdystopia.ai/api", clientId: "8156cdae-68c7-47f4-a5cb-d46d7e845523", trackScreenViews: true, trackOutgoingLinks: true, trackAttributes: true });
+        var add = function (src, site) {
+          var el = document.createElement("script");
+          el.src = src;
+          el.defer = true;
+          el.async = true;
+          if (site) el.dataset.site = site;
+          document.head.appendChild(el);
+        };
+        add("https://openpanel.dev/op1.js");
+        add("https://relay.boringdystopia.ai/r.js", "librecalculator");
+      })();
+    </script>
     <noscript>
       <p class="oc-page">{ui["ui.noscript"]}</p>
     </noscript>
